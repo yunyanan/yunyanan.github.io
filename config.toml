@@ -1,7 +1,7 @@
 baseURL = "https://example.com/"
 languageCode = "en"                                      # website language
 defaultContentLanguage = "en"                            # [en, zh, ...] determines which i18n file to use
-title = "LoveIt Theme"                                   # website title
+title = "YunYanan"                                   # website title
 theme = "LoveIt"                                         # theme
 enableGitInfo = false                                    # whether to use git commit log to generate lastmod record
 hasCJKLanguage = false                                   # whether to include chinese/japanese/korean
@@ -25,7 +25,7 @@ pygmentsCodefencesGuessSyntax = true
 unsafe = true
 
 [author]                                              #### Author Info
-  name = "XXXX"
+  name = "YunYanan"
 
 [sitemap]                                             #### Sitemap Info
   changefreq = "weekly"
@@ -60,11 +60,11 @@ unsafe = true
     url = "about"
     weight = 4
 
-  [[menu.main]]
-    identifier = "zh"
-    name = '<i class="fas fa-language fa-fw"></i>'
-    url = "https://hugo-loveit-zh.netlify.com"
-    weight = 5
+#  [[menu.main]]
+#    identifier = "zh"
+#    name = '<i class="fas fa-language fa-fw"></i>'
+#    url = "https://hugo-loveit-zh.netlify.com"
+#    weight = 5
 
 [params]
   version = "5.x"                                        # LoveIt theme version
@@ -75,12 +75,12 @@ unsafe = true
   home_mode = "post"                                     # [post, other] home mode
   home_paginate = 6                                      # special amount of posts in each home post page
   avatar = "images/avatar.png"                           # URL of avatar shown in home page
-  subtitle = "A Clean, Elegant but Advanced Hugo Theme"  # subtitle shown in home page
+  subtitle = "Stay Hungry, Stay Foolish."		# subtitle shown in home page
 
   socialShare = true                                     # whether to show social share links in post page
 
                                                       #### Footer CopyRight Info
-  since = 2018                                           # Site creation time
+  since = 2020                                           # Site creation time
   icp = ''                                               # ICP info only in China (HTML format is allowed)
   license= '<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
                                                          # license info (HTML format is allowed)
@@ -120,13 +120,13 @@ unsafe = true
     email = ""
 
   [params.social]                                        # Social Info in home page
-    GitHub = "xxxx"
-    Linkedin = "xxxx"
-    Twitter = "xxxx"
+    GitHub = "yunyanan"
+    Linkedin = "亚楠-运-6a502a17b"
+    #Twitter = "xxxx"
     #Instagram = "xxxx"
-    #Email = "xxxx"
-    Facebook = "xxxx"
-    Telegram = "xxxx"
+    Email = "yunyanan1@gmail.com"
+    #Facebook = "xxxx"
+    #Telegram = "xxxx"
     #Medium = "xxxx"
     #Gitlab = "xxxx"
     #Youtubelegacy = "xxxx"
@@ -140,7 +140,7 @@ unsafe = true
     #Codepen = "xxxx"
     #FreeCodeCamp = "xxxx"
     #Bitbucket = "xxxx"
-    #Stackoverflow = "xxxx"
+    Stackoverflow = "10385483/yunyanan"
     #Weibo = "xxxx"
     #Odnoklassniki = "xxxx"
     #VKontakte = "xxxx"
@@ -194,7 +194,7 @@ unsafe = true
     #Weibo = true
 
   [params.publisher]                                     # Publisher Info just for SEO
-    name = "XXXX"
+    name = "yunyanan"
     [params.publisher.logo]
       url = "logo.png"
       width = 127
