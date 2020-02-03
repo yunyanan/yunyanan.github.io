@@ -1,7 +1,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
         <url>
-            <loc>https://example.com/2020/02/my_second_post/</loc>
+            <loc>https://yunyanan.github.io/2020/02/my_third_post/</loc>
+            
+                <lastmod>2020-02-03T17:23:35+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/posts/</loc>
+            
+                <lastmod>2020-02-03T17:23:35+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/</loc>
+            
+                <lastmod>2020-02-03T17:23:35+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/2020/02/my_second_post/</loc>
             
                 <lastmod>2020-02-03T17:03:08+08:00</lastmod>
             
@@ -15,35 +57,7 @@
         </url>
     
         <url>
-            <loc>https://example.com/posts/</loc>
-            
-                <lastmod>2020-02-03T17:03:08+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://example.com/</loc>
-            
-                <lastmod>2020-02-03T17:03:08+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://example.com/2020/02/my_first_post/</loc>
+            <loc>https://yunyanan.github.io/2020/02/my_first_post/</loc>
             
                 <lastmod>2020-02-03T17:02:49+08:00</lastmod>
             
@@ -57,7 +71,7 @@
         </url>
     
         <url>
-            <loc>https://example.com/categories/</loc>
+            <loc>https://yunyanan.github.io/categories/</loc>
             
             
                 <changefreq>weekly</changefreq>
@@ -69,7 +83,7 @@
         </url>
     
         <url>
-            <loc>https://example.com/tags/</loc>
+            <loc>https://yunyanan.github.io/tags/</loc>
             
             
                 <changefreq>weekly</changefreq>
