@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on YunYanan</title>
+    <link>https://example.com/posts/</link>
+    <description>Recent content in Posts on YunYanan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 03 Feb 2020 12:14:31 +0800</lastBuildDate>
+    
+	<atom:link href="https://example.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Post1</title>
+      <link>https://example.com/2020/02/post1/</link>
+      <pubDate>Mon, 03 Feb 2020 12:14:31 +0800</pubDate>
+      
+      <guid>https://example.com/2020/02/post1/</guid>
+      <description>Hello second title second second second second second
+2 2 2 2 2
+third title third third third third third third
+3 3 3 3 3 3</description>
+    </item>
+    
+  </channel>
+</rss>
