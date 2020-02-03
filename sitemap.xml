@@ -1,9 +1,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
         <url>
-            <loc>https://yunyanan.github.io/2020/02/my_fifth_post/</loc>
+            <loc>https://yunyanan.github.io/2020/02/my_sixth_post/</loc>
             
-                <lastmod>2020-02-03T17:48:43+08:00</lastmod>
+                <lastmod>2020-02-03T17:55:51+08:00</lastmod>
             
             
                 <changefreq>weekly</changefreq>
@@ -17,7 +17,7 @@
         <url>
             <loc>https://yunyanan.github.io/posts/</loc>
             
-                <lastmod>2020-02-03T17:48:43+08:00</lastmod>
+                <lastmod>2020-02-03T17:55:51+08:00</lastmod>
             
             
                 <changefreq>weekly</changefreq>
@@ -30,6 +30,20 @@
     
         <url>
             <loc>https://yunyanan.github.io/</loc>
+            
+                <lastmod>2020-02-03T17:55:51+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/2020/02/my_fifth_post/</loc>
             
                 <lastmod>2020-02-03T17:48:43+08:00</lastmod>
             
