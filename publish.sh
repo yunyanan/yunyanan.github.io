@@ -16,6 +16,10 @@ git worktree add -B master public origin/master
 echo "Clean up public directory..."
 rm -rf public/*
 
+echo "Add Readme file..."
+touch public/Readme.md
+echo "This is my blog repo, Welcome to my [blog](https://yunyanan.github.io/)." > public/Readme.md
+
 echo "Generating site..."
 hugo
 
