@@ -1,7 +1,7 @@
 # 聊聊 Emacs
 
 
-![](https://yunyanan.github.io/images/posts/emacs_logo.png)
+![](/images/posts/emacs_logo.png)
 
 ## 缘起
 ---
