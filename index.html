@@ -213,7 +213,11 @@
     <div class="post-meta">
         <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
         published on&nbsp;<time datetime=2020-02-05>2020-02-05</time>&nbsp;
-        
+        <span class="post-category">
+                included in
+                <i class="far fa-folder fa-fw"></i><a href="https://yunyanan.github.io/categories/%E9%9A%8F%E6%83%B3/">随想</a>
+                    
+            </span>
     </div>
     <div class="post-content">
         
@@ -235,40 +239,11 @@ How do I exit the Emacs editor？
     <div class="post-footer">
         <a href="https://yunyanan.github.io/2020/02/rearrange_my_emacs_configuration/">Read More</a>
         
-    </div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article">
-    
-    
-    
-
-    
-    
-    
-    <h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="https://yunyanan.github.io/2020/02/my_sixth_post/">My_sixth_post</a>
-    </h1>
-
-    <div class="post-meta">
-        <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
-        published on&nbsp;<time datetime=2020-02-03>2020-02-03</time>&nbsp;
-        
-    </div>
-    <div class="post-content">
-        
-            
-            
-            
-            
-            
-            
-            
-            hhhhhhhhh jfkdjkdjf
-fjdkfjd
-fdjkjfka;jadklfnfaknc;a
-        
-    </div>
-    <div class="post-footer">
-        <a href="https://yunyanan.github.io/2020/02/my_sixth_post/">Read More</a>
+            <div class="post-tags">
+                
+                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/emacs/"><i class="fas fa-tag fa-fw"></i>Emacs</a></span>
+                
+            </div>
         
     </div>
 </article><article class="post" itemscope itemtype="http://schema.org/Article">
@@ -280,12 +255,12 @@ fdjkjfka;jadklfnfaknc;a
     
     
     <h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="https://yunyanan.github.io/2020/02/my_fifth_post/">My_fifth_post</a>
+        <a href="https://yunyanan.github.io/2020/02/talk_about_emacs/">聊聊 Emacs</a>
     </h1>
 
     <div class="post-meta">
         <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
-        published on&nbsp;<time datetime=2020-02-03>2020-02-03</time>&nbsp;
+        published on&nbsp;<time datetime=2020-02-05>2020-02-05</time>&nbsp;
         
     </div>
     <div class="post-content">
@@ -297,132 +272,19 @@ fdjkjfka;jadklfnfaknc;a
             
             
             
-            hahahahha dhhdjahfjfhajfhal
-hajkfhajkf hfajdfhlafh
-hajdfhlajhfdla
-fahjfahlfha
-hfajdflahdfaljkf
-hfajfhalhf
+            缘起 我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 Emacs，看到它真实面目后先是 一脸茫然，继而就想到了要退出它，于是便遇到了和问出上面那个问题的朋友类似的困 境:
+How do I exit the Emacs editor？
+也是从这里开始我就走上了一条和 Emacs 斗智斗勇的道路。
+一路走来 Emacs 的入门学习曲线也是出了名的曲折，而我也在第一次的入门过程中被它所击败。然 而在放弃它一段时间后，我又重新开始跟它较量了起来，这次它引起了我的兴趣，并且让我 成功的入了这个坑。
+在这之后的使用过程中， 也经常去上网找一些好用的轮子。 有什么突发奇想， 或者是使 用过程中碰到了一些痛点什么的，也都会去找一些解决方法。 就是在这样的一个过程中我 的配置文件也变得异常的庞大，并且杂乱不堪。 然后很自然的就想到了要去整理一下自己 的配置， 我觉得这可能也是每一个 Emacser 都会面临的问题。 用 Emacs 这么长时间 以来，我整理我自己的配置文件也有好多次了， 也尝试了不同的组织配置文件的方式。最近 我又重新做了一次这个工作，这次是用了一个 org 文件来做主配置文件， 尽可能的在文件 中描述清楚各个包的作用，放在了 Github 这里 也能有更好的可读性。这次整理只保留了一些基本的包，所以配置文件暂时也是比较简单的， 我是想在时候使用的过程中在慢慢增加需要的功能吧，尽可能的让它向简洁且强大的方向发 展。
+一点思考 回顾我整个 Emacs 的使用过程，我觉得想要快速的上手一个新的工具，或者是学习一项 新的技术，最快速的方法是实战。当然，了解它的基本知识也是必要的，但是如果 为了学习它而一直处在学习基本理论知识的状态，效果不理想不说还很容易对它失去兴趣和 耐心。入门的时候会都会很艰难，会有种恐惧感，都说恐惧源于未知，确实如此。就是因为 我们对新的技术，新的工具的不了解，所以才会怕它。然而当实战次数多起来后，你对它的 了解越来越多，恐惧感也随之减弱，离入门也就越来越近。所以前期努力克服这种恐惧感才 是我们最先接受的考验，这也成了我们意志强弱的体现。
         
     </div>
     <div class="post-footer">
-        <a href="https://yunyanan.github.io/2020/02/my_fifth_post/">Read More</a>
+        <a href="https://yunyanan.github.io/2020/02/talk_about_emacs/">Read More</a>
         
     </div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article">
-    
-    
-    
-
-    
-    
-    
-    <h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="https://yunyanan.github.io/2020/02/my_forth_post/">My_forth_post</a>
-    </h1>
-
-    <div class="post-meta">
-        <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
-        published on&nbsp;<time datetime=2020-02-03>2020-02-03</time>&nbsp;
-        
-    </div>
-    <div class="post-content">
-        
-            
-            
-            
-            
-            
-            
-            
-            Markdown是一种纯文本格式的标记语言。通过简单的标记语法，它可以使普通文本内容具有一定的格式。 相比WYSIWYG编辑器
-优点： 1、因为是纯文本，所以只要支持Markdown的地方都能获得一样的编辑效果，可以让作者摆脱排版的困扰，专心写作。 2、操作简单。比如:WYSIWYG编辑时标记个标题，先选中内容，再点击导航栏的标题按钮，选择几级标题。要三个步骤。而Markdown只需要在标题内容前加#即可
-缺点： 1、需要记一些语法（当然，是很简单。五分钟学会）。 2、有些平台不支持Markdown编辑模式。
-还好，简书是支持Markdown编辑模式的。
-作者：高鸿祥 链接：https://www.jianshu.com/p/191d1e21f7ed 来源：简书 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-        
-    </div>
-    <div class="post-footer">
-        <a href="https://yunyanan.github.io/2020/02/my_forth_post/">Read More</a>
-        
-    </div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article">
-    
-    
-    
-
-    
-    
-    
-    <h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="https://yunyanan.github.io/2020/02/my_third_post/">My_third_post</a>
-    </h1>
-
-    <div class="post-meta">
-        <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
-        published on&nbsp;<time datetime=2020-02-03>2020-02-03</time>&nbsp;
-        
-    </div>
-    <div class="post-content">
-        
-            
-            
-            
-            
-            
-            
-            
-            This is my third post 如果希望单独控制源文档和生成的网页文档的版本历史，可以使用单独建立一个gh-pages branch的方法托管到Github Pages——先将/public子目录添加到.gitignore中，让master branch忽略其更新，然后在本地和Github端添加一个名为gh-pages的branch：
-为了提高每次发布的效率，可以将下述命令存在脚本中，每次只需要运行该脚本即可将gh-pages branch中的文章发布到Github的repo中：
-        
-    </div>
-    <div class="post-footer">
-        <a href="https://yunyanan.github.io/2020/02/my_third_post/">Read More</a>
-        
-    </div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article">
-    
-    
-    
-
-    
-    
-    
-    <h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="https://yunyanan.github.io/2020/02/my_second_post/">My_second_post</a>
-    </h1>
-
-    <div class="post-meta">
-        <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
-        published on&nbsp;<time datetime=2020-02-03>2020-02-03</time>&nbsp;
-        
-    </div>
-    <div class="post-content">
-        
-            
-            
-            
-            
-            
-            
-            
-            This is my second post Hello post hello post!!!
-Hello hugo hello hugo!!!
-        
-    </div>
-    <div class="post-footer">
-        <a href="https://yunyanan.github.io/2020/02/my_second_post/">Read More</a>
-        
-    </div>
-</article><ul class="pagination"><li class="page-item active">
-                    <span class="page-link">
-                        <a href="/">1</a>
-                    </span>
-                </li><li class="page-item ">
-                    <span class="page-link">
-                        <a href="/page/2/">2</a>
-                    </span>
-                </li></ul></div></div>
+</article></div></div>
             </main>
             <footer class="footer">
     <div class="copyright">

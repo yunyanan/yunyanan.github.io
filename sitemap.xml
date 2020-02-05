@@ -1,7 +1,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
         <url>
+            <loc>https://yunyanan.github.io/categories/</loc>
+            
+                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/tags/emacs/</loc>
+            
+                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
             <loc>https://yunyanan.github.io/posts/</loc>
+            
+                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/tags/</loc>
             
                 <lastmod>2020-02-05T09:17:52+08:00</lastmod>
             
@@ -43,23 +85,9 @@
         </url>
     
         <url>
-            <loc>https://yunyanan.github.io/2020/02/my_sixth_post/</loc>
+            <loc>https://yunyanan.github.io/2020/02/talk_about_emacs/</loc>
             
-                <lastmod>2020-02-03T17:55:51+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/2020/02/my_fifth_post/</loc>
-            
-                <lastmod>2020-02-03T17:48:43+08:00</lastmod>
+                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
             
             
                 <changefreq>weekly</changefreq>
@@ -71,75 +99,9 @@
         </url>
     
         <url>
-            <loc>https://yunyanan.github.io/2020/02/my_forth_post/</loc>
+            <loc>https://yunyanan.github.io/categories/%E9%9A%8F%E6%83%B3/</loc>
             
-                <lastmod>2020-02-03T17:34:42+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/2020/02/my_third_post/</loc>
-            
-                <lastmod>2020-02-03T17:23:35+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/2020/02/my_second_post/</loc>
-            
-                <lastmod>2020-02-03T17:03:08+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/2020/02/my_first_post/</loc>
-            
-                <lastmod>2020-02-03T17:02:49+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/categories/</loc>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/tags/</loc>
+                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
             
             
                 <changefreq>weekly</changefreq>
