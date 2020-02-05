@@ -12,14 +12,24 @@
             <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
         
         
-            <lastBuildDate>Wed, 05 Feb 2020 15:10:33 +0800</lastBuildDate>
+            <lastBuildDate>Wed, 05 Feb 2020 15:19:12 +0800</lastBuildDate>
         
         <atom:link href="https://yunyanan.github.io/" rel="self" type="application/rss+xml" />
         
             <item>
+                <title>About</title>
+                <link>https://yunyanan.github.io/about/</link>
+                <pubDate>Wed, 05 Feb 2020 15:19:12 +0800</pubDate>
+                
+                <guid>https://yunyanan.github.io/about/</guid>
+                <description>&lt;p&gt;&lt;div class=&#34;tenor-gif-embed&#34; data-postid=&#34;10458935&#34; data-share-method=&#34;host&#34; data-width=&#34;100%&#34; data-aspect-ratio=&#34;1.8721804511278197&#34;&gt;&lt;a href=&#34;https://tenor.com/view/ice-bear-math-lady-we-bare-bears-say-what-we-bare-bears-brasil-gif-10458935&#34;&gt;Buguei / Ice Bear / We Bare Bears / GIF&lt;/a&gt; from &lt;a href=&#34;https://tenor.com/search/icebear-gifs&#34;&gt;Icebear GIFs&lt;/a&gt;&lt;/div&gt;&lt;script type=&#34;text/javascript&#34; async src=&#34;https://tenor.com/embed.js&#34;&gt;&lt;/script&gt;&lt;/p&gt;
+</description>
+            </item>
+        
+            <item>
                 <title>Posts</title>
                 <link>https://yunyanan.github.io/posts/</link>
-                <pubDate>Wed, 05 Feb 2020 15:10:33 +0800</pubDate>
+                <pubDate>Wed, 05 Feb 2020 09:17:52 +0800</pubDate>
                 
                 <guid>https://yunyanan.github.io/posts/</guid>
                 <description></description>
