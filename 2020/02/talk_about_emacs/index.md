@@ -1,7 +1,7 @@
 # 聊聊 Emacs
 
 
-![Ema](/images/posts/talk_about_emacs/emacs_logo.png)
+![Em](/images/posts/talk_about_emacs/emacs_logo.png)
 
 ## 缘起
 ---
@@ -22,7 +22,7 @@
 
 `Emacs` 的入门学习曲线也是出了名的曲折，而我也在第一次的入门过程中被它所击败。然
 而在放弃它一段时间后，我又重新开始跟它较量了起来，这次它引起了我的兴趣，并且让我
-成功的入了这个坑。刚开始我是在 `Windows` 系统下使用 `Emacs`, 尽管后来用的多了，
+成功的入了这个坑。刚开始我是在 `Windows` 系统下使用 `Emacs`,  尽管后来用的多了，
 更熟练了，还是觉得用起来多多少少有点难受， 不过这也不能阻止我继续对 `Emacs` 的探
 索。直到工作中开始使用起了 `Linux`， 当我在`Linux` 中安装完 `Emacs` 打开后面对
 如丝般顺滑的 `Emacs` 突然有种似花非花的感觉，发现之前在 `Windows` 下折腾好久才搞
