@@ -28,7 +28,9 @@ echo -e "\033[32m [Clean up public directory...] \033[0m"
 rm -rf public/*
 
 echo -e "\033[32m [Add Readme file...] \033[0m"
-echo "This is my blog repo, Welcome to my [blog](https://yunyanan.github.io/)." > public/Readme.md
+echo
+"Welcome to my [BLOG](https://yunyanan.github.io/). This branch is used to store
+publish files of blog." > public/Readme.md
 
 echo -e "\033[32m [Generating site...] \033[0m"
 hugo
