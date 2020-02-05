@@ -1,9 +1,6 @@
 ---
 title: "聊聊 Emacs"
 date: 2020-02-05T09:17:52+08:00
-
-tags: ['Emacs']
-categories: ['随想']
 ---
 
 ![Emacs](/images/posts/talk_about_emacs/emacs_logo.svg)
