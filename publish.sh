@@ -12,6 +12,7 @@ fi
 if [[ $(git status -s) ]]
 then
     echo -e "\033[32m [Commit new posts first...] \033[0m"
+    rm content/posts/*~
     git add --all && git commit -m "commit post"
     git push origin source
 fi
@@ -35,6 +36,8 @@ hugo
 echo -e "\033[32m [Updating master branch...] \033[0m"
 cd public && git add --all && git commit -m "Publishing post"
 
-echo -e "\033[32m [Push to origin] \033[0m"
+echo -e "\033[32m [Push to origin master...] \033[0m"
 git push origin master
 cd -
+
+echo -e "\033[32m [Publish finished] \033[0m"
