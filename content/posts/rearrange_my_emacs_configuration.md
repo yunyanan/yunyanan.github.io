@@ -6,12 +6,12 @@ tags: ['Emacs']
 categories: ['随想']
 ---
 
-![Emacs](/images/posts/talk_about_emacs/emacs_logo.svg)
+![](/images/posts/talk_about_emacs/emacs_logo.svg)
 
 ## 缘起
 ---
 
-  我第一次知道 `GUN Emacs` 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的
+我第一次知道 `GUN Emacs` 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的
 `Emacs` 来写代码。 之前 StackOverflow 上一个
 [How do I exit the Vim editor?](https://stackoverflow.com/questions/11828270/how-do-i-exit-the-vim-editor)
 的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 `Emacs`，看到它真实面目后先是
@@ -27,9 +27,14 @@ categories: ['随想']
 
 `Emacs` 的入门学习曲线也是出了名的曲折，而我也在第一次的入门过程中被它所击败。然
 而在放弃它一段时间后，我又重新开始跟它较量了起来，这次它引起了我的兴趣，并且让我
-成功的入了这个坑。
+成功的入了这个坑。刚开始我是在 `Windows` 系统下使用 `Emacs`, 尽管后来用的多了，
+更熟练了，还是觉得用起来多多少少有点难受， 不过这也不能阻止我继续对 `Emacs` 的探
+索。直到工作中开始使用起了 `Linux`， 当我在`Linux` 中安装完 `Emacs` 打开后面对
+如丝般顺滑的 `Emacs` 突然有种似花非花的感觉，发现之前在 `Windows` 下折腾好久才搞
+好的功能换在 `Linux` 下竟然安装完就能用，顿时便觉得之前在 `Windows` 下折腾
+`Emacs` 真的是在浪费生命。 自此我便放弃了在 `Windows` 下使用 `Emacs` 了。
 
-在这之后的使用过程中， 也经常去上网找一些好用的轮子。 有什么突发奇想， 或者是使
+在整个 `Emacs` 的使用过程中， 也经常去上网找一些好用的轮子。 有什么突发奇想， 或者是使
 用过程中碰到了一些痛点什么的，也都会去找一些解决方法。 就是在这样的一个过程中我
 的配置文件也变得异常的庞大，并且杂乱不堪。 然后很自然的就想到了要去整理一下自己
 的配置， 我觉得这可能也是每一个 `Emacser` 都会面临的问题。 用 `Emacs` 这么长时间
