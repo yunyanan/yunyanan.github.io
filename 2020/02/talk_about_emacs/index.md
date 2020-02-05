@@ -14,7 +14,6 @@
 境: **How do I exit the Emacs editor？** 也是从这里开始我就走上了一条和 `Emacs`
 斗智斗勇的道路。
 
-
 ## 一路走来
 ---
 
