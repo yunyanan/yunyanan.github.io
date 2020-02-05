@@ -1,7 +1,7 @@
 # 聊聊 Emacs
 
 
-![Emacs](/images/posts/emacs_logo.png)
+![Emacs](/images/posts/emacs_logo.svg)
 
 ## 缘起
 ---
