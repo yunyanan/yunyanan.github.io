@@ -14,10 +14,10 @@
     
     <item>
       <title>聊聊 Emacs</title>
-      <link>https://yunyanan.github.io/2020/02/rearrange_my_emacs_configuration/</link>
+      <link>https://yunyanan.github.io/2020/02/talk_about_emacs/</link>
       <pubDate>Wed, 05 Feb 2020 09:17:52 +0800</pubDate>
       
-      <guid>https://yunyanan.github.io/2020/02/rearrange_my_emacs_configuration/</guid>
+      <guid>https://yunyanan.github.io/2020/02/talk_about_emacs/</guid>
       <description>缘起 我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 Emacs，看到它真实面目后先是 一脸茫然，继而就想到了要退出它，于是便遇到了和问出上面那个问题的朋友类似的困 境:
 How do I exit the Emacs editor？
 也是从这里开始我就走上了一条和 Emacs 斗智斗勇的道路。
