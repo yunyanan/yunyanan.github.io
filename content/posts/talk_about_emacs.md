@@ -6,7 +6,7 @@ tags: ['Emacs']
 categories: ['随想']
 ---
 
-![Emacs](/images/posts/talk_about_emacs/emacs_logo.png)
+![Emac](/images/posts/talk_about_emacs/emacs_logo.png)
 
 ## 缘起
 ---
