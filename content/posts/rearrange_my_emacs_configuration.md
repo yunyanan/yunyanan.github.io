@@ -3,7 +3,7 @@ title: "聊聊 Emacs"
 date: 2020-02-05T09:17:52+08:00
 ---
 
-![](https://yunyanan.github.io/images/posts/emacs_logo.png)
+![](/images/posts/emacs_logo.png)
 
 ## 缘起
 ---
