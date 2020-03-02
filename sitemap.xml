@@ -1,6 +1,118 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
         <url>
+            <loc>https://yunyanan.github.io/categories/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/tags/kbuild/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/tags/kernel/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/tags/linux/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/categories/linux/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/posts/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/tags/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://yunyanan.github.io/2020/02/linux_kernel_compile/</loc>
+            
+                <lastmod>2020-02-29T17:40:32+08:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
             <loc>https://yunyanan.github.io/about/</loc>
             
                 <lastmod>2020-02-05T15:19:12+08:00</lastmod>
@@ -29,49 +141,7 @@
         </url>
     
         <url>
-            <loc>https://yunyanan.github.io/categories/</loc>
-            
-                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
             <loc>https://yunyanan.github.io/tags/emacs/</loc>
-            
-                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/posts/</loc>
-            
-                <lastmod>2020-02-05T09:17:52+08:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://yunyanan.github.io/tags/</loc>
             
                 <lastmod>2020-02-05T09:17:52+08:00</lastmod>
             

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-	<meta name="generator" content="Hugo 0.58.3" />
+	<meta name="generator" content="Hugo 0.65.3" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>YunYanan</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -207,6 +207,57 @@
     
     
     <h1 class="post-title post-list-title" itemprop="name headline">
+        <a href="https://yunyanan.github.io/2020/02/linux_kernel_compile/">编译 Linux 内核</a>
+    </h1>
+
+    <div class="post-meta">
+        <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
+        published on&nbsp;<time datetime=2020-02-29>2020-02-29</time>&nbsp;
+        <span class="post-category">
+                included in
+                <i class="far fa-folder fa-fw"></i><a href="https://yunyanan.github.io/categories/linux/">Linux</a>
+                    
+            </span>
+    </div>
+    <div class="post-content">
+        
+            
+            
+            
+            
+            
+            
+            
+            前言  为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中供应商提供的 SDK， Raspberry Pi, 还有为了修改 Ubuntu 的一个 驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内 核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是 编译动作多多少少被修改过， 编译的时候存在些许差别。所以这次我直接下载了 GItHub上 Linux 仓库的 master 分支来编译。这次就先记 录一下编译 Linux 内核的方法和过程，后面在来写一个 Kbuild 系统的介绍。
+编译  先简单说一下下载吧， 我是直接从 GitHub 上 Linux 的仓库直接下载的， 当然也可以去内核 的官方网站上下载, 这上面不仅有最新稳定版本的内核，一些 历史版本的内核也可以从这里下载到。 不仅如此， Linux 的内核仓库中其实还包含了大量 的文档， 可以选择自己编译出内核文档，也可以使用 在线文档。
+NOTE: 在线的文档可能更方便一点， 自己编译的话要在自己电脑上安装一些工具啥的。
+现在进入正题:
+配置内核 Linux 内核的配置方法有很多， 下面这三种应该是目前使用比较广泛的三种方式：
+        
+    </div>
+    <div class="post-footer">
+        <a href="https://yunyanan.github.io/2020/02/linux_kernel_compile/">Read More</a>
+        
+            <div class="post-tags">
+                
+                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/linux/"><i class="fas fa-tag fa-fw"></i>Linux</a></span>
+                
+                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/kernel/"><i class="fas fa-tag fa-fw"></i>Kernel</a></span>
+                
+                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/kbuild/"><i class="fas fa-tag fa-fw"></i>Kbuild</a></span>
+                
+            </div>
+        
+    </div>
+</article><article class="post" itemscope itemtype="http://schema.org/Article">
+    
+    
+    
+
+    
+    
+    
+    <h1 class="post-title post-list-title" itemprop="name headline">
         <a href="https://yunyanan.github.io/2020/02/talk_about_emacs/">聊聊 Emacs</a>
     </h1>
 
@@ -228,8 +279,8 @@
             
             
             
-            缘起 我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 Emacs，看到它真实面目后先是 一脸茫然，继而就想到了要退出它，于是便遇到了和问出上面那个问题的朋友类似的困 境: How do I exit the Emacs editor？ 也是从这里开始我就走上了一条和 Emacs 斗智斗勇的道路。
-一路走来 Emacs 的入门学习曲线也是出了名的曲折，而我也在第一次的入门过程中被它所击败。然 而在放弃它一段时间后，我又重新开始跟它较量了起来，这次它引起了我的兴趣，并且让我 成功的入了这个坑。刚开始我是在 Windows 系统下使用 Emacs, 尽管后来用的多了， 更熟练了，但还是觉得用起来多多少少有点难受， 不过这也没能阻止我继续对 Emacs 的探 索。直到工作中开始使用起了 Linux， 当我在Linux 中安装完 Emacs 打开后面对 如丝般顺滑的 Emacs 突然有种似花非花的感觉，发现之前在 Windows 下折腾好久才搞 好的功能换在 Linux 下竟然安装完就能用，顿时便觉得之前在 Windows 下折腾 Emacs 真的是在浪费生命。 自此我便放弃了在 Windows 下使用 Emacs 了。
+            缘起  我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 Emacs，看到它真实面目后先是 一脸茫然，继而就想到了要退出它，于是便遇到了和问出上面那个问题的朋友类似的困 境: How do I exit the Emacs editor？ 也是从这里开始我就走上了一条和 Emacs 斗智斗勇的道路。
+一路走来  Emacs 的入门学习曲线也是出了名的曲折，而我也在第一次的入门过程中被它所击败。然 而在放弃它一段时间后，我又重新开始跟它较量了起来，这次它引起了我的兴趣，并且让我 成功的入了这个坑。刚开始我是在 Windows 系统下使用 Emacs, 尽管后来用的多了， 更熟练了，但还是觉得用起来多多少少有点难受， 不过这也没能阻止我继续对 Emacs 的探 索。直到工作中开始使用起了 Linux， 当我在Linux 中安装完 Emacs 打开后面对 如丝般顺滑的 Emacs 突然有种似花非花的感觉，发现之前在 Windows 下折腾好久才搞 好的功能换在 Linux 下竟然安装完就能用，顿时便觉得之前在 Windows 下折腾 Emacs 真的是在浪费生命。 自此我便放弃了在 Windows 下使用 Emacs 了。
         
     </div>
     <div class="post-footer">

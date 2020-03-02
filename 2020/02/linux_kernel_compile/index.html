@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>编译 Linux 内核 | YunYanan</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="LoveIt Theme Demo">
+<link rel="prev" href="https://yunyanan.github.io/2020/02/talk_about_emacs/" />
+<link rel="canonical" href="https://yunyanan.github.io/2020/02/linux_kernel_compile/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="编译 Linux 内核"/>
+<meta name="twitter:description" content="前言  为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中供应商提供的 SDK， Raspberry Pi, 还有为了修改 Ubuntu 的一个 驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内 核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是 编译动作多多少少被修改过， 编译的时候存在些许差别。所以这次我直接下载了 GItHub上 Linux 仓库的 master 分支来编译。这次就先记 录一下编译 Linux 内核的方法和过程，后面在来写一个 Kbuild 系统的介绍。
+编译  先简单说一下下载吧， 我是直接从 GitHub 上 Linux 的仓库直接下载的， 当然也可以去内核 的官方网站上下载, 这上面不仅有最新稳定版本的内核，一些 历史版本的内核也可以从这里下载到。 不仅如此， Linux 的内核仓库中其实还包含了大量 的文档， 可以选择自己编译出内核文档，也可以使用 在线文档。
+NOTE: 在线的文档可能更方便一点， 自己编译的话要在自己电脑上安装一些工具啥的。
+现在进入正题:
+配置内核 Linux 内核的配置方法有很多， 下面这三种应该是目前使用比较广泛的三种方式："/>
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "编译 Linux 内核",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/yunyanan.github.io\/2020\/02\/linux_kernel_compile\/"
+    },
+    
+        "image": {
+            "@type": "ImageObject",
+            "url": "https:\/\/yunyanan.github.io\/cover.png",
+            "width":  800 ,
+            "height":  600 
+        },
+    
+    "genre": "posts",
+    
+        "keywords": "Linux, Kernel, Kbuild",
+    
+    "wordcount":  220 ,
+    "url": "https:\/\/yunyanan.github.io\/2020\/02\/linux_kernel_compile\/",
+    
+        "datePublished": "2020-02-29T17:40:32\x2b08:00",
+    
+    
+        "dateModified": "2020-02-29T17:40:32\x2b08:00",
+    
+    
+        "license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
+    
+    
+        "publisher": {
+            "@type": "Organization",
+            "name": "yunyanan",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "https:\/\/yunyanan.github.io\/logo.png",
+            "width":  127 ,
+            "height":  40 
+            }
+        },
+    
+    
+    "description": ""
+    }
+    </script>
+<link rel="stylesheet" href="/css/style.min.css">
+<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
+
+<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
+
+
+    </head>
+    <body>
+        <script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script>
+        <div class="wrapper">
+            <nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://yunyanan.github.io/">YunYanan</a>
+        </div>
+        <div class="navbar-menu">
+            
+            
+                <a class="menu-item" href="https://yunyanan.github.io/posts" title="">Posts</a>
+            
+                <a class="menu-item" href="https://yunyanan.github.io/tags" title="">Tags</a>
+            
+                <a class="menu-item" href="https://yunyanan.github.io/categories" title="">Categories</a>
+            
+                <a class="menu-item" href="https://yunyanan.github.io/about" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile">
+     <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://yunyanan.github.io/">YunYanan</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu">
+            
+            
+                <a class="menu-item" href="https://yunyanan.github.io/posts" title="">Posts</a>
+            
+                <a class="menu-item" href="https://yunyanan.github.io/tags" title="">Tags</a>
+            
+                <a class="menu-item" href="https://yunyanan.github.io/categories" title="">Categories</a>
+            
+                <a class="menu-item" href="https://yunyanan.github.io/about" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container">
+                    
+    
+    
+    
+
+    <article class="post-warp">
+        <h1 class="post-title animated flipInX">编译 Linux 内核</h1>
+
+        <div class="post-meta">
+            <div class="post-meta-main">
+                <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
+                <span class="post-category">
+                        included in
+                        <i class="far fa-folder fa-fw"></i><a href="https://yunyanan.github.io/categories/linux/">Linux</a>
+                            
+                    </span>
+            </div>
+            <div class="post-meta-other">
+                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-02-29>2020-02-29</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 220 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>2 min&nbsp;</div>
+        </div>
+
+        
+
+        
+
+        <div class="post-content">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p><img src="/images/posts/linux_kernel_compile/linux_logo.jpg" alt="Linux"></p>
+<a class="post-dummy-target" id="前言"></a><h2>前言</h2>
+<hr>
+<p>为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
+此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过
+工作中供应商提供的 SDK，
+<a href="https://github.com/raspberrypi/linux">Raspberry Pi</a>, 还有为了修改 Ubuntu 的一个
+驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内
+核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是
+编译动作多多少少被修改过， 编译的时候存在些许差别。所以这次我直接下载了 GItHub上
+<a href="https://github.com/torvalds/linux">Linux</a> 仓库的 master 分支来编译。这次就先记
+录一下编译 Linux 内核的方法和过程，后面在来写一个 Kbuild 系统的介绍。</p>
+<a class="post-dummy-target" id="编译"></a><h2>编译</h2>
+<hr>
+<p>先简单说一下下载吧， 我是直接从 GitHub 上 Linux 的仓库直接下载的， 当然也可以去内核
+的<a href="https://www.kernel.org">官方网站</a>上下载, 这上面不仅有最新稳定版本的内核，一些
+历史版本的内核也可以从这里下载到。 不仅如此， Linux 的内核仓库中其实还包含了大量
+的文档， 可以选择自己编译出内核文档，也可以使用
+<a href="https://www.kernel.org/doc/html/latest/index.html">在线文档</a>。</p>
+<p>NOTE: 在线的文档可能更方便一点， 自己编译的话要在自己电脑上安装一些工具啥的。</p>
+<p>现在进入正题:</p>
+<a class="post-dummy-target" id="配置内核"></a><h4>配置内核</h4>
+<p>Linux 内核的配置方法有很多， 下面这三种应该是目前使用比较广泛的三种方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">make menuconfig		<span class="c1"># Update current config utilising a menu based program</span>
+make xconfig		<span class="c1"># Update current config utilising a Qt based front-end</span>
+make gconfig		<span class="c1"># Update current config utilising a GTK+ based front-end</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这三个命令在配置时只需要用一个就可以了， 命令后面的注释说明了这三个命令的使用条件。
+这里先介绍一下 <code>make help</code> 命令。 这条命令可以查看到内核编译时所有 Make 可用的目标
+及介绍， 上面的注释便出自这里。 我之前配置时也只用过第一种方法，这次编译我的电脑也支持
+后面两个命令的条件，所以在这里我也展示一下这三种配置方式的界面。</p>
+<ul>
+<li>首先是 <code>make menuconfig</code> 的配置界面：</li>
+</ul>
+<p><img src="/images/posts/linux_kernel_compile/menuconfig.png" alt="make menuconfig"></p>
+<ul>
+<li>然后是 <code>make xconfig</code> 的配置界面：</li>
+</ul>
+<p><img src="/images/posts/linux_kernel_compile/xconfig.png" alt="make xconfig"></p>
+<ul>
+<li>最后是 <code>make gconfig</code> 的配置界面：</li>
+</ul>
+<p><img src="/images/posts/linux_kernel_compile/gconfig.png" alt="make gconfig"></p>
+<p>使用哪种方式可以说取决于个人喜好了或者自己电脑所具备的条件了，毕竟他们最终的目的
+都是生成名为 <code>.config</code> 的内核配置文件。 在配置具体功能时最多有三种选择：</p>
+<ul>
+<li>Y &ndash; 将该功能编译进内核</li>
+<li>N &ndash; 不要将该功能编译进内核</li>
+<li>M &ndash; 将该功能编译成模块</li>
+</ul>
+<p>基本每个功能配置都会有对应的帮助说明， 非常的人性化。 需要注意的是这个步骤其实并
+不是每次都必须的， 比如之前已经配置过了，或者从其他地方拷贝来了可用的配置文件，
+这一步是完全可以跳过的。配置完成后就可以开始编译了。</p>
+<a class="post-dummy-target" id="编译内核"></a><h4>编译内核</h4>
+<p>开始编译时直接使用 <code>make</code> 命令即可。 当然如果想加快编译的速度， 可以追加 <code>-j</code> 参
+数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">make -j 4			<span class="c1"># 同时运行 4 个作业，这里取值推荐为 2 倍的 CPU Core 数</span>
+make -j <span class="k">$(</span>nproc<span class="k">)</span>		<span class="c1"># 可以通过 nproc 命令得到可用处理单元的数量</span>
+</code></pre></td></tr></table>
+</div>
+</div><a class="post-dummy-target" id="编译模块"></a><h4>编译模块</h4>
+<p>上面配置内核时说到有三种选择，配置时候选择 <code>M</code> 编译为模块的功能特性在这里可以用
+下面的命令编译出来：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">make modules
+</code></pre></td></tr></table>
+</div>
+</div><p>至此，需要编译的代码都已经编译完成。</p>
+<a class="post-dummy-target" id="结语"></a><h2>结语</h2>
+<hr>
+<p>Linux 内核的 Makefile 还有很多目标，例如这些：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">make modules_install		<span class="c1"># 安装内核模块</span>
+make htmldocs			<span class="c1"># 生成 html 格式的内核文档</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在这里就不一一介绍了，以后用到再说。我想说的是正是有这么多的编译目标的存在才让现
+在 Linux 内核的编译如此的简单且人性化。 而在 Linux 的内核中更是处处充满了令人眼
+前一亮的细节，这应该也是 Linux 内核魅力的来源之一吧。以后慢慢去发现它们吧。 ：）</p>
+<p><strong>Happy Hacking!</strong></p>
+
+        </div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>This article is updated with 2020-02-29</span>
+            </div>
+            <div class="post-info-license">
+                
+            </div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md">
+                
+                    
+                        <span><a class="link-to-markdown" href="https://yunyanan.github.io/2020/02/linux_kernel_compile/index.md" target="_blank"></a></span>
+                    
+                
+            </div>
+            <div class="post-info-share">
+                
+                    <span>
+    
+        <a href="//twitter.com/share?url=https%3a%2f%2fyunyanan.github.io%2f2020%2f02%2flinux_kernel_compile%2f&amp;text=%e7%bc%96%e8%af%91%20Linux%20%e5%86%85%e6%a0%b8&amp;via=" target="_blank" title="Share on Twitter">
+            <i class="fab fa-twitter fa-fw"></i>
+        </a>
+    
+    
+        <a href="//www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fyunyanan.github.io%2f2020%2f02%2flinux_kernel_compile%2f" target="_blank" title="Share on Facebook">
+            <i class="fab fa-facebook-square fa-fw"></i>
+        </a>
+    
+    
+        <a href="//reddit.com/submit?url=https%3a%2f%2fyunyanan.github.io%2f2020%2f02%2flinux_kernel_compile%2f&amp;title=%e7%bc%96%e8%af%91%20Linux%20%e5%86%85%e6%a0%b8" target="_blank" title="Share on Reddit">
+            <i class="fab fa-reddit fa-fw"></i>
+        </a>
+    
+    
+    
+    
+    
+    
+    
+    
+</span>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section>
+            
+                
+                    <span class="tag">
+                        <a href="https://yunyanan.github.io/tags/linux/"><i class="fas fa-tag fa-fw"></i>Linux</a>
+                    </span>
+                
+                    <span class="tag">
+                        <a href="https://yunyanan.github.io/tags/kernel/"><i class="fas fa-tag fa-fw"></i>Kernel</a>
+                    </span>
+                
+                    <span class="tag">
+                        <a href="https://yunyanan.github.io/tags/kbuild/"><i class="fas fa-tag fa-fw"></i>Kbuild</a>
+                    </span>
+                
+            
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://yunyanan.github.io/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+            <a href="https://yunyanan.github.io/2020/02/talk_about_emacs/" class="prev" rel="prev" title="聊聊 Emacs"><i class="fas fa-angle-left fa-fw"></i>聊聊 Emacs</a>
+        
+        
+    </div>
+</div>
+
+        <div class="post-comment">
+            
+            
+
+            
+        </div>
+    </article></div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        <div class="copyright-line">
+            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+        <div class="copyright-line">
+            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://yunyanan.github.io/">YunYanan</a></span><span class="license">&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer>
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
+<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
+<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+<script src="/js/blog.min.js"></script>
+
+
+    
+</div>
+        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
+    </body>
+</html>
