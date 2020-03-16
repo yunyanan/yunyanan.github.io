@@ -8,8 +8,14 @@ categories: ['Linux']
 comment: true
 ---
 
-![](/images/posts/exploring_kbuild/kbuild.png)
+<div style="text-align: center">
+<img src="/images/posts/exploring_kbuild/kbuild.png"/>
+</div>
 
+上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
+`Kbuild` 系统吧。
+
+<!--more-->
 
 ## 前言
 ---
