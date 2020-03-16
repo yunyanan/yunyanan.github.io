@@ -34,6 +34,9 @@ publish files of blog." > public/Readme.md
 echo -e "\033[32m [Generating site...] \033[0m"
 hugo
 
+echo -e "\033[32m [Copy Google search verify file...] \033[0m"
+cp google43ebdfe4fa803825.html public/
+
 echo -e "\033[32m [Updating master branch...] \033[0m"
 cd public && git add --all && git commit -m "Publishing post"
 
