@@ -5,24 +5,29 @@
     <link>https://yunyanan.github.io/tags/kbuild/</link>
     <description>Recent content in Kbuild on YunYanan</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
+    <language>zh-CN</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 29 Feb 2020 17:40:32 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 15 Mar 2020 10:29:35 +0800</lastBuildDate>
     
 	<atom:link href="https://yunyanan.github.io/tags/kbuild/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Exploring Kbuild</title>
+      <link>https://yunyanan.github.io/exploring_kbuild/</link>
+      <pubDate>Sun, 15 Mar 2020 10:29:35 +0800</pubDate>
+      
+      <guid>https://yunyanan.github.io/exploring_kbuild/</guid>
+      <description>前言 最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编 译内核的文章确实不算多，这也反应出 Kbuild 系统确实是容易被忽视的一个</description>
+    </item>
+    
+    <item>
       <title>编译 Linux 内核</title>
-      <link>https://yunyanan.github.io/2020/02/linux_kernel_compile/</link>
+      <link>https://yunyanan.github.io/linux_kernel_compile/</link>
       <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate>
       
-      <guid>https://yunyanan.github.io/2020/02/linux_kernel_compile/</guid>
-      <description>前言  为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中供应商提供的 SDK， Raspberry Pi, 还有为了修改 Ubuntu 的一个 驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内 核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是 编译动作多多少少被修改过， 编译的时候存在些许差别。所以这次我直接下载了 GItHub上 Linux 仓库的 master 分支来编译。这次就先记 录一下编译 Linux 内核的方法和过程，后面在来写一个 Kbuild 系统的介绍。
-编译  先简单说一下下载吧， 我是直接从 GitHub 上 Linux 的仓库直接下载的， 当然也可以去内核 的官方网站上下载, 这上面不仅有最新稳定版本的内核，一些 历史版本的内核也可以从这里下载到。 不仅如此， Linux 的内核仓库中其实还包含了大量 的文档， 可以选择自己编译出内核文档，也可以使用 在线文档。
-NOTE: 在线的文档可能更方便一点， 自己编译的话要在自己电脑上安装一些工具啥的。
-现在进入正题:
-配置内核 Linux 内核的配置方法有很多， 下面这三种应该是目前使用比较广泛的三种方式：</description>
+      <guid>https://yunyanan.github.io/linux_kernel_compile/</guid>
+      <description>前言 为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中</description>
     </item>
     
   </channel>

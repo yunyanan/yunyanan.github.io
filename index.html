@@ -1,417 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
-	<meta name="generator" content="Hugo 0.65.3" />
+	<meta name="generator" content="Hugo 0.66.0" />
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>YunYanan</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noodp" />
-<meta name="Description" content="LoveIt Theme Demo">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>YunYanan</title>
+        <meta name="Description" content="个人博客"><meta property="og:title" content="YunYanan" />
+<meta property="og:description" content="个人博客" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://yunyanan.github.io/" />
+<meta property="og:updated_time" content="2020-02-05T15:19:12+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="YunYanan"/>
+<meta name="twitter:description" content="个人博客"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="https://yunyanan.github.io/" />
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-<link rel="alternate" href="/index.xml" type="application/rss+xml" title="YunYanan">
-    <link rel="feed" href="/index.xml" type="application/rss+xml" title="YunYanan">
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="YunYanan"/>
-<meta name="twitter:description" content="LoveIt Theme Demo"/>
-<script type="application/ld+json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="alternate" href="/index.xml" type="application/rss+xml" title="YunYanan">
+    <link rel="feed" href="/index.xml" type="application/rss+xml" title="YunYanan"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
     {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "url": "https:\/\/yunyanan.github.io\/",
-    
-        "author": {
-            "@type": "Person",
-            "name": "YunYanan"
-        },
-    
-    
-        "description": "LoveIt Theme Demo",
-    
-    
-        "image": "https:\/\/yunyanan.github.io\/cover.png",
-    
-    
-        "thumbnailUrl": "https:\/\/yunyanan.github.io\/logo.png",
-    
-    
-        "license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
-    
-    "name": "YunYanan"
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "https:\/\/yunyanan.github.io\/","inLanguage": "zh-CN","author": {
+                "@type": "Person",
+                "name": "YunYanan"
+            },"description": "个人博客","image": "https:\/\/yunyanan.github.io\/cover.png","thumbnailUrl": "https:\/\/yunyanan.github.io\/logo.png","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","name": "YunYanan"
     }
-    </script>
-<link rel="stylesheet" href="/css/style.min.css">
-<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
-
-<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
-
-
-    </head>
-    <body>
-        <script>
-            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
             window.isDark && document.body.classList.add('dark-theme');
-        </script>
-        <div class="wrapper">
-            <nav class="navbar">
-    <div class="navbar-container">
-        <div class="navbar-header animated bounceIn">
-            <a href="https://yunyanan.github.io/">YunYanan</a>
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">YunYanan</a>
         </div>
-        <div class="navbar-menu">
-            
-            
-                <a class="menu-item" href="https://yunyanan.github.io/posts" title="">Posts</a>
-            
-                <a class="menu-item" href="https://yunyanan.github.io/tags" title="">Tags</a>
-            
-                <a class="menu-item" href="https://yunyanan.github.io/categories" title="">Categories</a>
-            
-                <a class="menu-item" href="https://yunyanan.github.io/about" title="">About</a>
-            
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
-        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/documentation/" rel="noopener noreffer">文档</a><a class="menu-item" href="/about/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
-</nav>
-<nav class="navbar-mobile">
-     <div class="navbar-container">
-        <div class="navbar-header">
-            <div class="navbar-header-title animated bounceIn">
-                <a href="https://yunyanan.github.io/">YunYanan</a>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">YunYanan</a>
             </div>
-            <div class="menu-toggle" id="menu-toggle">
+            <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="navbar-menu" id="mobile-menu">
-            
-            
-                <a class="menu-item" href="https://yunyanan.github.io/posts" title="">Posts</a>
-            
-                <a class="menu-item" href="https://yunyanan.github.io/tags" title="">Tags</a>
-            
-                <a class="menu-item" href="https://yunyanan.github.io/categories" title="">Categories</a>
-            
-                <a class="menu-item" href="https://yunyanan.github.io/about" title="">About</a>
-            
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
-        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/documentation/" title="" rel="noopener noreffer">文档</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
     </div>
-</nav><main class="main">
-                <div class="container">
-                    <div class="post-warp"><div class="home-intro">
-    
-    
-        
-    
-    
-        <div class="home-avatar">
-            <a href="/posts">
-                <img src=/images/avatar.png alt="avatar">
-            </a>
-        </div>
-    
+</header>
 
-    
-        <h2 class="home-description">
-            
-            <div id=rtp-05fd9bedebfaa69e1d9f834a0250f8bc hidden=true>Stay Hungry, Stay Foolish.</div>
-            <div id=tp-05fd9bedebfaa69e1d9f834a0250f8bc class="typeit"></div>
-            
-                
-            
-        </h2>
-    
-
-    <div class="home-social-links">
-        
-    <a href="https://github.com/yunyanan" rel="me noopener noreffer" target="_blank"><i class="fab fa-github-alt fa-fw" title="Github"></i></a>
-
-
-    <a href="https://linkedin.com/in/%e4%ba%9a%e6%a5%a0-%e8%bf%90-6a502a17b" rel="me noopener noreffer" target="_blank"><i class="fab fa-linkedin fa-fw" title="LinkedIn"></i></a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <a href="https://stackoverflow.com/users/10385483/yunyanan" rel="me noopener noreffer" target="_blank"><i class="fab fa-stack-overflow fa-fw" title="Stackoverflow"></i></a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <a href="mailto:yunyanan1@gmail.com" rel="me noopener noreffer"><i class="far fa-envelope fa-fw" target="_blank" title="Email"></i></a>
-
-    </div>
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><div class="page home"><div class="home-profile"><div class="home-avatar">
+            <a href="/posts"><img
+        class="lazyload"
+        src="/svg/loading.small.min.svg"
+        data-sizes="auto"
+        data-srcset="/images/avatar.png,  1.5x,  2x"
+        data-src=""
+        alt="avatar"
+        title="主页" /></a>
+        </div><h2 class="home-description"><div id="id-6cf5a5" class="typeit"></div></h2><div class="home-social-links"><a href="https://github.com/yunyanan" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a>
+<a href="https://linkedin.com/in/%e4%ba%9a%e6%a5%a0-%e8%bf%90-6a502a17b" title="LinkedIn" target="_blank" rel="noopener noreffer me"><i class="fab fa-linkedin fa-fw"></i></a>
+<a href="https://stackoverflow.com/users/10385483/yunyanan" title="Stack Overflow" target="_blank" rel="noopener noreffer me"><i class="fab fa-stack-overflow fa-fw"></i></a>
+<a href="mailto:yunyanan1@gmail.com" title="Email" rel="noopener noreffer me"><i class="far fa-envelope fa-fw"></i></a>
 </div>
-<article class="post" itemscope itemtype="http://schema.org/Article">
-    
-    
-    
-
-    
-    
-    
-    <h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="https://yunyanan.github.io/2020/02/linux_kernel_compile/">编译 Linux 内核</a>
-    </h1>
-
-    <div class="post-meta">
-        <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
-        published on&nbsp;<time datetime=2020-02-29>2020-02-29</time>&nbsp;
-        <span class="post-category">
-                included in
-                <i class="far fa-folder fa-fw"></i><a href="https://yunyanan.github.io/categories/linux/">Linux</a>
-                    
-            </span>
-    </div>
-    <div class="post-content">
-        
-            
-            
-            
-            
-            
-            
-            
-            前言  为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中供应商提供的 SDK， Raspberry Pi, 还有为了修改 Ubuntu 的一个 驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内 核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是 编译动作多多少少被修改过， 编译的时候存在些许差别。所以这次我直接下载了 GItHub上 Linux 仓库的 master 分支来编译。这次就先记 录一下编译 Linux 内核的方法和过程，后面在来写一个 Kbuild 系统的介绍。
-编译  先简单说一下下载吧， 我是直接从 GitHub 上 Linux 的仓库直接下载的， 当然也可以去内核 的官方网站上下载, 这上面不仅有最新稳定版本的内核，一些 历史版本的内核也可以从这里下载到。 不仅如此， Linux 的内核仓库中其实还包含了大量 的文档， 可以选择自己编译出内核文档，也可以使用 在线文档。
-NOTE: 在线的文档可能更方便一点， 自己编译的话要在自己电脑上安装一些工具啥的。
-现在进入正题:
-配置内核 Linux 内核的配置方法有很多， 下面这三种应该是目前使用比较广泛的三种方式：
-        
-    </div>
-    <div class="post-footer">
-        <a href="https://yunyanan.github.io/2020/02/linux_kernel_compile/">Read More</a>
-        
-            <div class="post-tags">
-                
-                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/linux/"><i class="fas fa-tag fa-fw"></i>Linux</a></span>
-                
-                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/kernel/"><i class="fas fa-tag fa-fw"></i>Kernel</a></span>
-                
-                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/kbuild/"><i class="fas fa-tag fa-fw"></i>Kbuild</a></span>
-                
-            </div>
-        
-    </div>
-</article><article class="post" itemscope itemtype="http://schema.org/Article">
-    
-    
-    
-
-    
-    
-    
-    <h1 class="post-title post-list-title" itemprop="name headline">
-        <a href="https://yunyanan.github.io/2020/02/talk_about_emacs/">聊聊 Emacs</a>
-    </h1>
-
-    <div class="post-meta">
-        <a class="author" href="https://yunyanan.github.io/" rel="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan&nbsp;</a>
-        published on&nbsp;<time datetime=2020-02-05>2020-02-05</time>&nbsp;
-        <span class="post-category">
-                included in
-                <i class="far fa-folder fa-fw"></i><a href="https://yunyanan.github.io/categories/%E9%9A%8F%E6%83%B3/">随想</a>
-                    
-            </span>
-    </div>
-    <div class="post-content">
-        
-            
-            
-            
-            
-            
-            
-            
-            缘起  我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 Emacs，看到它真实面目后先是 一脸茫然，继而就想到了要退出它，于是便遇到了和问出上面那个问题的朋友类似的困 境: How do I exit the Emacs editor？ 也是从这里开始我就走上了一条和 Emacs 斗智斗勇的道路。
-一路走来  Emacs 的入门学习曲线也是出了名的曲折，而我也在第一次的入门过程中被它所击败。然 而在放弃它一段时间后，我又重新开始跟它较量了起来，这次它引起了我的兴趣，并且让我 成功的入了这个坑。刚开始我是在 Windows 系统下使用 Emacs, 尽管后来用的多了， 更熟练了，但还是觉得用起来多多少少有点难受， 不过这也没能阻止我继续对 Emacs 的探 索。直到工作中开始使用起了 Linux， 当我在Linux 中安装完 Emacs 打开后面对 如丝般顺滑的 Emacs 突然有种似花非花的感觉，发现之前在 Windows 下折腾好久才搞 好的功能换在 Linux 下竟然安装完就能用，顿时便觉得之前在 Windows 下折腾 Emacs 真的是在浪费生命。 自此我便放弃了在 Windows 下使用 Emacs 了。
-        
-    </div>
-    <div class="post-footer">
-        <a href="https://yunyanan.github.io/2020/02/talk_about_emacs/">Read More</a>
-        
-            <div class="post-tags">
-                
-                    &nbsp;&nbsp;<span class="tag"><a href="https://yunyanan.github.io/tags/emacs/"><i class="fas fa-tag fa-fw"></i>Emacs</a></span>
-                
-            </div>
-        
-    </div>
-</article></div></div>
-            </main>
-            <footer class="footer">
-    <div class="copyright">
-        <div class="copyright-line">
-            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+</div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/exploring_kbuild/">Exploring Kbuild</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a>
+</span>&nbsp;<span class="post-publish">
+            发布于&nbsp;<time datetime=2020-03-15>2020-03-15</time>
+        </span>&nbsp;
+            <span class="post-category">收录于<a href="/categories/linux">
+                        <i class="far fa-folder fa-fw"></i>Linux
+                    </a></span></div><div class="content">前言 最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编 译内核的文章确实不算多，这也反应出 Kbuild 系统确实是容易被忽视的一个</div><div class="post-footer">
+        <a href="/exploring_kbuild/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux">Linux</a>,&nbsp;<a href="/tags/kernel">Kernel</a>,&nbsp;<a href="/tags/kbuild">Kbuild</a>,&nbsp;<a href="/tags/makefile">Makefile</a>,&nbsp;<a href="/tags/kconfig">Kconfig</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/linux_kernel_compile/">编译 Linux 内核</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a>
+</span>&nbsp;<span class="post-publish">
+            发布于&nbsp;<time datetime=2020-02-29>2020-02-29</time>
+        </span>&nbsp;
+            <span class="post-category">收录于<a href="/categories/linux">
+                        <i class="far fa-folder fa-fw"></i>Linux
+                    </a></span></div><div class="content">前言 为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中</div><div class="post-footer">
+        <a href="/linux_kernel_compile/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux">Linux</a>,&nbsp;<a href="/tags/kernel">Kernel</a>,&nbsp;<a href="/tags/kbuild">Kbuild</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/talk_about_emacs/">聊聊 Emacs</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a>
+</span>&nbsp;<span class="post-publish">
+            发布于&nbsp;<time datetime=2020-02-05>2020-02-05</time>
+        </span>&nbsp;
+            <span class="post-category">收录于<a href="/categories/%E9%9A%8F%E6%83%B3">
+                        <i class="far fa-folder fa-fw"></i>随想
+                    </a></span></div><div class="content">缘起 我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的</div><div class="post-footer">
+        <a href="/talk_about_emacs/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/emacs">Emacs</a></div></div>
+</article>
+</div></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer"><i class="far fa-heart fa-fw"></i> LoveIt</a>
         </div>
-        <div class="copyright-line">
-            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://yunyanan.github.io/">YunYanan</a></span><span class="license">&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer>
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
-<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
-<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
-
-
-
-
-
-    <script src="/js/lib/typeit/typeit.min.min.js"></script>
-    
-    
-        
-    
-    <script>window.typeitArr = [["tp-05fd9bedebfaa69e1d9f834a0250f8bc"]];</script>
-
-
-
-<script src="/js/blog.min.js"></script>
-
-
-    
-</div>
-        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
-    </body>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><script>
+        window.typeitArr = [["id-6cf5a5"]];
+    </script><script>
+        window.contentMap = {"id-6cf5a5":"Stay Hungry, Stay Foolish."};
+    </script><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/lib/typeit/typeit.min.js"></script><script src="/js/theme.min.js"></script></body>
 </html>

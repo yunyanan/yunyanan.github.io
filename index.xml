@@ -1,39 +1,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>YunYanan on YunYanan</title>
+        <title>YunYanan | YunYanan</title>
         <link>https://yunyanan.github.io/</link>
-        <description>Recent content in YunYanan on YunYanan</description>
-        <generator>Hugo -- gohugo.io</generator>
-        
-            <language>en</language>
-        
-        
-        
-            <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-        
-        
-            <lastBuildDate>Wed, 05 Feb 2020 15:19:12 +0800</lastBuildDate>
-        
-        <atom:link href="https://yunyanan.github.io/" rel="self" type="application/rss+xml" />
-        
-            <item>
+        <description>YunYanan | YunYanan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 05 Feb 2020 15:19:12 &#43;0800</lastBuildDate><atom:link href="https://yunyanan.github.io/" rel="self" type="application/rss+xml" /><item>
                 <title>Posts</title>
                 <link>https://yunyanan.github.io/posts/</link>
-                <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate>
-                
-                <guid>https://yunyanan.github.io/posts/</guid>
+                <pubDate>Sun, 15 Mar 2020 10:29:35 &#43;0800</pubDate><guid>https://yunyanan.github.io/posts/</guid>
                 <description></description>
-            </item>
-        
-            <item>
+            </item><item>
                 <title>About</title>
                 <link>https://yunyanan.github.io/about/</link>
-                <pubDate>Wed, 05 Feb 2020 15:19:12 +0800</pubDate>
-                
-                <guid>https://yunyanan.github.io/about/</guid>
+                <pubDate>Wed, 05 Feb 2020 15:19:12 &#43;0800</pubDate><guid>https://yunyanan.github.io/about/</guid>
                 <description>&lt;div class=&#34;tenor-gif-embed&#34; data-postid=&#34;6240685&#34; data-share-method=&#34;host&#34; data-width=&#34;50%&#34; data-aspect-ratio=&#34;1.1116071428571428&#34;&gt;&lt;a href=&#34;https://tenor.com/view/webearbears-icebear-polarbear-creepy-smile-gif-6240685&#34;&gt;We Bare Bears Ice Bear GIF&lt;/a&gt; from &lt;a href=&#34;https://tenor.com/search/webarebears-gifs&#34;&gt;Webarebears GIFs&lt;/a&gt;&lt;/div&gt;&lt;script type=&#34;text/javascript&#34; async src=&#34;https://tenor.com/embed.js&#34;&gt;&lt;/script&gt;
 </description>
-            </item>
-        
-    </channel>
+            </item></channel>
 </rss>

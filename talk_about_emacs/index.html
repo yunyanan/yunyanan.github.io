@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>聊聊 Emacs | YunYanan</title>
+        <meta name="Description" content="个人博客"><meta property="og:title" content="聊聊 Emacs" />
+<meta property="og:description" content="缘起 我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunyanan.github.io/talk_about_emacs/" />
+<meta property="article:published_time" content="2020-02-05T09:17:52+08:00" />
+<meta property="article:modified_time" content="2020-02-05T15:11:54+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="聊聊 Emacs"/>
+<meta name="twitter:description" content="缘起 我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="https://yunyanan.github.io/talk_about_emacs/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="next" href="https://yunyanan.github.io/linux_kernel_compile/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "聊聊 Emacs",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yunyanan.github.io\/talk_about_emacs\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/yunyanan.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "Emacs","wordcount":  1128 ,
+        "url": "https:\/\/yunyanan.github.io\/talk_about_emacs\/","datePublished": "2020-02-05","dateModified": "2020-02-05","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/yunyanan.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "YunYanan"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">YunYanan</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/documentation/" rel="noopener noreffer">文档</a><a class="menu-item" href="/about/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">YunYanan</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/documentation/" title="" rel="noopener noreffer">文档</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">聊聊 Emacs</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E9%9A%8F%E6%83%B3">
+                                <i class="far fa-folder fa-fw"></i>随想
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-02-05>2020-02-05</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 1128 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;<span id="/talk_about_emacs/" class="leancloud_visitors" data-flag-title="聊聊 Emacs">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="content" id="content"><p><img
+        class="lazyload"
+        src="/svg/loading.small.min.svg"
+        data-sizes="auto"
+        data-srcset="/images/posts/talk_about_emacs/emacs_logo.png,  1.5x,  2x"
+        data-src=""
+        alt="Emacs"
+        title="Emacs" /></p>
+<h2 id="缘起">缘起</h2>
+<hr>
+<p>我第一次知道 <code>GUN Emacs</code> 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的
+<code>Emacs</code> 来写代码。 之前 StackOverflow 上一个
+<a href="https://stackoverflow.com/questions/11828270/how-do-i-exit-the-vim-editor" target="_blank" rel="noopener noreffer">How do I exit the Vim editor?</a>
+
+的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 <code>Emacs</code>，看到它真实面目后先是
+一脸茫然，继而就想到了要退出它，于是便遇到了和问出上面那个问题的朋友类似的困
+境: <strong>How do I exit the Emacs editor？</strong> 也是从这里开始我就走上了一条和 <code>Emacs</code>
+斗智斗勇的道路。</p>
+<h2 id="一路走来">一路走来</h2>
+<hr>
+<p><code>Emacs</code> 的入门学习曲线也是出了名的曲折，而我也在第一次的入门过程中被它所击败。然
+而在放弃它一段时间后，我又重新开始跟它较量了起来，这次它引起了我的兴趣，并且让我
+成功的入了这个坑。刚开始我是在 <code>Windows</code> 系统下使用 <code>Emacs</code>,  尽管后来用的多了，
+更熟练了，但还是觉得用起来多多少少有点难受， 不过这也没能阻止我继续对 <code>Emacs</code> 的探
+索。直到工作中开始使用起了 <code>Linux</code>， 当我在<code>Linux</code> 中安装完 <code>Emacs</code> 打开后面对
+如丝般顺滑的 <code>Emacs</code> 突然有种似花非花的感觉，发现之前在 <code>Windows</code> 下折腾好久才搞
+好的功能换在 <code>Linux</code> 下竟然安装完就能用，顿时便觉得之前在 <code>Windows</code> 下折腾
+<code>Emacs</code> 真的是在浪费生命。 自此我便放弃了在 <code>Windows</code> 下使用 <code>Emacs</code> 了。</p>
+<p>在整个 <code>Emacs</code> 的使用过程中， 我会经常去上网找一些好用的轮子， 或者有什么突发奇
+想，使用过程中碰到了一些痛点什么的，也都会去找一些解决方法。 就是在这样的一个过
+程中我的配置文件也变得异常的庞大，并且杂乱不堪。 然后很自然的就想到了要去整理一
+下自己的配置， 我觉得这可能也是每一个 <code>Emacser</code> 都会面临的问题。 用 <code>Emacs</code> 这么
+长时间以来，我整理我自己的配置文件也有好多次了， 也尝试了不同的组织配置文件的方
+式。最近我又重新做了一次这个工作，这次是用了一个 <code>org</code> 文件来做主配置文件， 尽可
+能的在文件中描述清楚各个包的作用，放在了 Github <a href="https://github.com/yunyanan/.emacs.d" target="_blank" rel="noopener noreffer">这
+里</a>
+也能有更好的可读性。这次整理只保留了一
+些基本的包，所以配置文件暂时也是比较简单的，我是想在使用的过程中去慢慢增加需要的
+功能吧，尽可能的让它向着简洁且强大的方向发展。</p>
+<h2 id="一点思考">一点思考</h2>
+<hr>
+<p>回顾我整个 <code>Emacs</code> 的使用过程，我觉得想要快速的上手一个新的工具，或者是学习一项
+新的技术，最快速的方法是实战。当然，了解它的基本知识也是必要的，但是如果为了学习
+它而一直处在学习基本理论知识的状态，效果不理想不说还很容易对它失去兴趣和耐心。
+在入门的时候都会很艰难，会有种恐惧感，都说恐惧源于未知，确实如此。就是因为我们对新
+的技术，新的工具的不了解，所以才会怕它。然而当实战次数多起来后，你对它的了解越来
+越多，恐惧感也随之减弱，离入门也就越来越近。所以前期努力克服这种恐惧感才是我们最
+先接受的考验，这也成了我们意志强弱的体现。 当入门之后其实日常使用它以及足够了，
+对整体有了概念，一般的问题也都能够解决。 但是如果想重度使用， 深度定制， 那就需
+要对它进行更深入的研究了， 不光是 <code>Emacs</code>, 其它的技术，工具也都如此， 所以继续努
+力吧。</p>
+<p><strong>Happy Hacking!</strong></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-02-05 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/64b26f2bd9c7a9df9cb46e9f3c436f94eee76f6e" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 64b26f2bd9c7a9df9cb46e9f3c436f94eee76f6e: commit post">
+                            <i class="fas fa-hashtag fa-fw"></i>64b26f2</a></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/talk_about_emacs/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://yunyanan.github.io/talk_about_emacs/" data-title="聊聊 Emacs" data-hashtags="Emacs"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://yunyanan.github.io/talk_about_emacs/" data-hashtag="Emacs"><i class="fab fa-facebook-square fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/emacs">Emacs</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/linux_kernel_compile/" class="next" rel="next" title="编译 Linux 内核">编译 Linux 内核<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"><div id="valine"></div><script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                new Valine({
+                    el: '#valine',
+                    appId: 'Rf1OExncyuF63xO6zVHaqdrm-gzGzoHsz',
+                    appKey: 'uIrFaPMGG1RgVwNJdrX1TTxa',placeholder: '你的评论 ...',verify: true,avatar: 'mp',pageSize: 10,lang: 'zh-cn',visitor: true,recordIP: true,});
+            });
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://valine.js.org/">comments powered by Valine.</a>
+        </noscript></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer"><i class="far fa-heart fa-fw"></i> LoveIt</a>
+        </div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/valine/valine.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/valine/Valine.min.js"></script><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>
