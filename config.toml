@@ -227,7 +227,7 @@ enableEmoji = true
           enable = true
           appId = "Rf1OExncyuF63xO6zVHaqdrm-gzGzoHsz"
           appKey = "uIrFaPMGG1RgVwNJdrX1TTxa"
-          placeholder = "你的评论 ..."
+          placeholder = "相遇既是有缘， 来说两句吧 ^_^"
           notify = false
           verify = true
           avatar = "mp"
@@ -283,7 +283,7 @@ enableEmoji = true
     lightgallery = true
     # whether to show link to Raw Markdown content of the post
     # 是否在文章页面显示原始 Markdown 文档链接
-    linkToMarkdown = true
+    linkToMarkdown = false
   # mathematical formulas (KaTeX https://katex.org/)
   # 数学公式 (KaTeX https://katex.org/)
   [params.math]
