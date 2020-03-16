@@ -7,14 +7,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>编译 Linux 内核 | YunYanan</title>
         <meta name="Description" content="个人博客"><meta property="og:title" content="编译 Linux 内核" />
-<meta property="og:description" content="前言 为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中" />
+<meta property="og:description" content="
+
+
+为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
+此那就少不了要实际编译一遍 Linux 内核。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yunyanan.github.io/linux_kernel_compile/" />
 <meta property="article:published_time" content="2020-02-29T17:40:32+08:00" />
-<meta property="article:modified_time" content="2020-03-02T21:43:42+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta property="article:modified_time" content="2020-03-17T00:08:07+08:00" /><meta property="og:site_name" content="YunYanan" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="编译 Linux 内核"/>
-<meta name="twitter:description" content="前言 为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如 此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过 工作中"/>
+<meta name="twitter:description" content="
+
+
+为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
+此那就少不了要实际编译一遍 Linux 内核。"/>
 <meta name="theme-color" content="#ffffff">
 <meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="https://yunyanan.github.io/linux_kernel_compile/" />
@@ -38,7 +46,7 @@
                 "width":  800 ,
                 "height":  600 
             },"genre": "posts","keywords": "Linux, Kernel, Kbuild","wordcount":  1208 ,
-        "url": "https:\/\/yunyanan.github.io\/linux_kernel_compile\/","datePublished": "2020-02-29","dateModified": "2020-03-02","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/yunyanan.github.io\/linux_kernel_compile\/","datePublished": "2020-02-29","dateModified": "2020-03-17","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -100,19 +108,14 @@
                 <i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;<span id="/linux_kernel_compile/" class="leancloud_visitors" data-flag-title="编译 Linux 内核">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
-        </div><div class="content" id="content"><p><img
-        class="lazyload"
-        src="/svg/loading.small.min.svg"
-        data-sizes="auto"
-        data-srcset="/images/posts/linux_kernel_compile/linux_logo.jpg,  1.5x,  2x"
-        data-src=""
-        alt="Linux"
-        title="Linux" /></p>
+        </div><div class="content" id="content"><div style="text-align: center">
+<img src="/images/posts/linux_kernel_compile/linux_logo.jpg"/>
+</div>
+<p>为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
+此那就少不了要实际编译一遍 Linux 内核。</p>
 <h2 id="前言">前言</h2>
 <hr>
-<p>为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
-此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过
-工作中供应商提供的 SDK，
+<p>说起来接触 Linux 这么长时间以来我编译过工作中供应商提供的 SDK，
 <a href="https://github.com/raspberrypi/linux" target="_blank" rel="noopener noreffer">Raspberry Pi</a>
 , 还有为了修改 Ubuntu 的一个
 驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内
@@ -234,13 +237,12 @@ make htmldocs			<span class="c1"># 生成 html 格式的内核文档</span>
 </div><p>在这里就不一一介绍了，以后用到再说。我想说的是正是有这么多的编译目标的存在才让现
 在 Linux 内核的编译如此的简单且人性化。 而在 Linux 的内核中更是处处充满了令人眼
 前一亮的细节，这应该也是 Linux 内核魅力的来源之一吧。以后慢慢去发现它们吧。 ：）</p>
-<p><strong>Happy Hacking!</strong></p>
-</div><div class="post-footer" id="post-footer">
+<p><strong>Happy Hacking!</strong></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>本文于 2020-03-02 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/9568b516847e08ebfd0d9e7434c0a29e9b9a0a97" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 9568b516847e08ebfd0d9e7434c0a29e9b9a0a97: commit post">
-                            <i class="fas fa-hashtag fa-fw"></i>9568b51</a></span>
+                <span>本文于 2020-03-17 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/e8e47068d82e9748d0488970da61d449473e4f21" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) e8e47068d82e9748d0488970da61d449473e4f21: commit post">
+                            <i class="fas fa-hashtag fa-fw"></i>e8e4706</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

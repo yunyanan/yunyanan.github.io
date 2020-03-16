@@ -1,13 +1,19 @@
 # 聊聊 Emacs
 
 
-![Emacs](/images/posts/talk_about_emacs/emacs_logo.png)
+<div style="text-align: center">
+<img src="/images/posts/talk_about_emacs/emacs_logo.png"/>
+</div>
+
+这篇文章来聊聊 Emacs 吧。
+
+<!--more-->
 
 ## 缘起
 ---
 
 我第一次知道 `GUN Emacs` 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的
-`Emacs` 来写代码。 之前 StackOverflow 上一个
+`Emacs` 来写代码。之前 StackOverflow 上一个
 [How do I exit the Vim editor?](https://stackoverflow.com/questions/11828270/how-do-i-exit-the-vim-editor)
 的问题, 成了很多人聊天作梗的内容。 而当我第一次打开 `Emacs`，看到它真实面目后先是
 一脸茫然，继而就想到了要退出它，于是便遇到了和问出上面那个问题的朋友类似的困

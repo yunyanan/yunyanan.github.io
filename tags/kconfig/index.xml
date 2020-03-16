@@ -18,7 +18,11 @@
       <pubDate>Sun, 15 Mar 2020 10:29:35 +0800</pubDate>
       
       <guid>https://yunyanan.github.io/exploring_kbuild/</guid>
-      <description>前言 最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编 译内核的文章确实不算多，这也反应出 Kbuild 系统确实是容易被忽视的一个</description>
+      <description>&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;img src=&#34;https://yunyanan.github.io/images/posts/exploring_kbuild/kbuild.png&#34;/&gt;
+&lt;/div&gt;
+&lt;p&gt;上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
+&lt;code&gt;Kbuild&lt;/code&gt; 系统吧。&lt;/p&gt;</description>
     </item>
     
   </channel>

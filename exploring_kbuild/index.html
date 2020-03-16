@@ -7,14 +7,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <title>Exploring Kbuild | YunYanan</title>
         <meta name="Description" content="个人博客"><meta property="og:title" content="Exploring Kbuild" />
-<meta property="og:description" content="前言 最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编 译内核的文章确实不算多，这也反应出 Kbuild 系统确实是容易被忽视的一个" />
+<meta property="og:description" content="
+
+
+上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
+Kbuild 系统吧。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yunyanan.github.io/exploring_kbuild/" />
 <meta property="article:published_time" content="2020-03-15T10:29:35+08:00" />
-<meta property="article:modified_time" content="2020-03-16T22:57:06+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta property="article:modified_time" content="2020-03-17T00:08:07+08:00" /><meta property="og:site_name" content="YunYanan" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Exploring Kbuild"/>
-<meta name="twitter:description" content="前言 最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编 译内核的文章确实不算多，这也反应出 Kbuild 系统确实是容易被忽视的一个"/>
+<meta name="twitter:description" content="
+
+
+上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
+Kbuild 系统吧。"/>
 <meta name="theme-color" content="#ffffff">
 <meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="https://yunyanan.github.io/exploring_kbuild/" />
@@ -37,8 +45,8 @@
                 "url": "https:\/\/yunyanan.github.io\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  1811 ,
-        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-16","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  1845 ,
+        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-17","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -96,18 +104,15 @@
                                 <i class="far fa-folder fa-fw"></i>Linux
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-15>2020-03-15</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>约 1811 字&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 1845 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>预计阅读 4 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="Exploring Kbuild">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
-        </div><div class="content" id="content"><p><img
-        class="lazyload"
-        src="/svg/loading.small.min.svg"
-        data-sizes="auto"
-        data-srcset="/images/posts/exploring_kbuild/kbuild.png,  1.5x,  2x"
-        data-src=""
-        alt=""
-        title="" /></p>
+        </div><div class="content" id="content"><div style="text-align: center">
+<img src="/images/posts/exploring_kbuild/kbuild.png"/>
+</div>
+<p>上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
+<code>Kbuild</code> 系统吧。</p>
 <h2 id="前言">前言</h2>
 <hr>
 <p>最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编
@@ -400,13 +405,12 @@ build := -f $(srctree)/scripts/Makefile.build obj
 所以 scripts_basic 这个目标其实是去编译了 scripts/basic 下的源码生成 fixdep 工具。</p>
 <ol start="3">
 <li>FORCE</li>
-</ol>
-</div><div class="post-footer" id="post-footer">
+</ol></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>本文于 2020-03-16 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/39d31aa2eefd2db3646726f38042007c8a504345" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 39d31aa2eefd2db3646726f38042007c8a504345: commit post">
-                            <i class="fas fa-hashtag fa-fw"></i>39d31aa</a></span>
+                <span>本文于 2020-03-17 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/e8e47068d82e9748d0488970da61d449473e4f21" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) e8e47068d82e9748d0488970da61d449473e4f21: commit post">
+                            <i class="fas fa-hashtag fa-fw"></i>e8e4706</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

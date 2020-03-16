@@ -18,7 +18,10 @@
       <pubDate>Wed, 05 Feb 2020 09:17:52 +0800</pubDate>
       
       <guid>https://yunyanan.github.io/talk_about_emacs/</guid>
-      <description>缘起 我第一次知道 GUN Emacs 这玩意是刚参加工作那会，当时的领导强制要求使用他配置的 Emacs 来写代码。 之前 StackOverflow 上一个 How do I exit the Vim editor? 的问题, 成了很多人聊天作梗的</description>
+      <description>&lt;div style=&#34;text-align: center&#34;&gt;
+&lt;img src=&#34;https://yunyanan.github.io/images/posts/talk_about_emacs/emacs_logo.png&#34;/&gt;
+&lt;/div&gt;
+&lt;p&gt;这篇文章来聊聊 Emacs 吧。&lt;/p&gt;</description>
     </item>
     
   </channel>

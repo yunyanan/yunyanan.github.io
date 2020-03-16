@@ -1,14 +1,19 @@
 # 编译 Linux 内核
 
 
-![Linux](/images/posts/linux_kernel_compile/linux_logo.jpg)
+<div style="text-align: center">
+<img src="/images/posts/linux_kernel_compile/linux_logo.jpg"/>
+</div>
+
+为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
+此那就少不了要实际编译一遍 Linux 内核。
+
+<!--more-->
 
 ## 前言
 ---
 
-为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
-此那就少不了要实际编译一遍 Linux 内核。 说起来接触 Linux 这么长时间以来我编译过
-工作中供应商提供的 SDK，
+说起来接触 Linux 这么长时间以来我编译过工作中供应商提供的 SDK，
 [Raspberry Pi](https://github.com/raspberrypi/linux), 还有为了修改 Ubuntu 的一个
 驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内
 核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是
