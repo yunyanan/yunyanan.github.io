@@ -37,6 +37,9 @@ hugo
 echo -e "\033[32m [Copy Google search verify file...] \033[0m"
 cp google43ebdfe4fa803825.html public/
 
+echo -e "\033[32m [Copy Sitemap file...] \033[0m"
+cp sitemap.xml public/
+
 echo -e "\033[32m [Updating master branch...] \033[0m"
 cd public && git add --all && git commit -m "Publishing post"
 
