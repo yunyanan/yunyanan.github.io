@@ -5,52 +5,54 @@
 <img src="/images/posts/exploring_kbuild/kbuild.png"/>
 </div>
 
-上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
-`Kbuild` 系统吧。
+上一篇简单介绍了下编译 **GNU Linux** 内核， 这篇就来说说编译 **GNU Linux** 内核的
+**Kbuild** 系统吧。
 
 <!--more-->
 
 ## 前言
 ---
 
-最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编
-译内核的文章确实不算多，这也反应出 Kbuild 系统确实是容易被忽视的一个内容， 也说
-明了会编译内核的人应该不再少数，但是去研究过 Kbuild 系统的， 对 Kbuild 感兴趣的
-人则要少很大一部分。 下面来讲讲我对 Kbuild 的理解。
+最近了解 **Kbuild** 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎
+么编译内核的文章数量上要少很多。 我觉得这也反应出 **Kbuild** 系统确实是容易被忽
+视的一隅， 也说明了会编译内核的人不再少数，但是去研究过 **Kbuild** 系统的， 对
+**Kbuild** 感兴趣的人则要少很大一部分。 下面呢来讲讲我对 **Kbuild** 的理解。
 
 ## Kbuild && Kconfig
 ---
 
-刚开始接触 Linux 内核的时候我就知道在内核中有一系列的 Kconfig 和 Makefile 文件，
-内核源码的很多目录下都是一个 Kconfig 文件和一个 Makefile 搭配。我知道 Kbuild 这
-个名词的时候是很久之后了。 当看到这个词的时候我的第一反应是觉得 "Kbuild" 它是内
-核中具体的某个配置文件或者编译脚本之类的东西。 关于 Kbuild
+刚开始接触 **GNU Linux** 内核的时候我就知道在内核中有一系列的 **Kconfig** 和
+**Makefile** 文件， 内核源码的很多目录下也都是一个 **Kconfig** 文件搭配一个
+**Makefile** 文件。我知道 **Kbuild** 这个名词的时候是很久之后了。 当看到这个词的
+时候我的第一反应是觉得 **"Kbuild"** 它是内核中具体的某个配置文件或者编译脚本之类
+的东西。 网上一众文章中也很少有直接给 **Kbuild** 下一个定义， 反而我在
 [内核文档 modules 篇](https://www.kernel.org/doc/Documentation/kbuild/modules.txt)
-中有给出这样的一个定义：
+中找到这样的一句话：
 
-     "kbuild" is the build system used by the Linux kernel.
+> "kbuild" is the build system used by the Linux kernel.
 
-这里定义的 Kbuild 其实指的是：
+这里定义的 **Kbuild** 其实指的是：
 
-     "The Linux Kernel build sytem."
+	"The Linux Kernel build sytem."
 
-这是从广义上来说的 Kbuild。 但是内核中又存在一些 Kbuild 文件， 那这些文件是什么
+这是从广义上来说的 **Kbuild**。 但是内核中又存在一些 **Kbuild** 文件， 那这些文件是什么
 呢？ 这其实有个有趣的地方， 在
 [内核文档 makefiles 篇](https://www.kernel.org/doc/Documentation/kbuild/makefiles.txt)
 中的第三节有这样的一个介绍：
 
-	"Most Makefiles within the kernel are kbuild Makefiles that use the kbuild
-	infrastructure. This chapter introduces the syntax used in the kbuild
-	makefiles. The preferred name for the kbuild files are 'Makefile' but
-	'Kbuild' can be used and if both a 'Makefile' and a 'Kbuild' file exists,
-	then the 'Kbuild' file will be used."
+>	"Most Makefiles within the kernel are kbuild Makefiles that use the kbuild
+>	infrastructure. This chapter introduces the syntax used in the kbuild
+>	makefiles. The preferred name for the kbuild files are 'Makefile' but
+>	'Kbuild' can be used and if both a 'Makefile' and a 'Kbuild' file exists,
+>	then the 'Kbuild' file will be used."
 
-所以说我上面提到的我的第一感觉也不能算错， 从狭义上讲 Kbuild 也可以指内核中的编
-译脚本， 只不过官方更推荐使用 "Makefile" 这个名字。
+所以说我上面提到的我的第一感觉也不能算错， 从狭义上讲 **Kbuild** 也可以指内核中的编
+译脚本， 只不过官方更推荐使用 **"Makefile"** 这个名字。
 
-关于 Kconfig， 这里其实不用更多的解释了，它就是指内核的配置，没有歧义。网上好多
-文章把 Kconfig 和 Kbuild 是以并列的架构讲解的， 而内核中关于 Kconfig 描述文档则
-全部都归类在Kbuild 下的。 这其实也是从 广义还是狭义上来看待 Kbuild 的问题了。
+关于 **Kconfig**， 这里其实不用更多的解释了，它就是指内核的配置，没有歧义。网上好多
+文章把 **Kconfig** 和 Kbuild 是以并列的架构讲解的， 而内核中关于 **Kconfig** 描
+述文档则全部都归类在 **Kbuild** 下的。 这其实也是从 广义还是狭义上来看待
+**Kbuild** 的问题了。
 
 构建内核的第一步始终是配置内核。 在上一篇文章中也讲了如何配置内核， 这里就先来看看
 在 `menuconfig`, `xconfig` 等这些配置方式的背后到底发生了什么。
@@ -58,30 +60,22 @@
 #### make *config 的背后
 ---
 
-首先需要了解的是内核 Makefile 有以下 5 个部分：
-
-    Makefile		the top Makefile.
-	.config			the kernel configuration file.
-	arch/$(ARCH)/Makefile	the arch Makefile.
-	scripts/Makefile.*	common rules etc. for all kbuild Makefiles.
-	kbuild Makefiles	there are about 500 of these.
-
 当我们执行 `make menuconfig` 或 `make xconfig` 等命令时， 匹配到的是顶层
-Makefile 中的 `%config` 目标：
+**Makefile** 中的 `%config` 目标：
 
-```
+```Makefile
 %config: outputmakefile scripts_basic FORCE
 	$(Q)$(MAKE) $(build)=scripts/kconfig $@
 ```
 
-它有三个依赖： `outputmakefile`, `scripts_basic`, `FORCE`。 我们一个一个来看。
+它有三个依赖： `outputmakefile`, `scripts_basic`, `FORCE` 以及一条命令。 我们一个一个来看。
 
-1. outputmakefile
+##### outputmakefile
 
 	我把 outputmakefile 目标的来源以及它所依赖的一些变量来源从顶层 Makefile 中拿
     出来放在了一起：
 
-```shell
+```Makefile
 #####################
 # abs_objtree 变量来源
 
@@ -107,7 +101,7 @@ endif # ifneq ($(KBUILD_OUTPUT),)
 
 abs_srctree := $(realpath $(dir $(lastword $(MAKEFILE_LIST))))
 
-#####################
+################################
 # building_out_of_srctree 变量来源
 
 ifeq ($(abs_srctree),$(abs_objtree))
@@ -145,52 +139,63 @@ ifdef building_out_of_srctree
 endif
 
 ```
-我们从下往上看， outputmakefile 目标的内容是否有效取决于这样的一个依赖关系：
+我们从下往上看， `outputmakefile` 目标的内容是否有效取决于这样的一个依赖关系链：
 
 	outputmakefile --> building_out_of_srctree --> abs_srctree, abs_objtree
 
-abs_objtree 取决于命令行是否有 `O=DIR` 参数传入。 DIR 表示编译输出文件的存放路径，
-默认是在源码路径下。 如果有这个参数传入则 abs_objtree 的值为传入的路径，否则为源
-码路径。 需要注意的是， 当指定了 `O` 参数的时候 Makefile 不仅会去创建这个目录，
-并且会将工作路径切换到了 DIR 这个路径。
+- `abs_objtree` 取决于命令行是否有 `O=DIR` 参数传入。 **DIR** 表示编译输出文件的
+  存放路径， 默认是在源码路径下。 如果有这个参数传入则 `abs_objtree` 的值为传入
+  的路径，否则为源码路径。
 
-abs_srctree 是由 `MAKEFILE_LIST` 变量经过 `lastword`, `dir`, `realpath` 几个函
-数处理后得到的结果，最后的结果是顶层 Makefile 的绝对路径。
+  {{< admonition >}}
+  当指定了 `O=DIR` 参数的时候 **Makefile** 不仅会去创建这个目录，并且会将工作路
+  径切换到 **DIR** 这个路径去。
+  {{< /admonition >}}
 
-building_out_of_srctree 的值则取决于 `abs_objtree` 和 `abs_srctree` 是否相等，
-不相等时 building_out_of_srctree 的值为 1， 否则为空。
+- `abs_srctree` 是由 `MAKEFILE_LIST` 变量经过 `lastword`, `dir`, `realpath` 几个函
+  数处理后得到的结果，最后的结果是顶层 **Makefile** 的绝对路径。
 
-到这里其实可以看得出 outputmakefile 这个目标是为 `O=DIR` 这个参数服务的。 它真正
-做了一下几件事：
+- `building_out_of_srctree` 的值则取决于 `abs_objtree` 和 `abs_srctree` 是否相等，
+  不相等时 `building_out_of_srctree` 的值为 1， 否则为空。
 
-1. 在 DIR 路径下创建了源码目录的软链接。
-2. 执行了 `$(srctree)/scripts/mkmakefile $(srctree)` 这条 shell 命令。
+- 到这里其实可以看得出 `outputmakefile` 这个目标是为 `O=DIR` 这个参数服务的。 它真正
+  做了这么两件事：
 
-关键在于第二条， 这条命令是去执行源码路径下的 `scripts/mkmakefile` 脚本，并且将
-源码路径作为参数传入。而这个脚本的内容如下：
+	1. 在 **DIR** 路径下创建了源码目录的软链接。
+	2. 执行了 `$(srctree)/scripts/mkmakefile $(srctree)` 这条 **shell** 命令。
 
-```shell
-cat << EOF > Makefile
-# Automatically generated by $0: don't edit
-include $1/Makefile
-EOF
-```
-可以看出，它的作用就是在 DIR 路径下创建出一个 Makefile 文件并包含源码目录下的顶
-层 Makefile。
+  关键在于第二条， 这条命令是去执行源码路径下的 `scripts/mkmakefile` 脚本，并且将
+  源码路径作为参数传入。而这个脚本的内容如下：
 
-2. scripts_basic
+  ```shell
+  cat << EOF > Makefile
+  # Automatically generated by $0: don't edit
+  include $1/Makefile
+  EOF
+  ```
+  可以看出，它的作用就是在 **DIR** 路径下创建出一个 **Makefile** 文件并包含源码目录下的顶
+  层 **Makefile**。
 
-scripts_basic 目标的内容是这样的：
+##### scripts_basic
 
-```
+`scripts_basic` 目标的内容是这样的：
+
+```Makefile
 scripts_basic:
 	$(Q)$(MAKE) $(build)=scripts/basic
 	$(Q)rm -f .tmp_quiet_recordmcount
 ```
-这里面比较麻烦的是 `build` 这个变量，其实它是定义在了 "scripts/Kbuild.include"
+
+{{< admonition info >}}
+变量 `$(Q)` 是定义在顶层 **Makefile** 中的， 它的作用是编译时控制 **Makefile**
+否要回显命令。 它的值取决于命令行有没有 `V=1` 的参数传入，如果有这个参数传入，
+`$(Q)` 的值为空， 否则为 `@`。 在这里分析 **Makefile** 时都可以先忽略它。
+{{< /admonition >}}
+
+这里面比较麻烦的是 `build` 这个变量，其实它是定义在了 **"scripts/Kbuild.include"**
 中。 它的定义是这样的：
 
-```
+```Makefile
 ###
 # Shorthand for $(Q)$(MAKE) -f scripts/Makefile.build obj=
 # Usage:
@@ -198,23 +203,66 @@ scripts_basic:
 build := -f $(srctree)/scripts/Makefile.build obj
 ```
 
-这里注释也解释了为什么把它定义成这样和怎么使用它。而 MAKE 变量是 `GNU make` 定义
+这里注释也解释了为什么把它定义成这样和怎么使用它。而 `MAKE` 变量是 `GNU make` 定义
 的变量，一般它的值都是 `make`， 有关它的详细介绍可以参考
-[这里](https://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html).
+[这里](https://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html)。
 所以上面 `$(Q)$(MAKE) $(build)=scripts/basic` 这条规则可以展开成这样：
 `make -f $(srctree)/scripts/Makefile.build obj=scripts/basic`。
-这里没有指定目标，所以编译的是 Makefile.build 的默认目标：
+这里没有指定目标，所以编译的是 `Makefile.build` 的默认目标：
 
-```
+```Makefile
 __build: $(if $(KBUILD_BUILTIN),$(builtin-target) $(lib-target) $(extra-y)) \
 	 $(if $(KBUILD_MODULES),$(obj-m) $(mod-targets) $(modorder-target)) \
 	 $(subdir-ym) $(always-y)
 	@:
 ```
 
-当配置内核时， $(KBUILD_BUILTIN)， $(KBUILD_MODULES)， $(subdir-ym) 的值都为空， 所以此
-时只去编译 $(always-y) 目标, 此时 $(always-y) 的值为 `fixdep`。
-所以 scripts_basic 这个目标其实是去编译了 scripts/basic 下的源码生成 fixdep 工具。
+当配置内核时， **$(KBUILD_BUILTIN)**， **$(KBUILD_MODULES)**， **$(subdir-ym)** 的值都为空， 所以
+只有 **$(always-y)** 目标有效, 此时 **$(always-y)** 的值为 `fixdep`。
+所以 `scripts_basic` 这个目标其实是去编译了 `scripts/basic` 下的源码生成 `fixdep` 工具。
 
-3. FORCE
+关于 **fixdep** 工具的作用在 `scripts/basic/Makefile` 里有一段这样的解释：
+
+> fixdep: used to generate dependency information during build process
+
+在这里就不对 **fixdep** 工具展开详细分析了。
+
+##### FORCE
+
+`FORCE` 目标是定义在顶层 **Makefile** 的最后：
+
+```Makefile
+PHONY += FORCE
+FORCE:
+
+# Declare the contents of the PHONY variable as phony.  We keep that
+# information in a variable so we can use it in if_changed and friends.
+.PHONY: $(PHONY)
+```
+
+这里其实也是一个比较有意思的地方， 在 **Makefile** 中 `FORCE` 目标并没有依赖，
+也没有要执行的命令， 但是 `FORCE` 目标的使用却不止一处两处。 那么为什么要这么用
+呢？ 这个答案其实 `GNU Make` 官方就已经给出了：
+
+> If a rule has no prerequisites or recipe, and the target of the rule is a
+> nonexistent file, then make imagines this target to have been updated whenever
+> its rule is run. This implies that all targets depending on this one will
+> always have their recipe run.
+
+简而言之就是这样定义出的 `FORCE` 目标在使用时其实可以把它当成一个关键字， 如果依
+赖中加上 `FORCE` 的话, **make** 工具便会认为这个目标的依赖更新过， 需要重新生成
+这个目标。 详细内容可以参考 `GNU Make`
+[官方手册](https://www.gnu.org/software/make/manual/html_node/Force-Targets.html)。
+
+##### %config 目标的命令
+
+`%config` 的命令原本是这样的： `$(Q)$(MAKE) $(build)=scripts/kconfig $@`。 上面
+提到过 `$(build)` 是可以展开的， 所以这条命令展开后就变成了这样：
+
+```Makefile
+make -f $(srctree)/scripts/Makefile.build obj=scripts/kconfig %config
+```
+
+可以看出， 它又去调用了 `scripts/Makefile.build` 文件， 只不过此时有参数
+`obj=scripts/kconfig`， 有目标 `%config`。
 

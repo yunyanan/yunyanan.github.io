@@ -15,7 +15,7 @@ Kbuild 系统吧。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yunyanan.github.io/exploring_kbuild/" />
 <meta property="article:published_time" content="2020-03-15T10:29:35+08:00" />
-<meta property="article:modified_time" content="2020-03-17T00:08:07+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta property="article:modified_time" content="2020-03-17T23:47:54+08:00" /><meta property="og:site_name" content="YunYanan" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Exploring Kbuild"/>
 <meta name="twitter:description" content="
@@ -45,7 +45,7 @@ Kbuild 系统吧。"/>
                 "url": "https:\/\/yunyanan.github.io\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  1845 ,
+            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  2330 ,
         "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-17","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
@@ -104,82 +104,110 @@ Kbuild 系统吧。"/>
                                 <i class="far fa-folder fa-fw"></i>Linux
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-15>2020-03-15</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>约 1845 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>预计阅读 4 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="Exploring Kbuild">
+                <i class="fas fa-pencil-alt fa-fw"></i>约 2330 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 5 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="Exploring Kbuild">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
-        </div><div class="content" id="content"><div style="text-align: center">
+        </div><div class="toc" id="toc-auto">
+                <h2 class="toc-title">目录</h2>
+                <div class="toc-content" id="toc-content-auto"></div>
+            </div>
+            <div class="toc" id="toc-static">
+                <details>
+                    <summary>
+                        <div class="toc-title">
+                            <span>目录</span>
+                            <span><i class="details icon fas fa-angle-down"></i></span>
+                        </div>
+                    </summary>
+                    <div class="toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#kbuild--kconfig">Kbuild &amp;&amp; Kconfig</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#make-config-的背后">make *config 的背后</a>
+              <ul>
+                <li><a href="#outputmakefile">outputmakefile</a></li>
+                <li><a href="#scripts_basic">scripts_basic</a></li>
+                <li><a href="#force">FORCE</a></li>
+                <li><a href="#config-目标的命令">%config 目标的命令</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+                </details>
+            </div><div class="content" id="content"><div style="text-align: center">
 <img src="/images/posts/exploring_kbuild/kbuild.png"/>
 </div>
-<p>上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
-<code>Kbuild</code> 系统吧。</p>
+<p>上一篇简单介绍了下编译 <strong>GNU Linux</strong> 内核， 这篇就来说说编译 <strong>GNU Linux</strong> 内核的
+<strong>Kbuild</strong> 系统吧。</p>
 <h2 id="前言">前言</h2>
 <hr>
-<p>最近了解 Kbuild 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎么编
-译内核的文章确实不算多，这也反应出 Kbuild 系统确实是容易被忽视的一个内容， 也说
-明了会编译内核的人应该不再少数，但是去研究过 Kbuild 系统的， 对 Kbuild 感兴趣的
-人则要少很大一部分。 下面来讲讲我对 Kbuild 的理解。</p>
+<p>最近了解 <strong>Kbuild</strong> 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎
+么编译内核的文章数量上要少很多。 我觉得这也反应出 <strong>Kbuild</strong> 系统确实是容易被忽
+视的一隅， 也说明了会编译内核的人不再少数，但是去研究过 <strong>Kbuild</strong> 系统的， 对
+<strong>Kbuild</strong> 感兴趣的人则要少很大一部分。 下面呢来讲讲我对 <strong>Kbuild</strong> 的理解。</p>
 <h2 id="kbuild--kconfig">Kbuild &amp;&amp; Kconfig</h2>
 <hr>
-<p>刚开始接触 Linux 内核的时候我就知道在内核中有一系列的 Kconfig 和 Makefile 文件，
-内核源码的很多目录下都是一个 Kconfig 文件和一个 Makefile 搭配。我知道 Kbuild 这
-个名词的时候是很久之后了。 当看到这个词的时候我的第一反应是觉得 &ldquo;Kbuild&rdquo; 它是内
-核中具体的某个配置文件或者编译脚本之类的东西。 关于 Kbuild
+<p>刚开始接触 <strong>GNU Linux</strong> 内核的时候我就知道在内核中有一系列的 <strong>Kconfig</strong> 和
+<strong>Makefile</strong> 文件， 内核源码的很多目录下也都是一个 <strong>Kconfig</strong> 文件搭配一个
+<strong>Makefile</strong> 文件。我知道 <strong>Kbuild</strong> 这个名词的时候是很久之后了。 当看到这个词的
+时候我的第一反应是觉得 <strong>&ldquo;Kbuild&rdquo;</strong> 它是内核中具体的某个配置文件或者编译脚本之类
+的东西。 网上一众文章中也很少有直接给 <strong>Kbuild</strong> 下一个定义， 反而我在
 <a href="https://www.kernel.org/doc/Documentation/kbuild/modules.txt" target="_blank" rel="noopener noreffer">内核文档 modules 篇</a>
 
-中有给出这样的一个定义：</p>
-<pre><code> &quot;kbuild&quot; is the build system used by the Linux kernel.
+中找到这样的一句话：</p>
+<blockquote>
+<p>&ldquo;kbuild&rdquo; is the build system used by the Linux kernel.</p>
+</blockquote>
+<p>这里定义的 <strong>Kbuild</strong> 其实指的是：</p>
+<pre><code>&quot;The Linux Kernel build sytem.&quot;
 </code></pre>
-<p>这里定义的 Kbuild 其实指的是：</p>
-<pre><code> &quot;The Linux Kernel build sytem.&quot;
-</code></pre>
-<p>这是从广义上来说的 Kbuild。 但是内核中又存在一些 Kbuild 文件， 那这些文件是什么
+<p>这是从广义上来说的 <strong>Kbuild</strong>。 但是内核中又存在一些 <strong>Kbuild</strong> 文件， 那这些文件是什么
 呢？ 这其实有个有趣的地方， 在
 <a href="https://www.kernel.org/doc/Documentation/kbuild/makefiles.txt" target="_blank" rel="noopener noreffer">内核文档 makefiles 篇</a>
 
 中的第三节有这样的一个介绍：</p>
-<pre><code>&quot;Most Makefiles within the kernel are kbuild Makefiles that use the kbuild
+<blockquote>
+<p>&ldquo;Most Makefiles within the kernel are kbuild Makefiles that use the kbuild
 infrastructure. This chapter introduces the syntax used in the kbuild
-makefiles. The preferred name for the kbuild files are 'Makefile' but
-'Kbuild' can be used and if both a 'Makefile' and a 'Kbuild' file exists,
-then the 'Kbuild' file will be used.&quot;
-</code></pre>
-<p>所以说我上面提到的我的第一感觉也不能算错， 从狭义上讲 Kbuild 也可以指内核中的编
-译脚本， 只不过官方更推荐使用 &ldquo;Makefile&rdquo; 这个名字。</p>
-<p>关于 Kconfig， 这里其实不用更多的解释了，它就是指内核的配置，没有歧义。网上好多
-文章把 Kconfig 和 Kbuild 是以并列的架构讲解的， 而内核中关于 Kconfig 描述文档则
-全部都归类在Kbuild 下的。 这其实也是从 广义还是狭义上来看待 Kbuild 的问题了。</p>
+makefiles. The preferred name for the kbuild files are &lsquo;Makefile&rsquo; but
+&lsquo;Kbuild&rsquo; can be used and if both a &lsquo;Makefile&rsquo; and a &lsquo;Kbuild&rsquo; file exists,
+then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
+</blockquote>
+<p>所以说我上面提到的我的第一感觉也不能算错， 从狭义上讲 <strong>Kbuild</strong> 也可以指内核中的编
+译脚本， 只不过官方更推荐使用 <strong>&ldquo;Makefile&rdquo;</strong> 这个名字。</p>
+<p>关于 <strong>Kconfig</strong>， 这里其实不用更多的解释了，它就是指内核的配置，没有歧义。网上好多
+文章把 <strong>Kconfig</strong> 和 Kbuild 是以并列的架构讲解的， 而内核中关于 <strong>Kconfig</strong> 描
+述文档则全部都归类在 <strong>Kbuild</strong> 下的。 这其实也是从 广义还是狭义上来看待
+<strong>Kbuild</strong> 的问题了。</p>
 <p>构建内核的第一步始终是配置内核。 在上一篇文章中也讲了如何配置内核， 这里就先来看看
 在 <code>menuconfig</code>, <code>xconfig</code> 等这些配置方式的背后到底发生了什么。</p>
 <h4 id="make-config-的背后">make *config 的背后</h4>
 <hr>
-<p>首先需要了解的是内核 Makefile 有以下 5 个部分：</p>
-<pre><code>Makefile		the top Makefile.
-.config			the kernel configuration file.
-arch/$(ARCH)/Makefile	the arch Makefile.
-scripts/Makefile.*	common rules etc. for all kbuild Makefiles.
-kbuild Makefiles	there are about 500 of these.
-</code></pre>
 <p>当我们执行 <code>make menuconfig</code> 或 <code>make xconfig</code> 等命令时， 匹配到的是顶层
-Makefile 中的 <code>%config</code> 目标：</p>
+<strong>Makefile</strong> 中的 <code>%config</code> 目标：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">%config: outputmakefile scripts_basic FORCE
-	$(Q)$(MAKE) $(build)=scripts/kconfig $@
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">%config</span><span class="o">:</span> <span class="n">outputmakefile</span> <span class="n">scripts_basic</span> <span class="n">FORCE</span>
+	<span class="k">$(</span>Q<span class="k">)$(</span>MAKE<span class="k">)</span> <span class="k">$(</span>build<span class="k">)</span><span class="o">=</span>scripts/kconfig <span class="nv">$@</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>它有三个依赖： <code>outputmakefile</code>, <code>scripts_basic</code>, <code>FORCE</code>。 我们一个一个来看。</p>
-<ol>
-<li>
-<p>outputmakefile</p>
-<p>我把 outputmakefile 目标的来源以及它所依赖的一些变量来源从顶层 Makefile 中拿
-出来放在了一起：</p>
-</li>
-</ol>
+</div><p>它有三个依赖： <code>outputmakefile</code>, <code>scripts_basic</code>, <code>FORCE</code> 以及一条命令。 我们一个一个来看。</p>
+<h5 id="outputmakefile">outputmakefile</h5>
+<pre><code>我把 outputmakefile 目标的来源以及它所依赖的一些变量来源从顶层 Makefile 中拿
+出来放在了一起：
+</code></pre>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -246,86 +274,98 @@ Makefile 中的 <code>%config</code> 目标：</p>
 </span><span class="lnt">62
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#####################</span>
-<span class="c1"># abs_objtree 变量来源</span>
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="c">#####################
+</span><span class="c"># abs_objtree 变量来源
+</span><span class="c"></span>
+<span class="err">ifeq</span> <span class="err">(</span><span class="s2">&#34;$(origin O)&#34;</span><span class="err">,</span> <span class="s2">&#34;command line&#34;</span><span class="err">)</span>
+  <span class="nv">KBUILD_OUTPUT</span> <span class="o">:=</span> <span class="k">$(</span>O<span class="k">)</span>
+<span class="err">endif</span>
 
-ifeq <span class="o">(</span><span class="s2">&#34;</span><span class="k">$(</span>origin O<span class="k">)</span><span class="s2">&#34;</span>, <span class="s2">&#34;command line&#34;</span><span class="o">)</span>
-  KBUILD_OUTPUT :<span class="o">=</span> <span class="k">$(</span>O<span class="k">)</span>
-endif
+<span class="err">ifneq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">KBUILD_OUTPUT</span><span class="k">)</span><span class="err">,)</span>
+<span class="c"># Make&#39;s built-in functions such as $(abspath ...), $(realpath ...) cannot
+</span><span class="c"># expand a shell special character &#39;~&#39;. We use a somewhat tedious way here.
+</span><span class="c"></span><span class="nv">abs_objtree</span> <span class="o">:=</span> <span class="k">$(</span>shell mkdir -p <span class="k">$(</span>KBUILD_OUTPUT<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="k">$(</span>KBUILD_OUTPUT<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="nb">pwd</span><span class="k">)</span>
+<span class="k">$(</span><span class="nv">if</span> <span class="k">$(</span><span class="nv">abs_objtree</span><span class="k">)</span>,, \
+     <span class="k">$(</span><span class="nv">error</span> <span class="nv">failed</span> <span class="nv">to</span> <span class="nv">create</span> <span class="nv">output</span> <span class="nv">directory</span> &#34;<span class="k">$(</span><span class="nv">KBUILD_OUTPUT</span><span class="k">)</span>&#34;<span class="k">))</span>
 
-ifneq <span class="o">(</span><span class="k">$(</span>KBUILD_OUTPUT<span class="k">)</span>,<span class="o">)</span>
-<span class="c1"># Make&#39;s built-in functions such as $(abspath ...), $(realpath ...) cannot</span>
-<span class="c1"># expand a shell special character &#39;~&#39;. We use a somewhat tedious way here.</span>
-abs_objtree :<span class="o">=</span> <span class="k">$(</span>shell mkdir -p <span class="k">$(</span>KBUILD_OUTPUT<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="k">$(</span>KBUILD_OUTPUT<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="nb">pwd</span><span class="k">)</span>
-<span class="k">$(if</span> <span class="k">$(</span>abs_objtree<span class="k">)</span>,, <span class="se">\
-</span><span class="se"></span>     <span class="k">$(</span>error failed to create output directory <span class="s2">&#34;</span><span class="k">$(</span>KBUILD_OUTPUT<span class="k">)</span><span class="s2">&#34;</span><span class="k">))</span>
+<span class="c"># $(realpath ...) resolves symlinks
+</span><span class="c"></span><span class="nv">abs_objtree</span> <span class="o">:=</span> <span class="k">$(</span>realpath <span class="k">$(</span>abs_objtree<span class="k">))</span>
+<span class="err">else</span>
+<span class="nv">abs_objtree</span> <span class="o">:=</span> <span class="k">$(</span>CURDIR<span class="k">)</span>
+<span class="err">endif</span> <span class="c"># ifneq ($(KBUILD_OUTPUT),)
+</span><span class="c"></span>
+<span class="c">#####################
+</span><span class="c"># abs_srctree 变量来源
+</span><span class="c"></span>
+<span class="nv">abs_srctree</span> <span class="o">:=</span> <span class="k">$(</span>realpath <span class="k">$(</span>dir <span class="k">$(</span>lastword <span class="k">$(</span>MAKEFILE_LIST<span class="k">))))</span>
 
-<span class="c1"># $(realpath ...) resolves symlinks</span>
-abs_objtree :<span class="o">=</span> <span class="k">$(</span>realpath <span class="k">$(</span>abs_objtree<span class="k">))</span>
-<span class="k">else</span>
-abs_objtree :<span class="o">=</span> <span class="k">$(</span>CURDIR<span class="k">)</span>
-endif <span class="c1"># ifneq ($(KBUILD_OUTPUT),)</span>
-
-<span class="c1">#####################</span>
-<span class="c1"># abs_srctree 变量来源</span>
-
-abs_srctree :<span class="o">=</span> <span class="k">$(</span>realpath <span class="k">$(</span>dir <span class="k">$(</span>lastword <span class="k">$(</span>MAKEFILE_LIST<span class="k">))))</span>
-
-<span class="c1">#####################</span>
-<span class="c1"># building_out_of_srctree 变量来源</span>
-
-ifeq <span class="o">(</span><span class="k">$(</span>abs_srctree<span class="k">)</span>,<span class="k">$(</span>abs_objtree<span class="k">)</span><span class="o">)</span>
-        <span class="c1"># building in the source tree</span>
-        srctree :<span class="o">=</span> .
+<span class="c">################################
+</span><span class="c"># building_out_of_srctree 变量来源
+</span><span class="c"></span>
+<span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">abs_srctree</span><span class="k">)</span><span class="err">,</span><span class="k">$(</span><span class="nv">abs_objtree</span><span class="k">)</span><span class="err">)</span>
+        <span class="c"># building in the source tree
+</span><span class="c"></span>        srctree :<span class="o">=</span> .
 	building_out_of_srctree :<span class="o">=</span>
-<span class="k">else</span>
-        ifeq <span class="o">(</span><span class="k">$(</span>abs_srctree<span class="k">)</span>/,<span class="k">$(</span>dir <span class="k">$(</span>abs_objtree<span class="k">))</span><span class="o">)</span>
-                <span class="c1"># building in a subdirectory of the source tree</span>
-                srctree :<span class="o">=</span> ..
+<span class="err">else</span>
+        <span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">abs_srctree</span><span class="k">)</span><span class="err">/,</span><span class="k">$(</span><span class="nv">dir</span> <span class="k">$(</span><span class="nv">abs_objtree</span><span class="k">))</span><span class="err">)</span>
+                <span class="c"># building in a subdirectory of the source tree
+</span><span class="c"></span>                srctree :<span class="o">=</span> ..
         <span class="k">else</span>
                 srctree :<span class="o">=</span> <span class="k">$(</span>abs_srctree<span class="k">)</span>
         endif
 	building_out_of_srctree :<span class="o">=</span> <span class="m">1</span>
-endif
+<span class="err">endif</span>
 
-<span class="c1">#####################</span>
-<span class="c1"># outputmakefile 目标</span>
-
-outputmakefile:
-ifdef building_out_of_srctree
-	<span class="k">$(</span>Q<span class="k">)if</span> <span class="o">[</span> -f <span class="k">$(</span>srctree<span class="k">)</span>/.config -o <span class="se">\
-</span><span class="se"></span>		 -d <span class="k">$(</span>srctree<span class="k">)</span>/include/config -o <span class="se">\
-</span><span class="se"></span>		 -d <span class="k">$(</span>srctree<span class="k">)</span>/arch/<span class="k">$(</span>SRCARCH<span class="k">)</span>/include/generated <span class="o">]</span><span class="p">;</span> <span class="k">then</span> <span class="se">\
-</span><span class="se"></span>		<span class="nb">echo</span> &gt;<span class="p">&amp;</span><span class="m">2</span> <span class="s2">&#34;***&#34;</span><span class="p">;</span> <span class="se">\
-</span><span class="se"></span>		<span class="nb">echo</span> &gt;<span class="p">&amp;</span><span class="m">2</span> <span class="s2">&#34;*** The source tree is not clean, please run &#39;make</span><span class="k">$(if</span> <span class="k">$(</span>findstring <span class="nb">command</span> line, <span class="k">$(</span>origin ARCH<span class="k">))</span>, <span class="nv">ARCH</span><span class="o">=</span><span class="k">$(</span>ARCH<span class="k">))</span><span class="s2"> mrproper&#39;&#34;</span><span class="p">;</span> <span class="se">\
-</span><span class="se"></span>		<span class="nb">echo</span> &gt;<span class="p">&amp;</span><span class="m">2</span> <span class="s2">&#34;*** in </span><span class="k">$(</span>abs_srctree<span class="k">)</span><span class="s2">&#34;</span><span class="p">;</span><span class="se">\
-</span><span class="se"></span>		<span class="nb">echo</span> &gt;<span class="p">&amp;</span><span class="m">2</span> <span class="s2">&#34;***&#34;</span><span class="p">;</span> <span class="se">\
-</span><span class="se"></span>		false<span class="p">;</span> <span class="se">\
-</span><span class="se"></span>	<span class="k">fi</span>
-	<span class="k">$(</span>Q<span class="k">)</span>ln -fsn <span class="k">$(</span>srctree<span class="k">)</span> <span class="nb">source</span>
-	<span class="k">$(</span>Q<span class="k">)$(</span>CONFIG_SHELL<span class="k">)</span> <span class="k">$(</span>srctree<span class="k">)</span>/scripts/mkmakefile <span class="k">$(</span>srctree<span class="k">)</span>
-	<span class="k">$(</span>Q<span class="k">)</span><span class="nb">test</span> -e .gitignore <span class="o">||</span> <span class="se">\
-</span><span class="se"></span>	<span class="o">{</span> <span class="nb">echo</span> <span class="s2">&#34;# this is build directory, ignore it&#34;</span><span class="p">;</span> <span class="nb">echo</span> <span class="s2">&#34;*&#34;</span><span class="p">;</span> <span class="o">}</span> &gt; .gitignore
-endif
+<span class="c">#####################
+</span><span class="c"># outputmakefile 目标
+</span><span class="c"></span>
+<span class="nf">outputmakefile</span><span class="o">:</span>
+<span class="err">ifdef</span> <span class="err">building_out_of_srctree</span>
+	<span class="k">$(</span><span class="nv">Q</span><span class="k">)</span><span class="err">if</span> <span class="err">[</span> <span class="err">-f</span> <span class="k">$(</span><span class="nv">srctree</span><span class="k">)</span><span class="err">/.config</span> <span class="err">-o</span> <span class="err">\</span>
+		 <span class="err">-d</span> <span class="k">$(</span><span class="nv">srctree</span><span class="k">)</span><span class="err">/include/config</span> <span class="err">-o</span> <span class="err">\</span>
+		 <span class="err">-d</span> <span class="k">$(</span><span class="nv">srctree</span><span class="k">)</span><span class="err">/arch/</span><span class="k">$(</span><span class="nv">SRCARCH</span><span class="k">)</span><span class="err">/include/generated</span> <span class="err">];</span> <span class="err">then</span> <span class="err">\</span>
+		<span class="err">echo</span> <span class="err">&gt;&amp;2</span> <span class="s2">&#34;***&#34;</span><span class="err">;</span> <span class="err">\</span>
+		<span class="err">echo</span> <span class="err">&gt;&amp;2</span> <span class="s2">&#34;*** The source tree is not clean, please run &#39;make$(if $(findstring command line, $(origin ARCH)), ARCH=$(ARCH)) mrproper&#39;&#34;</span><span class="err">;</span> <span class="err">\</span>
+		<span class="err">echo</span> <span class="err">&gt;&amp;2</span> <span class="s2">&#34;*** in $(abs_srctree)&#34;</span><span class="err">;\</span>
+		<span class="err">echo</span> <span class="err">&gt;&amp;2</span> <span class="s2">&#34;***&#34;</span><span class="err">;</span> <span class="err">\</span>
+		<span class="err">false;</span> <span class="err">\</span>
+	<span class="err">fi</span>
+	<span class="k">$(</span><span class="nv">Q</span><span class="k">)</span><span class="err">ln</span> <span class="err">-fsn</span> <span class="k">$(</span><span class="nv">srctree</span><span class="k">)</span> <span class="err">source</span>
+	<span class="k">$(</span><span class="nv">Q</span><span class="k">)$(</span><span class="nv">CONFIG_SHELL</span><span class="k">)</span> <span class="k">$(</span><span class="nv">srctree</span><span class="k">)</span><span class="err">/scripts/mkmakefile</span> <span class="k">$(</span><span class="nv">srctree</span><span class="k">)</span>
+	<span class="k">$(</span><span class="nv">Q</span><span class="k">)</span><span class="err">test</span> <span class="err">-e</span> <span class="err">.gitignore</span> <span class="err">||</span> <span class="err">\</span>
+	<span class="err">{</span> <span class="err">echo</span> <span class="s2">&#34;# this is build directory, ignore it&#34;</span><span class="err">;</span> <span class="err">echo</span> <span class="s2">&#34;*&#34;</span><span class="err">;</span> <span class="err">}</span> <span class="err">&gt;</span> <span class="err">.gitignore</span>
+<span class="err">endif</span>
 
 </code></pre></td></tr></table>
 </div>
-</div><p>我们从下往上看， outputmakefile 目标的内容是否有效取决于这样的一个依赖关系：</p>
+</div><p>我们从下往上看， <code>outputmakefile</code> 目标的内容是否有效取决于这样的一个依赖关系链：</p>
 <pre><code>outputmakefile --&gt; building_out_of_srctree --&gt; abs_srctree, abs_objtree
 </code></pre>
-<p>abs_objtree 取决于命令行是否有 <code>O=DIR</code> 参数传入。 DIR 表示编译输出文件的存放路径，
-默认是在源码路径下。 如果有这个参数传入则 abs_objtree 的值为传入的路径，否则为源
-码路径。 需要注意的是， 当指定了 <code>O</code> 参数的时候 Makefile 不仅会去创建这个目录，
-并且会将工作路径切换到了 DIR 这个路径。</p>
-<p>abs_srctree 是由 <code>MAKEFILE_LIST</code> 变量经过 <code>lastword</code>, <code>dir</code>, <code>realpath</code> 几个函
-数处理后得到的结果，最后的结果是顶层 Makefile 的绝对路径。</p>
-<p>building_out_of_srctree 的值则取决于 <code>abs_objtree</code> 和 <code>abs_srctree</code> 是否相等，
-不相等时 building_out_of_srctree 的值为 1， 否则为空。</p>
-<p>到这里其实可以看得出 outputmakefile 这个目标是为 <code>O=DIR</code> 这个参数服务的。 它真正
-做了一下几件事：</p>
+<ul>
+<li>
+<p><code>abs_objtree</code> 取决于命令行是否有 <code>O=DIR</code> 参数传入。 <strong>DIR</strong> 表示编译输出文件的
+存放路径， 默认是在源码路径下。 如果有这个参数传入则 <code>abs_objtree</code> 的值为传入
+的路径，否则为源码路径。</p>
+<div class="admonition note">
+            <p class="admonition-title"><i class="icon fas fa-pencil-alt"></i>注意</p>
+            <div class="admonition-content">当指定了 <code>O=DIR</code> 参数的时候 <strong>Makefile</strong> 不仅会去创建这个目录，并且会将工作路
+径切换到 <strong>DIR</strong> 这个路径去。</div>
+        </div>
+</li>
+<li>
+<p><code>abs_srctree</code> 是由 <code>MAKEFILE_LIST</code> 变量经过 <code>lastword</code>, <code>dir</code>, <code>realpath</code> 几个函
+数处理后得到的结果，最后的结果是顶层 <strong>Makefile</strong> 的绝对路径。</p>
+</li>
+<li>
+<p><code>building_out_of_srctree</code> 的值则取决于 <code>abs_objtree</code> 和 <code>abs_srctree</code> 是否相等，
+不相等时 <code>building_out_of_srctree</code> 的值为 1， 否则为空。</p>
+</li>
+<li>
+<p>到这里其实可以看得出 <code>outputmakefile</code> 这个目标是为 <code>O=DIR</code> 这个参数服务的。 它真正
+做了这么两件事：</p>
 <ol>
-<li>在 DIR 路径下创建了源码目录的软链接。</li>
-<li>执行了 <code>$(srctree)/scripts/mkmakefile $(srctree)</code> 这条 shell 命令。</li>
+<li>在 <strong>DIR</strong> 路径下创建了源码目录的软链接。</li>
+<li>执行了 <code>$(srctree)/scripts/mkmakefile $(srctree)</code> 这条 <strong>shell</strong> 命令。</li>
 </ol>
 <p>关键在于第二条， 这条命令是去执行源码路径下的 <code>scripts/mkmakefile</code> 脚本，并且将
 源码路径作为参数传入。而这个脚本的内容如下：</p>
@@ -343,12 +383,12 @@ endif
 </span><span class="s">EOF</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>可以看出，它的作用就是在 DIR 路径下创建出一个 Makefile 文件并包含源码目录下的顶
-层 Makefile。</p>
-<ol start="2">
-<li>scripts_basic</li>
-</ol>
-<p>scripts_basic 目标的内容是这样的：</p>
+</div><p>可以看出，它的作用就是在 <strong>DIR</strong> 路径下创建出一个 <strong>Makefile</strong> 文件并包含源码目录下的顶
+层 <strong>Makefile</strong>。</p>
+</li>
+</ul>
+<h5 id="scripts_basic">scripts_basic</h5>
+<p><code>scripts_basic</code> 目标的内容是这样的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -356,12 +396,18 @@ endif
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">scripts_basic:
-	$(Q)$(MAKE) $(build)=scripts/basic
-	$(Q)rm -f .tmp_quiet_recordmcount
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">scripts_basic</span><span class="o">:</span>
+	<span class="k">$(</span>Q<span class="k">)$(</span>MAKE<span class="k">)</span> <span class="k">$(</span>build<span class="k">)</span><span class="o">=</span>scripts/basic
+	<span class="k">$(</span>Q<span class="k">)</span>rm -f .tmp_quiet_recordmcount
 </code></pre></td></tr></table>
 </div>
-</div><p>这里面比较麻烦的是 <code>build</code> 这个变量，其实它是定义在了 &ldquo;scripts/Kbuild.include&rdquo;
+</div><div class="admonition info">
+            <p class="admonition-title"><i class="icon fas fa-info-circle"></i>信息</p>
+            <div class="admonition-content">变量 <code>$(Q)</code> 是定义在顶层 <strong>Makefile</strong> 中的， 它的作用是编译时控制 <strong>Makefile</strong>
+否要回显命令。 它的值取决于命令行有没有 <code>V=1</code> 的参数传入，如果有这个参数传入，
+<code>$(Q)</code> 的值为空， 否则为 <code>@</code>。 在这里分析 <strong>Makefile</strong> 时都可以先忽略它。</div>
+        </div>
+<p>这里面比较麻烦的是 <code>build</code> 这个变量，其实它是定义在了 <strong>&ldquo;scripts/Kbuild.include&rdquo;</strong>
 中。 它的定义是这样的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -372,20 +418,20 @@ endif
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">###
-# Shorthand for $(Q)$(MAKE) -f scripts/Makefile.build obj=
-# Usage:
-# $(Q)$(MAKE) $(build)=dir
-build := -f $(srctree)/scripts/Makefile.build obj
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="c">###
+</span><span class="c"># Shorthand for $(Q)$(MAKE) -f scripts/Makefile.build obj=
+</span><span class="c"># Usage:
+</span><span class="c"># $(Q)$(MAKE) $(build)=dir
+</span><span class="c"></span><span class="nv">build</span> <span class="o">:=</span> -f <span class="k">$(</span>srctree<span class="k">)</span>/scripts/Makefile.build obj
 </code></pre></td></tr></table>
 </div>
-</div><p>这里注释也解释了为什么把它定义成这样和怎么使用它。而 MAKE 变量是 <code>GNU make</code> 定义
+</div><p>这里注释也解释了为什么把它定义成这样和怎么使用它。而 <code>MAKE</code> 变量是 <code>GNU make</code> 定义
 的变量，一般它的值都是 <code>make</code>， 有关它的详细介绍可以参考
 <a href="https://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html" target="_blank" rel="noopener noreffer">这里</a>
-.
+。
 所以上面 <code>$(Q)$(MAKE) $(build)=scripts/basic</code> 这条规则可以展开成这样：
 <code>make -f $(srctree)/scripts/Makefile.build obj=scripts/basic</code>。
-这里没有指定目标，所以编译的是 Makefile.build 的默认目标：</p>
+这里没有指定目标，所以编译的是 <code>Makefile.build</code> 的默认目标：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -394,23 +440,72 @@ build := -f $(srctree)/scripts/Makefile.build obj
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">__build: $(if $(KBUILD_BUILTIN),$(builtin-target) $(lib-target) $(extra-y)) \
-	 $(if $(KBUILD_MODULES),$(obj-m) $(mod-targets) $(modorder-target)) \
-	 $(subdir-ym) $(always-y)
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nf">__build</span><span class="o">:</span> <span class="k">$(</span><span class="nv">if</span> <span class="k">$(</span><span class="nv">KBUILD_BUILTIN</span><span class="k">)</span>,<span class="k">$(</span><span class="nv">builtin</span>-<span class="nv">target</span><span class="k">)</span> <span class="k">$(</span><span class="nv">lib</span>-<span class="nv">target</span><span class="k">)</span> <span class="k">$(</span><span class="nv">extra</span>-<span class="nv">y</span><span class="k">))</span> \
+	 <span class="k">$(</span><span class="nv">if</span> <span class="k">$(</span><span class="nv">KBUILD_MODULES</span><span class="k">)</span>,<span class="k">$(</span><span class="nv">obj</span>-<span class="nv">m</span><span class="k">)</span> <span class="k">$(</span><span class="nv">mod</span>-<span class="nv">targets</span><span class="k">)</span> <span class="k">$(</span><span class="nv">modorder</span>-<span class="nv">target</span><span class="k">))</span> \
+	 <span class="k">$(</span><span class="nv">subdir</span>-<span class="nv">ym</span><span class="k">)</span> <span class="k">$(</span><span class="nv">always</span>-<span class="nv">y</span><span class="k">)</span>
 	@:
 </code></pre></td></tr></table>
 </div>
-</div><p>当配置内核时， $(KBUILD_BUILTIN)， $(KBUILD_MODULES)， $(subdir-ym) 的值都为空， 所以此
-时只去编译 $(always-y) 目标, 此时 $(always-y) 的值为 <code>fixdep</code>。
-所以 scripts_basic 这个目标其实是去编译了 scripts/basic 下的源码生成 fixdep 工具。</p>
-<ol start="3">
-<li>FORCE</li>
-</ol></div><div class="post-footer" id="post-footer">
+</div><p>当配置内核时， <strong>$(KBUILD_BUILTIN)</strong>， <strong>$(KBUILD_MODULES)</strong>， <strong>$(subdir-ym)</strong> 的值都为空， 所以
+只有 <strong>$(always-y)</strong> 目标有效, 此时 <strong>$(always-y)</strong> 的值为 <code>fixdep</code>。
+所以 <code>scripts_basic</code> 这个目标其实是去编译了 <code>scripts/basic</code> 下的源码生成 <code>fixdep</code> 工具。</p>
+<p>关于 <strong>fixdep</strong> 工具的作用在 <code>scripts/basic/Makefile</code> 里有一段这样的解释：</p>
+<blockquote>
+<p>fixdep: used to generate dependency information during build process</p>
+</blockquote>
+<p>在这里就不对 <strong>fixdep</strong> 工具展开详细分析了。</p>
+<h5 id="force">FORCE</h5>
+<p><code>FORCE</code> 目标是定义在顶层 <strong>Makefile</strong> 的最后：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="nv">PHONY</span> <span class="o">+=</span> FORCE
+<span class="nf">FORCE</span><span class="o">:</span>
+
+<span class="c"># Declare the contents of the PHONY variable as phony.  We keep that
+</span><span class="c"># information in a variable so we can use it in if_changed and friends.
+</span><span class="c"></span><span class="nf">.PHONY</span><span class="o">:</span> <span class="k">$(</span><span class="nv">PHONY</span><span class="k">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这里其实也是一个比较有意思的地方， 在 <strong>Makefile</strong> 中 <code>FORCE</code> 目标并没有依赖，
+也没有要执行的命令， 但是 <code>FORCE</code> 目标的使用却不止一处两处。 那么为什么要这么用
+呢？ 这个答案其实 <code>GNU Make</code> 官方就已经给出了：</p>
+<blockquote>
+<p>If a rule has no prerequisites or recipe, and the target of the rule is a
+nonexistent file, then make imagines this target to have been updated whenever
+its rule is run. This implies that all targets depending on this one will
+always have their recipe run.</p>
+</blockquote>
+<p>简而言之就是这样定义出的 <code>FORCE</code> 目标在使用时其实可以把它当成一个关键字， 如果依
+赖中加上 <code>FORCE</code> 的话, <strong>make</strong> 工具便会认为这个目标的依赖更新过， 需要重新生成
+这个目标。 详细内容可以参考 <code>GNU Make</code>
+<a href="https://www.gnu.org/software/make/manual/html_node/Force-Targets.html" target="_blank" rel="noopener noreffer">官方手册</a>
+。</p>
+<h5 id="config-目标的命令">%config 目标的命令</h5>
+<p><code>%config</code> 的命令原本是这样的： <code>$(Q)$(MAKE) $(build)=scripts/kconfig $@</code>。 上面
+提到过 <code>$(build)</code> 是可以展开的， 所以这条命令展开后就变成了这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="err">make</span> <span class="err">-f</span> <span class="k">$(</span><span class="nv">srctree</span><span class="k">)</span><span class="err">/scripts/Makefile.build</span> <span class="nv">obj</span><span class="o">=</span>scripts/kconfig %config
+</code></pre></td></tr></table>
+</div>
+</div><p>可以看出， 它又去调用了 <code>scripts/Makefile.build</code> 文件， 只不过此时有参数
+<code>obj=scripts/kconfig</code>， 有目标 <code>%config</code>。</p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>本文于 2020-03-17 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/e8e47068d82e9748d0488970da61d449473e4f21" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) e8e47068d82e9748d0488970da61d449473e4f21: commit post">
-                            <i class="fas fa-hashtag fa-fw"></i>e8e4706</a></span>
+                <span>本文于 2020-03-17 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/7c79a79f9a69bc21562b11c3d295dce42e7f02d9" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 7c79a79f9a69bc21562b11c3d295dce42e7f02d9: commit post">
+                            <i class="fas fa-hashtag fa-fw"></i>7c79a79</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

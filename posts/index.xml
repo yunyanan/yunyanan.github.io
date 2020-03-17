@@ -21,8 +21,8 @@
       <description>&lt;div style=&#34;text-align: center&#34;&gt;
 &lt;img src=&#34;https://yunyanan.github.io/images/posts/exploring_kbuild/kbuild.png&#34;/&gt;
 &lt;/div&gt;
-&lt;p&gt;上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
-&lt;code&gt;Kbuild&lt;/code&gt; 系统吧。&lt;/p&gt;</description>
+&lt;p&gt;上一篇简单介绍了下编译 &lt;strong&gt;GNU Linux&lt;/strong&gt; 内核， 这篇就来说说编译 &lt;strong&gt;GNU Linux&lt;/strong&gt; 内核的
+&lt;strong&gt;Kbuild&lt;/strong&gt; 系统吧。&lt;/p&gt;</description>
     </item>
     
     <item>
