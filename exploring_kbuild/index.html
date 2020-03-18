@@ -15,7 +15,7 @@ Kbuild 系统吧。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yunyanan.github.io/exploring_kbuild/" />
 <meta property="article:published_time" content="2020-03-15T10:29:35+08:00" />
-<meta property="article:modified_time" content="2020-03-17T23:47:54+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta property="article:modified_time" content="2020-03-19T00:01:20+08:00" /><meta property="og:site_name" content="YunYanan" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Exploring Kbuild"/>
 <meta name="twitter:description" content="
@@ -45,8 +45,8 @@ Kbuild 系统吧。"/>
                 "url": "https:\/\/yunyanan.github.io\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  2330 ,
-        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-17","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  2554 ,
+        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-19","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -104,8 +104,8 @@ Kbuild 系统吧。"/>
                                 <i class="far fa-folder fa-fw"></i>Linux
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-15>2020-03-15</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>约 2330 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>预计阅读 5 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="Exploring Kbuild">
+                <i class="fas fa-pencil-alt fa-fw"></i>约 2554 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 6 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="Exploring Kbuild">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="toc" id="toc-auto">
@@ -500,12 +500,103 @@ always have their recipe run.</p>
 </code></pre></td></tr></table>
 </div>
 </div><p>可以看出， 它又去调用了 <code>scripts/Makefile.build</code> 文件， 只不过此时有参数
-<code>obj=scripts/kconfig</code>， 有目标 <code>%config</code>。</p></div><div class="post-footer" id="post-footer">
+<code>obj=scripts/kconfig</code>， 有目标 <code>%config</code>。</p>
+<div class="admonition info">
+            <p class="admonition-title"><i class="icon fas fa-info-circle"></i>信息</p>
+            <div class="admonition-content">这里目标 <code>%config</code> 在传入 <code>scripts/Makefile.build</code> 时就是在执行 <code>make</code> 时传入的
+目标。 例如使用的是 <code>make menuconfig</code> 命令配置内核， 这里目标就是 <code>menuconfig</code>。</div>
+        </div>
+<p>因为传入了参数 <code>obj=scripts/kconfig</code>， 所以 <code>srcipts/kconfig</code> 目录下的
+<code>Makefile</code> 会被包含进来。 对应的 <code>%config</code> 目标也都在其中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="c">################
+</span><span class="c"># Kconfig 变量定义
+</span><span class="c"></span>
+<span class="err">ifdef</span> <span class="err">KBUILD_KCONFIG</span>
+<span class="nv">Kconfig</span> <span class="o">:=</span> <span class="k">$(</span>KBUILD_KCONFIG<span class="k">)</span>
+<span class="err">else</span>
+<span class="nv">Kconfig</span> <span class="o">:=</span> Kconfig
+<span class="err">endif</span>
+
+<span class="err">ifndef</span> <span class="err">KBUILD_DEFCONFIG</span>
+<span class="nv">KBUILD_DEFCONFIG</span> <span class="o">:=</span> defconfig
+<span class="err">endif</span>
+
+<span class="c">###############
+</span><span class="c"># silent 变量定义
+</span><span class="c"></span>
+<span class="err">ifeq</span> <span class="err">(</span><span class="k">$(</span><span class="nv">quiet</span><span class="k">)</span><span class="err">,silent_)</span>
+<span class="nv">silent</span> <span class="o">:=</span> -s
+<span class="err">endif</span>
+
+<span class="c">################
+</span><span class="c"># %config 目标定义
+</span><span class="c"></span>
+<span class="nf">xconfig</span><span class="o">:</span> <span class="k">$(</span><span class="nv">obj</span><span class="k">)</span>/<span class="n">qconf</span>
+	$&lt; <span class="k">$(</span>silent<span class="k">)</span> <span class="k">$(</span>Kconfig<span class="k">)</span>
+
+<span class="nf">gconfig</span><span class="o">:</span> <span class="k">$(</span><span class="nv">obj</span><span class="k">)</span>/<span class="n">gconf</span>
+	$&lt; <span class="k">$(</span>silent<span class="k">)</span> <span class="k">$(</span>Kconfig<span class="k">)</span>
+
+<span class="nf">menuconfig</span><span class="o">:</span> <span class="k">$(</span><span class="nv">obj</span><span class="k">)</span>/<span class="n">mconf</span>
+	$&lt; <span class="k">$(</span>silent<span class="k">)</span> <span class="k">$(</span>Kconfig<span class="k">)</span>
+
+<span class="nf">config</span><span class="o">:</span> <span class="k">$(</span><span class="nv">obj</span><span class="k">)</span>/<span class="n">conf</span>
+	$&lt; <span class="k">$(</span>silent<span class="k">)</span> --oldaskconfig <span class="k">$(</span>Kconfig<span class="k">)</span>
+
+<span class="nf">nconfig</span><span class="o">:</span> <span class="k">$(</span><span class="nv">obj</span><span class="k">)</span>/<span class="n">nconf</span>
+	$&lt; <span class="k">$(</span>silent<span class="k">)</span> <span class="k">$(</span>Kconfig<span class="k">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>TO be continued!</strong></p>
+<!--
+menuconfig -> $(obj)/mconf -> $(host-cmulti)
+--></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>本文于 2020-03-17 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/7c79a79f9a69bc21562b11c3d295dce42e7f02d9" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 7c79a79f9a69bc21562b11c3d295dce42e7f02d9: commit post">
-                            <i class="fas fa-hashtag fa-fw"></i>7c79a79</a></span>
+                <span>本文于 2020-03-19 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/08bf2e72a321878dc95fdf4c1307b5fcdab87705" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 08bf2e72a321878dc95fdf4c1307b5fcdab87705: commit post">
+                            <i class="fas fa-hashtag fa-fw"></i>08bf2e7</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>

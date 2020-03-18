@@ -266,3 +266,57 @@ make -f $(srctree)/scripts/Makefile.build obj=scripts/kconfig %config
 可以看出， 它又去调用了 `scripts/Makefile.build` 文件， 只不过此时有参数
 `obj=scripts/kconfig`， 有目标 `%config`。
 
+{{< admonition info >}}
+这里目标 `%config` 在传入 `scripts/Makefile.build` 时就是在执行 `make` 时传入的
+目标。 例如使用的是 `make menuconfig` 命令配置内核， 这里目标就是 `menuconfig`。
+{{< /admonition >}}
+
+因为传入了参数 `obj=scripts/kconfig`， 所以 `srcipts/kconfig` 目录下的
+`Makefile` 会被包含进来。 对应的 `%config` 目标也都在其中：
+
+```Makefile
+################
+# Kconfig 变量定义
+
+ifdef KBUILD_KCONFIG
+Kconfig := $(KBUILD_KCONFIG)
+else
+Kconfig := Kconfig
+endif
+
+ifndef KBUILD_DEFCONFIG
+KBUILD_DEFCONFIG := defconfig
+endif
+
+###############
+# silent 变量定义
+
+ifeq ($(quiet),silent_)
+silent := -s
+endif
+
+################
+# %config 目标定义
+
+xconfig: $(obj)/qconf
+	$< $(silent) $(Kconfig)
+
+gconfig: $(obj)/gconf
+	$< $(silent) $(Kconfig)
+
+menuconfig: $(obj)/mconf
+	$< $(silent) $(Kconfig)
+
+config: $(obj)/conf
+	$< $(silent) --oldaskconfig $(Kconfig)
+
+nconfig: $(obj)/nconf
+	$< $(silent) $(Kconfig)
+```
+
+**TO be continued!**
+
+<!--
+menuconfig -> $(obj)/mconf -> $(host-cmulti)
+-->
+
