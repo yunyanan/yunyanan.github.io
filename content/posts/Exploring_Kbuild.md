@@ -322,7 +322,7 @@ nconfig: $(obj)/nconf
 	$< $(silent) $(Kconfig)
 ```
 
-**TO be continued!**
+**To be continued!**
 
 <!--
 menuconfig -> $(obj)/mconf -> $(host-cmulti)
