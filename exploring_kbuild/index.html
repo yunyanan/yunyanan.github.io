@@ -5,24 +5,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>Exploring Kbuild | YunYanan</title>
-        <meta name="Description" content="个人博客"><meta property="og:title" content="Exploring Kbuild" />
+        <title>内核编译的背后 | YunYanan</title>
+        <meta name="Description" content="个人博客"><meta property="og:title" content="内核编译的背后" />
 <meta property="og:description" content="
 
 
-上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
-Kbuild 系统吧。" />
+上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来了解一下编译 GNU Linux
+内核背后的 Kbuild 系统吧。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yunyanan.github.io/exploring_kbuild/" />
 <meta property="article:published_time" content="2020-03-15T10:29:35+08:00" />
-<meta property="article:modified_time" content="2020-03-19T00:03:07+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta property="article:modified_time" content="2020-03-22T22:32:59+08:00" /><meta property="og:site_name" content="YunYanan" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Exploring Kbuild"/>
+<meta name="twitter:title" content="内核编译的背后"/>
 <meta name="twitter:description" content="
 
 
-上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来说说编译 GNU Linux 内核的
-Kbuild 系统吧。"/>
+上一篇简单介绍了下编译 GNU Linux 内核， 这篇就来了解一下编译 GNU Linux
+内核背后的 Kbuild 系统吧。"/>
 <meta name="theme-color" content="#ffffff">
 <meta name="msapplication-TileColor" content="#da532c">
 <link rel="canonical" href="https://yunyanan.github.io/exploring_kbuild/" />
@@ -35,7 +35,7 @@ Kbuild 系统吧。"/>
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "Exploring Kbuild",
+        "headline": "内核编译的背后",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -45,8 +45,8 @@ Kbuild 系统吧。"/>
                 "url": "https:\/\/yunyanan.github.io\/cover.png",
                 "width":  800 ,
                 "height":  600 
-            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  2554 ,
-        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-19","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  3272 ,
+        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-22","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -97,15 +97,15 @@ Kbuild 系统吧。"/>
     window.mobileHeaderMode = "auto";
 </script>
 <main class="main">
-                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">Exploring Kbuild</h1><div class="post-meta">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">内核编译的背后</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a>
 </span>&nbsp;
                     <span class="post-category">收录于<a href="/categories/linux">
                                 <i class="far fa-folder fa-fw"></i>Linux
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-15>2020-03-15</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>约 2554 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>预计阅读 6 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="Exploring Kbuild">
+                <i class="fas fa-pencil-alt fa-fw"></i>约 3272 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 7 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="内核编译的背后">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="toc" id="toc-auto">
@@ -125,18 +125,15 @@ Kbuild 系统吧。"/>
     <li><a href="#前言">前言</a></li>
     <li><a href="#kbuild--kconfig">Kbuild &amp;&amp; Kconfig</a>
       <ul>
-        <li>
+        <li><a href="#make-config-的背后">make *config 的背后</a>
           <ul>
-            <li><a href="#make-config-的背后">make *config 的背后</a>
-              <ul>
-                <li><a href="#outputmakefile">outputmakefile</a></li>
-                <li><a href="#scripts_basic">scripts_basic</a></li>
-                <li><a href="#force">FORCE</a></li>
-                <li><a href="#config-目标的命令">%config 目标的命令</a></li>
-              </ul>
-            </li>
+            <li><a href="#outputmakefile">outputmakefile</a></li>
+            <li><a href="#scripts_basic">scripts_basic</a></li>
+            <li><a href="#force">FORCE</a></li>
+            <li><a href="#config-目标的命令">%config 目标的命令</a></li>
           </ul>
         </li>
+        <li><a href="#vmlinux-生成的背后">vmlinux 生成的背后</a></li>
       </ul>
     </li>
   </ul>
@@ -145,32 +142,37 @@ Kbuild 系统吧。"/>
             </div><div class="content" id="content"><div style="text-align: center">
 <img src="/images/posts/exploring_kbuild/kbuild.png"/>
 </div>
-<p>上一篇简单介绍了下编译 <strong>GNU Linux</strong> 内核， 这篇就来说说编译 <strong>GNU Linux</strong> 内核的
-<strong>Kbuild</strong> 系统吧。</p>
+<p>上一篇简单介绍了下编译 <strong>GNU Linux</strong> 内核， 这篇就来了解一下编译 <strong>GNU Linux</strong>
+内核背后的 <strong>Kbuild</strong> 系统吧。</p>
 <h2 id="前言">前言</h2>
 <hr>
 <p>最近了解 <strong>Kbuild</strong> 的时候, 在网上搜索相关的内容发现讲这方面内容的文章比起教你怎
 么编译内核的文章数量上要少很多。 我觉得这也反应出 <strong>Kbuild</strong> 系统确实是容易被忽
 视的一隅， 也说明了会编译内核的人不再少数，但是去研究过 <strong>Kbuild</strong> 系统的， 对
 <strong>Kbuild</strong> 感兴趣的人则要少很大一部分。 下面呢来讲讲我对 <strong>Kbuild</strong> 的理解。</p>
+<div class="admonition note">
+            <p class="admonition-title"><i class="icon fas fa-pencil-alt"></i>注意</p>
+            <div class="admonition-content"><ul>
+<li>本文中是以在 PC 上编译 <code>GNU Linux</code> 内核为例。</li>
+<li><code>GNU Linux</code> 的内核现在也还在活跃的更新中， 所以本篇文章中讲到的 <code>Kbuild</code> 规则
+可能会随着时间的推移，与最新的 <code>GNU Linux</code> 内核 <code>Kbuild</code> 规则的偏差逐渐加大。</li>
+</ul></div>
+        </div>
 <h2 id="kbuild--kconfig">Kbuild &amp;&amp; Kconfig</h2>
 <hr>
 <p>刚开始接触 <strong>GNU Linux</strong> 内核的时候我就知道在内核中有一系列的 <strong>Kconfig</strong> 和
 <strong>Makefile</strong> 文件， 内核源码的很多目录下也都是一个 <strong>Kconfig</strong> 文件搭配一个
 <strong>Makefile</strong> 文件。我知道 <strong>Kbuild</strong> 这个名词的时候是很久之后了。 当看到这个词的
 时候我的第一反应是觉得 <strong>&ldquo;Kbuild&rdquo;</strong> 它是内核中具体的某个配置文件或者编译脚本之类
-的东西。 网上一众文章中也很少有直接给 <strong>Kbuild</strong> 下一个定义， 反而我在
+的东西。 网上一众文章中也很少有直接给 <strong>Kbuild</strong> 下一个定义， 我在官方的
 <a href="https://www.kernel.org/doc/Documentation/kbuild/modules.txt" target="_blank" rel="noopener noreffer">内核文档 modules 篇</a>
 
-中找到这样的一句话：</p>
+中找到这样的一句话， 也算是通俗易懂的介绍了 <strong>kbuild</strong>：</p>
 <blockquote>
 <p>&ldquo;kbuild&rdquo; is the build system used by the Linux kernel.</p>
 </blockquote>
-<p>这里定义的 <strong>Kbuild</strong> 其实指的是：</p>
-<pre><code>&quot;The Linux Kernel build sytem.&quot;
-</code></pre>
-<p>这是从广义上来说的 <strong>Kbuild</strong>。 但是内核中又存在一些 <strong>Kbuild</strong> 文件， 那这些文件是什么
-呢？ 这其实有个有趣的地方， 在
+<p>这里定义的 <strong>Kbuild</strong> 是从广义上来说的 <strong>Kbuild</strong>。 而内核中也存在一些名字就是
+<strong>Kbuild</strong> 的文件， 那这些文件是什么呢？ 这其实有个有趣的地方， 在
 <a href="https://www.kernel.org/doc/Documentation/kbuild/makefiles.txt" target="_blank" rel="noopener noreffer">内核文档 makefiles 篇</a>
 
 中的第三节有这样的一个介绍：</p>
@@ -189,7 +191,7 @@ then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
 <strong>Kbuild</strong> 的问题了。</p>
 <p>构建内核的第一步始终是配置内核。 在上一篇文章中也讲了如何配置内核， 这里就先来看看
 在 <code>menuconfig</code>, <code>xconfig</code> 等这些配置方式的背后到底发生了什么。</p>
-<h4 id="make-config-的背后">make *config 的背后</h4>
+<h3 id="make-config-的背后">make *config 的背后</h3>
 <hr>
 <p>当我们执行 <code>make menuconfig</code> 或 <code>make xconfig</code> 等命令时， 匹配到的是顶层
 <strong>Makefile</strong> 中的 <code>%config</code> 目标：</p>
@@ -204,10 +206,9 @@ then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
 </code></pre></td></tr></table>
 </div>
 </div><p>它有三个依赖： <code>outputmakefile</code>, <code>scripts_basic</code>, <code>FORCE</code> 以及一条命令。 我们一个一个来看。</p>
-<h5 id="outputmakefile">outputmakefile</h5>
-<pre><code>我把 outputmakefile 目标的来源以及它所依赖的一些变量来源从顶层 Makefile 中拿
-出来放在了一起：
-</code></pre>
+<h4 id="outputmakefile">outputmakefile</h4>
+<p>我把 outputmakefile 目标的来源以及它所依赖的一些变量来源从顶层 Makefile 中拿
+出来放在了一起：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -387,7 +388,7 @@ then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
 层 <strong>Makefile</strong>。</p>
 </li>
 </ul>
-<h5 id="scripts_basic">scripts_basic</h5>
+<h4 id="scripts_basic">scripts_basic</h4>
 <p><code>scripts_basic</code> 目标的内容是这样的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -454,7 +455,7 @@ then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
 <p>fixdep: used to generate dependency information during build process</p>
 </blockquote>
 <p>在这里就不对 <strong>fixdep</strong> 工具展开详细分析了。</p>
-<h5 id="force">FORCE</h5>
+<h4 id="force">FORCE</h4>
 <p><code>FORCE</code> 目标是定义在顶层 <strong>Makefile</strong> 的最后：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -488,9 +489,9 @@ always have their recipe run.</p>
 这个目标。 详细内容可以参考 <code>GNU Make</code>
 <a href="https://www.gnu.org/software/make/manual/html_node/Force-Targets.html" target="_blank" rel="noopener noreffer">官方手册</a>
 。</p>
-<h5 id="config-目标的命令">%config 目标的命令</h5>
-<p><code>%config</code> 的命令原本是这样的： <code>$(Q)$(MAKE) $(build)=scripts/kconfig $@</code>。 上面
-提到过 <code>$(build)</code> 是可以展开的， 所以这条命令展开后就变成了这样：</p>
+<h4 id="config-目标的命令">%config 目标的命令</h4>
+<p><code>%config</code> 的命令原本是这样的： <code>$(Q)$(MAKE) $(build)=scripts/kconfig $@</code>。 这条
+命令展开后就变成了这样：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -588,22 +589,90 @@ always have their recipe run.</p>
 	$&lt; <span class="k">$(</span>silent<span class="k">)</span> <span class="k">$(</span>Kconfig<span class="k">)</span>
 </code></pre></td></tr></table>
 </div>
-</div><p><strong>To be continued!</strong></p>
-<!--
-menuconfig -> $(obj)/mconf -> $(host-cmulti)
---></div><div class="post-footer" id="post-footer">
+</div><p>继续以 <code>menuconfig</code> 目标为例， 它有一个依赖 <code>$(obj)/mconf</code>。 这个 <code>mconf</code> 其实是
+个可执行程序， 而这里的依赖也就是它的生成过程。 关于它的生成过程也还是比较复杂的，
+下面是我整理出来的它的依赖关系图， 其他的几个目标也是大同小异， 这里我就不展开分
+析了。 这部分工作主要是在 <code>scripts/Makefile.host</code> 和 <code>scripts/kconfig/Makefile</code>
+中实现的。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.small.min.svg"
+        data-sizes="auto"
+        data-srcset="/images/posts/exploring_kbuild/menuconfig.png,  1.5x,  2x"
+        data-src=""
+        alt="menuconfig"
+        title="menuconfig" /></p>
+<p>回过头来， <code>menuconfig</code> 的命令展开后是这样的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Makefile" data-lang="Makefile"><span class="err">scripts/kconfig/mconf</span> <span class="err">Kconfig</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>其实就是调用了生成的 <code>mconf</code> 程序， 并把 <code>Kconfig</code> 作为输入参数。 这里的
+<code>Kconfig</code> 便是指源码根目录下的 <code>Kconfig</code> 文件， 目的就是用 <code>mconf</code> 去解析这个文
+件。 顶层的 <code>Kconfig</code> 内容并不复杂， 基本都是去包含各个子模块下的 <code>Kconfig</code> 文件。
+解析完之后开始构建初始配置数据库， 然后根据以下优先级读取现有配置文件来更新初始
+数数据库：</p>
+<ul>
+<li>.config</li>
+<li>/lib/modules/$(shell,uname -r)/.config</li>
+<li>/etc/kernel-config</li>
+<li>/boot/config-$(shell,uname -r)</li>
+<li>ARCH_DEFCONFIG</li>
+<li>arch/$(ARCH)/defconfig</li>
+</ul>
+<p>之后我们就可以通过 <code>GUI</code> 界面开始配置内核， 完成后会生成 <code>.config</code> 文件。所以整
+个配置过程是这样的：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.small.min.svg"
+        data-sizes="auto"
+        data-srcset="/images/posts/exploring_kbuild/config_flow.png,  1.5x,  2x"
+        data-src=""
+        alt="config flow"
+        title="config flow" /></p>
+<h3 id="vmlinux-生成的背后">vmlinux 生成的背后</h3>
+<p>通过上面对内核配置过程的分析， <strong>kbuild</strong> 的套路也被揭露了一二。 而编译 <code>vmlinux</code>
+目标可以说是 <code>kbuild</code> 系统的主要任务了。 内核的架构被分成了不同的模块， 每个模块
+都由它自己在 <code>Makefile</code> 管理。 当编译内核时， 顶层的 <code>Makefile</code> 会按照正确的顺序
+调用对应模块的 <code>Makefile</code>， 递归的进行编译。 因此， 内核中的 <code>Makefile</code> 也被分成
+了下面的这几部分：</p>
+<pre><code>Makefile		the top Makefile.
+.config			the kernel configuration file.
+arch/$(ARCH)/Makefile	the arch Makefile.
+scripts/Makefile.*	common rules etc. for all kbuild Makefiles.
+kbuild Makefiles	there are about 500 of these.
+</code></pre>
+<p>顶层 <strong>Makefile</strong> 包含了架构 <strong>Makefile</strong> 之后， 在 <strong>scripts/Makefile.*</strong> 等
+<strong>Makefile</strong> 中规则的帮助下， 会将各个模块编译为一个中间对象， 并且大多数都是
+<strong>built-in.a</strong>。 最终将各个中间对象链接起来后就是最终的 <strong>vmlinux</strong> 对象了。
+下面这个图是我画得生成 <strong>vmlinux</strong> 目标的依赖关系图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-sizes="auto"
+        data-srcset=",  1.5x,  2x"
+        data-src=""
+        alt="vmlinux"
+        title="vmlinux" /></p>
+<p>从图上可以看到 <strong>vmlinux</strong> 的依赖有三个： <code>scripts/link-vmlinux.sh</code>,
+<code>autoksyms_recursive</code>, <code>$(vmlinux-deps)</code>。</p>
+<p><strong>To be continued</strong></p></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>本文于 2020-03-19 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/c1b9135862a4fa69c9aa95edb96492be6886ee55" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) c1b9135862a4fa69c9aa95edb96492be6886ee55: commit post">
-                            <i class="fas fa-hashtag fa-fw"></i>c1b9135</a></span>
+                <span>本文于 2020-03-22 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/a0867215412f88f99b8439f0e0a3dba2d0e6596e" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) a0867215412f88f99b8439f0e0a3dba2d0e6596e: commit post">
+                            <i class="fas fa-hashtag fa-fw"></i>a086721</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://yunyanan.github.io/exploring_kbuild/" data-title="Exploring Kbuild" data-hashtags="Linux,Kernel,Kbuild,Makefile,Kconfig"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://yunyanan.github.io/exploring_kbuild/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://yunyanan.github.io/exploring_kbuild/" data-title="内核编译的背后" data-hashtags="Linux,Kernel,Kbuild,Makefile,Kconfig"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://yunyanan.github.io/exploring_kbuild/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a></span>
             </div>
         </div>
     </div>
