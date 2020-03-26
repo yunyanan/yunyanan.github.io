@@ -28,8 +28,12 @@ autoCollapseToc: true
 
 {{< admonition >}}
 + 本文中是以在 PC 上编译 `GNU Linux` 内核为例。
-+ `GNU Linux` 的内核现在也还在活跃的更新中， 所以本篇文章中讲到的 `Kbuild` 规则
-  可能会随着时间的推移，与最新的 `GNU Linux` 内核 `Kbuild` 规则的偏差逐渐加大。
++ 本文研究使用的内核版本信息如下：
+  >VERSION = 5	\
+  >PATCHLEVEL = 6 \
+  >SUBLEVEL = 0	\
+  >EXTRAVERSION = -rc3	\
+  >NAME = Kleptomaniac Octopus
 {{< /admonition >}}
 
 ## Kbuild && Kconfig
@@ -359,25 +363,206 @@ scripts/kconfig/mconf Kconfig
 ### vmlinux 生成的背后
 
 通过上面对内核配置过程的分析， **kbuild** 的套路也被揭露了一二。 而编译 `vmlinux`
-目标可以说是 `kbuild` 系统的主要任务了。 内核的架构被分成了不同的模块， 每个模块
+目标可以说是 `kbuild` 系统的核心任务了。 内核的架构被分成了不同的模块， 每个模块
 都由它自己在 `Makefile` 管理。 当编译内核时， 顶层的 `Makefile` 会按照正确的顺序
 调用对应模块的 `Makefile`， 递归的进行编译。 因此， 内核中的 `Makefile` 也被分成
 了下面的这几部分：
 
-	Makefile		the top Makefile.
-	.config			the kernel configuration file.
-	arch/$(ARCH)/Makefile	the arch Makefile.
-	scripts/Makefile.*	common rules etc. for all kbuild Makefiles.
-	kbuild Makefiles	there are about 500 of these.
+    Makefile		the top Makefile.
+     .config			the kernel configuration file.
+     arch/$(ARCH)/Makefile	the arch Makefile.
+     scripts/Makefile.*	common rules etc. for all kbuild Makefiles.
+     kbuild Makefiles	there are about 500 of these.
 
-顶层 **Makefile** 包含了架构 **Makefile** 之后， 在 **scripts/Makefile.\*** 等
-**Makefile** 中规则的帮助下， 会将各个模块编译为一个中间对象， 并且大多数都是
-**built-in.a**。 最终将各个中间对象链接起来后就是最终的 **vmlinux** 对象了。
-下面这个图是我画得生成 **vmlinux** 目标的依赖关系图：
+没错，就是在它们的共同努力下编译出了 `vmlinux`。 我把 **vmlinux** 编译的编译整理
+成了下面这张依赖关系图：
 
 ![vmlinux]()
 
-从图上可以看到 **vmlinux** 的依赖有三个： `scripts/link-vmlinux.sh`,
-`autoksyms_recursive`, `$(vmlinux-deps)`。
+那接下来就来讲一下编译时最核心的部分。 从上面的图中也可以看到， `vmlinux` 的依赖
+有三大块。
 
-**To be continued**
+#### $(vmlinux-deps)
+
+这部分主要是负责源码部分的编译， 从变量的名字也可以看得出，这
+个变量属于 `vmlinux` 的依赖。 图中可以看到， 这部分最终的依赖基本都是名为
+`built-in.a` 的文件， 那这些文件是什么呢？ 我们先来看看另一个问题， 在上面提到过，
+`kbuild` 系统的编译是采用递归的方式进行的, 那这是怎么实现的呢？ 这个秘密在
+`scripts/Makefile.build` 和 `scripts/Makefile.lib` 中：
+
+```Makefile
+# Handle objects in subdirs
+# ---------------------------------------------------------------------------
+# o if we encounter foo/ in $(obj-y), replace it by foo/built-in.a
+#   and add the directory to the list of dirs to descend into: $(subdir-y)
+# o if we encounter foo/ in $(obj-m), remove it from $(obj-m)
+#   and add the directory to the list of dirs to descend into: $(subdir-m)
+__subdir-y	:= $(patsubst %/,%,$(filter %/, $(obj-y)))
+subdir-y	+= $(__subdir-y)
+__subdir-m	:= $(patsubst %/,%,$(filter %/, $(obj-m)))
+subdir-m	+= $(__subdir-m)
+
+# Subdirectories we need to descend into
+subdir-ym	:= $(sort $(subdir-y) $(subdir-m))
+subdir-ym	:= $(addprefix $(obj)/,$(subdir-ym))
+
+# $(subdir-obj-y) is the list of objects in $(obj-y) which uses dir/ to
+# tell kbuild to descend
+subdir-obj-y := $(filter %/built-in.a, $(obj-y))
+
+$(subdir-ym):
+	$(Q)$(MAKE) $(build)=$@ \
+	$(if $(filter $@/, $(KBUILD_SINGLE_TARGETS)),single-build=) \
+	need-builtin=$(if $(filter $@/built-in.a, $(subdir-obj-y)),1) \
+	need-modorder=$(if $(need-modorder),$(if $(filter $@/modules.order, $(modorder)),1))
+
+ifdef need-builtin
+builtin-target := $(obj)/built-in.a
+endif
+
+$(builtin-target): $(real-obj-y) FORCE
+	$(call if_changed,ar_builtin)
+```
+上面这些内容是从那两个 `Makefile` 中摘抄出来的， 他们并不在一起。 这点东西我觉得应该算
+是 `kbuild` 系统及其核心的一个部分了。 `obj-y/m` 变量中存放的是需要编译的文件和
+需要递归进入的目录。 `kbuild Makefiles` 中的内容大多都是增加它们的值。
+`$(subdir-obj-y)` 变量则是从 `$(obj-y)` 中过滤出了所有的 `%/built-in.a`。
+在 `$(subdir-ym)` 的命令执行时会去判断 `$(subdir-obj-y)` 变量里是否存在
+`$@/built-in.a`， 如果存在自然就会有 `$(builtin-target)` 目标存在。 而
+`$(builtin-target)` 目标的参数是执行了 `$(call if_changed,ar_builtin)`。
+这里就不得不讲讲 `if_changed` 这个东西了， 它在 `kbuild` 中的出场率也是非常高的。
+它的定义是在 `scripts/Kbuild.include` 中：
+
+```Makefile
+# echo command.
+# Short version is used, if $(quiet) equals `quiet_', otherwise full one.
+echo-cmd = $(if $($(quiet)cmd_$(1)),\
+	echo '  $(call escsq,$($(quiet)cmd_$(1)))$(echo-why)';)
+
+# printing commands
+cmd = @set -e; $(echo-cmd) $(cmd_$(1))
+
+# Execute command if command has changed or prerequisite(s) are updated.
+if_changed = $(if $(newer-prereqs)$(cmd-check),                              \
+	$(cmd);                                                              \
+	printf '%s\n' 'cmd_$@ := $(make-cmd)' > $(dot-target).cmd, @:)
+```
+
+可以看出如果 `$(newer-prereqs)` 和 `$(cmd-check)` 只要有一个不为空，那么就会执行
+`$(cmd)` 命令， 否则会打印一些日志。 `$(newer-prereqs)` 表示任何比目标更新或不存
+在的先决条件。 `$(cmd-check)` 的作用则是检查 `$(cmd_@)` 是否为空，或者
+`$(cmd_@)` 和 `$(cmd_$(1))` 是否相等。 说的简单点就是去判断了是否存在有效的
+`$(cmd_$(1))` 目标。 而 `cmd` 目标实际上做了两件事： 一个是打印当前命令，第二个是
+执行 `cmd_$(1)` 命令。 这里的 `$(1)` 便是调用 `if_changed` 时传入的参数。 所以
+`$(builtin-target)` 目标的命令就是去执行 `cmd_ar_builtin` 目标。 而它的定义是这
+样的：
+
+```Makefile
+cmd_ar_builtin = rm -f $@; $(AR) cDPrST $@ $(real-prereqs)
+```
+这也可以看出， `cmd_ar_builtin` 命令就是将当前目录下的编译目标们都用 `$(AR)` 命
+令打包成 `$(builtin-target)`， 也就是 `$(obj)/built-in.a`。 这就是在图中各个程序
+模块目录下 `built-in.a` 的来源。
+
+#### autoksyms_recursive
+
+这部分从的功能从图中看是被分成了两个分支：
+
+`descend` 依赖的 `prepare` 主要是去做了一些编译前的准备工作。 例如
+`outputmakefile` 是去编译输出目录生成一个 `Makefile`等。
+
+`modules.order` 目标的命令是这样的：
+```Makefile
+$(Q)$(AWK) '!x[$$0]++' $(addsuffix /$@, $(build-dirs)) > $@
+```
+它主要是生成了 `modules.order` 文件。 这个文件是用来记录编译的外部模块， 目的是
+给 `modprobe` 命令加卸载模块时使用。
+
+而 `autoksyms_recursive` 目标的命令是这样的：
+
+```Makefile
+ifdef CONFIG_TRIM_UNUSED_KSYMS
+autoksyms_recursive: descend modules.order
+	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/adjust_autoksyms.sh \
+	  "$(MAKE) -f $(srctree)/Makefile vmlinux"
+endif
+```
+
+这里的 `CONFIG_TRIM_UNUSED_KSYMS` 默认是没有被定义的， 所以在默认情况下，这里的
+命令也就不会被执行。 命令中的 `$(CONFIG_SHELL)` 在 `kbuild` 中也是比较常见的，
+它的值在顶层 `Makefile`中被定义成了 `CONFIG_SHELL := sh`。 所以它的作用就是确定
+了 `kbuild` 所使用的 `SHELL`。 所以上面的命令其实就是去执行了
+`scripts/adjust_autoksyms.sh` 脚本。 而这个脚本的作用在脚本开头的注释中也有介绍：
+
+	# Create/update the include/generated/autoksyms.h file from the list
+	 # of all module's needed symbols as recorded on the second line of *.mod files.
+
+	 # For each symbol being added or removed, the corresponding dependency
+	 # file's timestamp is updated to force a rebuild of the affected source
+	 # file. All arguments passed to this script are assumed to be a command
+	 # to be exec'd to trigger a rebuild of those files.
+
+说简单点就是生成或者更新 `include/generated/autoksyms.h` 和其他依赖文件。 所以综
+合来看这部分的内容主要是做好编译前的准备工作。
+
+#### scripts/link-vmlinux.sh
+
+这个脚本的作用是用于链接生成最终的 `vmlinux` 目标的。 同样的， 这个脚本开头的注
+释我觉得讲的比较清楚， 也非常的有意义：
+
+```Text
+# vmlinux is linked from the objects selected by $(KBUILD_VMLINUX_OBJS) and
+# $(KBUILD_VMLINUX_LIBS). Most are built-in.a files from top-level directories
+# in the kernel tree, others are specified in arch/$(ARCH)/Makefile.
+# $(KBUILD_VMLINUX_LIBS) are archives which are linked conditionally
+# (not within --whole-archive), and do not require symbol indexes added.
+#
+# vmlinux
+#   ^
+#   |
+#   +--< $(KBUILD_VMLINUX_OBJS)
+#   |    +--< init/built-in.a drivers/built-in.a mm/built-in.a + more
+#   |
+#   +--< $(KBUILD_VMLINUX_LIBS)
+#   |    +--< lib/lib.a + more
+#   |
+#   +-< ${kallsymso} (see description in KALLSYMS section)
+#
+# vmlinux version (uname -v) cannot be updated during normal
+# descending-into-subdirs phase since we do not yet know if we need to
+# update vmlinux.
+# Therefore this step is delayed until just before final link of vmlinux.
+#
+# System.map is generated to document addresses of all kernel symbols
+```
+
+### 构建的目标
+
+虽然在上面的讲述中一直是以 `vmlinux` 当作最终目标来讲的， 但是实际上如果我们在编
+译内核时输入 `make` 时没有指定任何目标时， 默认目标 `all` 会使用
+`arch/$(ARCH)/Makefile` 文件中定义的值。 在 `x86` 平台上是这样定义的: `all:
+bzImage`。 那这里就来说说 `vmlinux` 和 `bzImage` 之间的关系。
+
+`vmlinux` 只是编译出来的最原始的内核文件， 它的本质是一个包含静态链接，带调试信
+息的 `ELF` 文件， 不带有引导信息。 而有些时候，尤其是在嵌入式 `ARM` 处理器上我们
+需要的是一个可被引导的内核镜像， 而 `bzImage` 就是这样的一个目标。 一般来说， 创
+建一个可引导的内核镜像时， 这个镜像都会先经过压缩处理， 而在创建好的镜像的开头会
+嵌有解压代码， 这里的 `bzImage` 文件也是这样的。 它是经过了 `gzip` 和 `objcopy`
+工具制作出来的压缩文件。 不仅如此， `bzImage` 文件还包含了 `bootsect.o`，
+`setup.o`， `misc.o`， `piggy.o` 等内容。
+
+
+## 结语
+
+关于 `kbuild` 系统就分析到这里了， 下面和大家分享一点我的感想。
+
+从上面的讲解过程也可以看到， 我引用了很多内核里的文档和注释。 不得不说， 内核的
+文档和注释真的非常值得我们学习。 从文档和注释的内容上来说， 它们可以帮助我们更好
+更快的理解内核中的内容， 从编程的方面来说我们平时写程序的时候写文档写注释也应该
+向内核中的文档注释学习, 即简单明了又能抓住重点理清逻辑。 当然， 不止是文档和注释，
+`GNU Linux` 的内核中处处都有值得我们学习的地方, 宛如一个宝藏。
+
+最后， 如果大家发现文章中有什么错误或者疑问， 欢迎留言一起交流。
+
+---
+**Happy Hacking!**
