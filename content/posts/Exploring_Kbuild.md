@@ -13,8 +13,7 @@ autoCollapseToc: true
 <img src="/images/posts/exploring_kbuild/kbuild.png"/>
 </div>
 
-上一篇简单介绍了下编译 **GNU Linux** 内核， 这篇就来了解一下编译 **GNU Linux**
-内核背后的 **Kbuild** 系统吧。
+Hey, 会编译内核了之后还想知道内核编译背后的 `Kbuild` 吗 :smirk:
 
 <!--more-->
 

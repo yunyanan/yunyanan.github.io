@@ -10,8 +10,7 @@ categories: ['Linux']
 <img src="/images/posts/linux_kernel_compile/linux_logo.jpg"/>
 </div>
 
-为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
-此那就少不了要实际编译一遍 Linux 内核。
+来看看怎么编译 `GNU Linux` 内核吧 :thinking:
 
 <!--more-->
 
