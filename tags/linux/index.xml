@@ -21,8 +21,7 @@
       <description>&lt;div style=&#34;text-align: center&#34;&gt;
 &lt;img src=&#34;https://yunyanan.github.io/images/posts/exploring_kbuild/kbuild.png&#34;/&gt;
 &lt;/div&gt;
-&lt;p&gt;上一篇简单介绍了下编译 &lt;strong&gt;GNU Linux&lt;/strong&gt; 内核， 这篇就来了解一下编译 &lt;strong&gt;GNU Linux&lt;/strong&gt;
-内核背后的 &lt;strong&gt;Kbuild&lt;/strong&gt; 系统吧。&lt;/p&gt;</description>
+&lt;p&gt;Hey, 会编译内核了之后还想知道内核编译背后的 &lt;code&gt;Kbuild&lt;/code&gt; 吗 😏&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -34,8 +33,7 @@
       <description>&lt;div style=&#34;text-align: center&#34;&gt;
 &lt;img src=&#34;https://yunyanan.github.io/images/posts/linux_kernel_compile/linux_logo.jpg&#34;/&gt;
 &lt;/div&gt;
-&lt;p&gt;为了能更深入的了解 Linux 内核， 最近想研究一下 Linux 的整个 Kbuild 系统， 既然如
-此那就少不了要实际编译一遍 Linux 内核。&lt;/p&gt;</description>
+&lt;p&gt;来看看怎么编译 &lt;code&gt;GNU Linux&lt;/code&gt; 内核吧 🤔&lt;/p&gt;</description>
     </item>
     
   </channel>

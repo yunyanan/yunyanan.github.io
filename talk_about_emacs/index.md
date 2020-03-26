@@ -5,7 +5,7 @@
 <img src="/images/posts/talk_about_emacs/emacs_logo.png"/>
 </div>
 
-这篇文章来聊聊 Emacs 吧。
+来聊聊 Emacs 吧 :grimacing:
 
 <!--more-->
 
@@ -41,7 +41,8 @@
 能的在文件中描述清楚各个包的作用，放在了 Github [这
 里](https://github.com/yunyanan/.emacs.d)也能有更好的可读性。这次整理只保留了一
 些基本的包，所以配置文件暂时也是比较简单的，我是想在使用的过程中去慢慢增加需要的
-功能吧，尽可能的让它向着简洁且强大的方向发展。
+功能吧，尽可能的让它向着简洁且强大的方向发展。 这里给大家推荐一个 `Emacs` 的论坛:
+[Emacs China](https://emacs-china.org).
 
 
 ## 一点思考
