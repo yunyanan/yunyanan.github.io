@@ -376,7 +376,7 @@ scripts/kconfig/mconf Kconfig
 没错，就是在它们的共同努力下编译出了 `vmlinux`。 我把 **vmlinux** 编译的编译整理
 成了下面这张依赖关系图：
 
-![vmlinux]()
+![vmlinux](/images/posts/exploring_kbuild/vmlinux.png)
 
 那接下来就来讲一下编译时最核心的部分。 从上面的图中也可以看到， `vmlinux` 的依赖
 有三大块。
