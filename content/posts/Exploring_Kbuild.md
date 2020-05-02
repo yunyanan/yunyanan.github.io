@@ -5,7 +5,6 @@ date: 2020-03-15T10:29:35+08:00
 tags: ['Linux', 'Kernel', 'Kbuild', 'Makefile', 'Kconfig']
 categories: ['Linux']
 
-toc: true
 autoCollapseToc: true
 ---
 
