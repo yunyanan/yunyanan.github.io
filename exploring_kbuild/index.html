@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>内核编译的背后 | YunYanan</title>
+        <title>内核编译的背后 - YunYanan</title>
         <meta name="Description" content="个人博客"><meta property="og:title" content="内核编译的背后" />
 <meta property="og:description" content="
 
@@ -14,22 +14,17 @@ Hey, 会编译内核了之后还想知道内核编译背后的 Kbuild 吗 😏" 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://yunyanan.github.io/exploring_kbuild/" />
 <meta property="article:published_time" content="2020-03-15T10:29:35+08:00" />
-<meta property="article:modified_time" content="2020-03-28T13:33:13+08:00" /><meta property="og:site_name" content="YunYanan" />
+<meta property="article:modified_time" content="2020-05-02T19:46:37+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="内核编译的背后"/>
 <meta name="twitter:description" content="
 
 
 Hey, 会编译内核了之后还想知道内核编译背后的 Kbuild 吗 😏"/>
-<meta name="theme-color" content="#ffffff">
-<meta name="msapplication-TileColor" content="#da532c">
-<link rel="canonical" href="https://yunyanan.github.io/exploring_kbuild/" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="https://yunyanan.github.io/linux_kernel_compile/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+<meta name="application-name" content="YunYanan">
+<meta name="apple-mobile-web-app-title" content="YunYanan"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yunyanan.github.io/exploring_kbuild/" /><link rel="prev" href="https://yunyanan.github.io/linux_kernel_compile/" /><link rel="next" href="https://yunyanan.github.io/devicetree/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -44,7 +39,7 @@ Hey, 会编译内核了之后还想知道内核编译背后的 Kbuild 吗 😏"/
                 "width":  800 ,
                 "height":  600 
             },"genre": "posts","keywords": "Linux, Kernel, Kbuild, Makefile, Kconfig","wordcount":  5304 ,
-        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15","dateModified": "2020-03-28","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        "url": "https:\/\/yunyanan.github.io\/exploring_kbuild\/","datePublished": "2020-03-15T10:29:35+08:00","dateModified": "2020-05-02T19:46:37+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
                 "@type": "Organization",
                 "name": "xxxx",
                 "logo": {
@@ -59,46 +54,75 @@ Hey, 会编译内核了之后还想知道内核编译背后的 Kbuild 吗 😏"/
             },"description": ""
     }
     </script></head>
-    <body><script>
-            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;} else {
-                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
-            }
-            window.isDark && document.body.classList.add('dark-theme');
-        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
         <div class="header-title">
-            <a href="/">YunYanan</a>
+            <a href="/" title="YunYanan"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i> </span>YunYanan</a>
         </div>
-        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/documentation/" rel="noopener noreffer">文档</a><a class="menu-item" href="/about/" rel="noopener noreffer">关于</a><span class="menu-item">|</span>
-            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
-            </a></div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
     </div>
 </header><header class="mobile" id="header-mobile">
-    <div class="header-wrapper">
-        <div class="header-container">
+    <div class="header-container">
+        <div class="header-wrapper">
             <div class="header-title">
-                <a href="/">YunYanan</a>
+                <a href="/" title="YunYanan"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i> </span>YunYanan</a>
             </div>
             <div class="menu-toggle" id="menu-toggle-mobile">
                 <span></span><span></span><span></span>
             </div>
         </div>
-        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/categories/documentation/" title="" rel="noopener noreffer">文档</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
                 <i class="fas fa-adjust fa-fw"></i>
             </a></div>
     </div>
 </header>
-
-<script>
-    window.desktopHeaderMode = "fixed";
-    window.mobileHeaderMode = "auto";
-</script>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
 <main class="main">
-                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">内核编译的背后</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a>
-</span>&nbsp;
-                    <span class="post-category">收录于<a href="/categories/linux">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">内核编译的背后</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/linux/">
                                 <i class="far fa-folder fa-fw"></i>Linux
                             </a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-15>2020-03-15</time>&nbsp;
@@ -106,19 +130,12 @@ Hey, 会编译内核了之后还想知道内核编译背后的 Kbuild 吗 😏"/
                 <i class="far fa-clock fa-fw"></i>预计阅读 11 分钟&nbsp;<span id="/exploring_kbuild/" class="leancloud_visitors" data-flag-title="内核编译的背后">
                         <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
-        </div><div class="toc" id="toc-auto">
-                <h2 class="toc-title">目录</h2>
-                <div class="toc-content" id="toc-content-auto"></div>
-            </div>
-            <div class="toc" id="toc-static">
-                <details>
-                    <summary>
-                        <div class="toc-title">
-                            <span>目录</span>
-                            <span><i class="details icon fas fa-angle-down"></i></span>
-                        </div>
-                    </summary>
-                    <div class="toc-content" id="toc-content-static"><nav id="TableOfContents">
+        </div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#前言">前言</a></li>
     <li><a href="#kbuild--kconfig">Kbuild &amp;&amp; Kconfig</a>
@@ -144,7 +161,6 @@ Hey, 会编译内核了之后还想知道内核编译背后的 Kbuild 吗 😏"/
     <li><a href="#结语">结语</a></li>
   </ul>
 </nav></div>
-                </details>
             </div><div class="content" id="content"><div style="text-align: center">
 <img src="/images/posts/exploring_kbuild/kbuild.png"/>
 </div>
@@ -155,8 +171,11 @@ Hey, 会编译内核了之后还想知道内核编译背后的 Kbuild 吗 😏"/
 么编译内核的文章数量上要少很多。 我觉得这也反应出 <strong>Kbuild</strong> 系统确实是容易被忽
 视的一隅， 也说明了会编译内核的人不再少数，但是去研究过 <strong>Kbuild</strong> 系统的， 对
 <strong>Kbuild</strong> 感兴趣的人则要少很大一部分。 下面呢来讲讲我对 <strong>Kbuild</strong> 的理解。</p>
-<div class="admonition note">
-            <p class="admonition-title"><i class="icon fas fa-pencil-alt"></i>注意</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
             <div class="admonition-content"><ul>
 <li>本文中是以在 PC 上编译 <code>GNU Linux</code> 内核为例。</li>
 <li>本文研究使用的内核版本信息如下：
@@ -168,8 +187,10 @@ EXTRAVERSION = -rc3<br>
 NAME = Kleptomaniac Octopus</p>
 </blockquote>
 </li>
-</ul></div>
+</ul>
+</div>
         </div>
+    </div>
 <h2 id="kbuild--kconfig">Kbuild &amp;&amp; Kconfig</h2>
 <hr>
 <p>刚开始接触 <strong>GNU Linux</strong> 内核的时候我就知道在内核中有一系列的 <strong>Kconfig</strong> 和
@@ -178,7 +199,6 @@ NAME = Kleptomaniac Octopus</p>
 时候我的第一反应是觉得 <strong>&ldquo;Kbuild&rdquo;</strong> 它是内核中具体的某个配置文件或者编译脚本之类
 的东西。 网上一众文章中也很少有直接给 <strong>Kbuild</strong> 下一个定义， 我在官方的
 <a href="https://www.kernel.org/doc/Documentation/kbuild/modules.txt" target="_blank" rel="noopener noreffer">内核文档 modules 篇</a>
-
 中找到这样的一句话， 也算是通俗易懂的介绍了 <strong>kbuild</strong>：</p>
 <blockquote>
 <p>&ldquo;kbuild&rdquo; is the build system used by the Linux kernel.</p>
@@ -186,7 +206,6 @@ NAME = Kleptomaniac Octopus</p>
 <p>这里定义的 <strong>Kbuild</strong> 是从广义上来说的 <strong>Kbuild</strong>。 而内核中也存在一些名字就是
 <strong>Kbuild</strong> 的文件， 那这些文件是什么呢？ 这其实有个有趣的地方， 在
 <a href="https://www.kernel.org/doc/Documentation/kbuild/makefiles.txt" target="_blank" rel="noopener noreffer">内核文档 makefiles 篇</a>
-
 中的第三节有这样的一个介绍：</p>
 <blockquote>
 <p>&ldquo;Most Makefiles within the kernel are kbuild Makefiles that use the kbuild
@@ -359,11 +378,15 @@ then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
 <p><code>abs_objtree</code> 取决于命令行是否有 <code>O=DIR</code> 参数传入。 <strong>DIR</strong> 表示编译输出文件的
 存放路径， 默认是在源码路径下。 如果有这个参数传入则 <code>abs_objtree</code> 的值为传入
 的路径，否则为源码路径。</p>
-<div class="admonition note">
-            <p class="admonition-title"><i class="icon fas fa-pencil-alt"></i>注意</p>
+<div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
             <div class="admonition-content">当指定了 <code>O=DIR</code> 参数的时候 <strong>Makefile</strong> 不仅会去创建这个目录，并且会将工作路
 径切换到 <strong>DIR</strong> 这个路径去。</div>
         </div>
+    </div>
 </li>
 <li>
 <p><code>abs_srctree</code> 是由 <code>MAKEFILE_LIST</code> 变量经过 <code>lastword</code>, <code>dir</code>, <code>realpath</code> 几个函
@@ -414,12 +437,16 @@ then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
 	<span class="k">$(</span>Q<span class="k">)</span>rm -f .tmp_quiet_recordmcount
 </code></pre></td></tr></table>
 </div>
-</div><div class="admonition info">
-            <p class="admonition-title"><i class="icon fas fa-info-circle"></i>信息</p>
+</div><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>信息<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
             <div class="admonition-content">变量 <code>$(Q)</code> 是定义在顶层 <strong>Makefile</strong> 中的， 它的作用是编译时控制 <strong>Makefile</strong>
 否要回显命令。 它的值取决于命令行有没有 <code>V=1</code> 的参数传入，如果有这个参数传入，
 <code>$(Q)</code> 的值为空， 否则为 <code>@</code>。 在这里分析 <strong>Makefile</strong> 时都可以先忽略它。</div>
         </div>
+    </div>
 <p>这里面比较麻烦的是 <code>build</code> 这个变量，其实它是定义在了 <strong>&ldquo;scripts/Kbuild.include&rdquo;</strong>
 中。 它的定义是这样的：</p>
 <div class="highlight"><div class="chroma">
@@ -440,8 +467,7 @@ then the &lsquo;Kbuild&rsquo; file will be used.&rdquo;</p>
 </div>
 </div><p>这里注释也解释了为什么把它定义成这样和怎么使用它。而 <code>MAKE</code> 变量是 <code>GNU make</code> 定义
 的变量，一般它的值都是 <code>make</code>， 有关它的详细介绍可以参考
-<a href="https://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html" target="_blank" rel="noopener noreffer">这里</a>
-。
+<a href="https://www.gnu.org/software/make/manual/html_node/MAKE-Variable.html" target="_blank" rel="noopener noreffer">这里</a>。
 所以上面 <code>$(Q)$(MAKE) $(build)=scripts/basic</code> 这条规则可以展开成这样：
 <code>make -f $(srctree)/scripts/Makefile.build obj=scripts/basic</code>。
 这里没有指定目标，所以编译的是 <code>Makefile.build</code> 的默认目标：</p>
@@ -499,8 +525,7 @@ always have their recipe run.</p>
 <p>简而言之就是这样定义出的 <code>FORCE</code> 目标在使用时其实可以把它当成一个关键字， 如果依
 赖中加上 <code>FORCE</code> 的话, <strong>make</strong> 工具便会认为这个目标的依赖更新过， 需要重新生成
 这个目标。 详细内容可以参考 <code>GNU Make</code>
-<a href="https://www.gnu.org/software/make/manual/html_node/Force-Targets.html" target="_blank" rel="noopener noreffer">官方手册</a>
-。</p>
+<a href="https://www.gnu.org/software/make/manual/html_node/Force-Targets.html" target="_blank" rel="noopener noreffer">官方手册</a>。</p>
 <h4 id="config-目标的命令">%config 目标的命令</h4>
 <p><code>%config</code> 的命令原本是这样的： <code>$(Q)$(MAKE) $(build)=scripts/kconfig $@</code>。 这条
 命令展开后就变成了这样：</p>
@@ -514,11 +539,15 @@ always have their recipe run.</p>
 </div>
 </div><p>可以看出， 它又去调用了 <code>scripts/Makefile.build</code> 文件， 只不过此时有参数
 <code>obj=scripts/kconfig</code>， 有目标 <code>%config</code>。</p>
-<div class="admonition info">
-            <p class="admonition-title"><i class="icon fas fa-info-circle"></i>信息</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>信息<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
             <div class="admonition-content">这里目标 <code>%config</code> 在传入 <code>scripts/Makefile.build</code> 时就是在执行 <code>make</code> 时传入的
 目标。 例如使用的是 <code>make menuconfig</code> 命令配置内核， 这里目标就是 <code>menuconfig</code>。</div>
         </div>
+    </div>
 <p>因为传入了参数 <code>obj=scripts/kconfig</code>， 所以 <code>srcipts/kconfig</code> 目录下的
 <code>Makefile</code> 会被包含进来。 对应的 <code>%config</code> 目标也都在其中：</p>
 <div class="highlight"><div class="chroma">
@@ -608,10 +637,10 @@ always have their recipe run.</p>
 中实现的。</p>
 <p><img
         class="lazyload"
-        src="/svg/loading.small.min.svg"
+        src="/svg/loading/small.min.svg"
+        data-src="/images/posts/exploring_kbuild/menuconfig.png"
+        data-srcset="/images/posts/exploring_kbuild/menuconfig.png, /images/posts/exploring_kbuild/menuconfig.png 1.5x, /images/posts/exploring_kbuild/menuconfig.png 2x"
         data-sizes="auto"
-        data-srcset="/images/posts/exploring_kbuild/menuconfig.png,  1.5x,  2x"
-        data-src=""
         alt="menuconfig"
         title="menuconfig" /></p>
 <p>回过头来， <code>menuconfig</code> 的命令展开后是这样的：</p>
@@ -640,10 +669,10 @@ always have their recipe run.</p>
 个配置过程是这样的：</p>
 <p><img
         class="lazyload"
-        src="/svg/loading.small.min.svg"
+        src="/svg/loading/small.min.svg"
+        data-src="/images/posts/exploring_kbuild/config_flow.png"
+        data-srcset="/images/posts/exploring_kbuild/config_flow.png, /images/posts/exploring_kbuild/config_flow.png 1.5x, /images/posts/exploring_kbuild/config_flow.png 2x"
         data-sizes="auto"
-        data-srcset="/images/posts/exploring_kbuild/config_flow.png,  1.5x,  2x"
-        data-src=""
         alt="config flow"
         title="config flow" /></p>
 <h3 id="vmlinux-生成的背后">vmlinux 生成的背后</h3>
@@ -662,10 +691,10 @@ always have their recipe run.</p>
 成了下面这张依赖关系图：</p>
 <p><img
         class="lazyload"
-        src="/svg/loading.small.min.svg"
+        src="/svg/loading/small.min.svg"
+        data-src="/images/posts/exploring_kbuild/vmlinux.png"
+        data-srcset="/images/posts/exploring_kbuild/vmlinux.png, /images/posts/exploring_kbuild/vmlinux.png 1.5x, /images/posts/exploring_kbuild/vmlinux.png 2x"
         data-sizes="auto"
-        data-srcset="/images/posts/exploring_kbuild/vmlinux.png,  1.5x,  2x"
-        data-src=""
         alt="vmlinux"
         title="vmlinux" /></p>
 <p>那接下来就来讲一下编译时最核心的部分。 从上面的图中也可以看到， <code>vmlinux</code> 的依赖
@@ -928,13 +957,15 @@ always have their recipe run.</p>
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>本文于 2020-03-28 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/39936734a033dbed6f6b3f06f5241781b7921a0d" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 39936734a033dbed6f6b3f06f5241781b7921a0d: commit post">
-                            <i class="fas fa-hashtag fa-fw"></i>3993673</a></span>
+                <span>本文于 2020-05-02 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/60773f0ad162c04203e7a58be05fc8344ce67e19" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 60773f0ad162c04203e7a58be05fc8344ce67e19: update LoveIt theme">
+                                <i class="fas fa-hashtag fa-fw"></i>60773f0</a></span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
-            <div class="post-info-md"></div>
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/exploring_kbuild/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
             <div class="post-info-share">
                 <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://yunyanan.github.io/exploring_kbuild/" data-title="内核编译的背后" data-hashtags="Linux,Kernel,Kbuild,Makefile,Kconfig"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://yunyanan.github.io/exploring_kbuild/" data-hashtag="Linux"><i class="fab fa-facebook-square fa-fw"></i></a></span>
             </div>
@@ -942,46 +973,30 @@ always have their recipe run.</p>
     </div>
 
     <div class="post-info-more">
-        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux">Linux</a>,&nbsp;<a href="/tags/kernel">Kernel</a>,&nbsp;<a href="/tags/kbuild">Kbuild</a>,&nbsp;<a href="/tags/makefile">Makefile</a>,&nbsp;<a href="/tags/kconfig">Kconfig</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a>,&nbsp;<a href="/tags/kernel/">Kernel</a>,&nbsp;<a href="/tags/kbuild/">Kbuild</a>,&nbsp;<a href="/tags/makefile/">Makefile</a>,&nbsp;<a href="/tags/kconfig/">Kconfig</a></section>
         <section>
-            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/linux_kernel_compile/" class="prev" rel="prev" title="编译 Linux 内核"><i class="fas fa-angle-left fa-fw"></i>编译 Linux 内核</a></div>
+    <div class="post-nav"><a href="/linux_kernel_compile/" class="prev" rel="prev" title="编译 Linux 内核"><i class="fas fa-angle-left fa-fw"></i>编译 Linux 内核</a>
+            <a href="/devicetree/" class="next" rel="next" title="DeviceTree">DeviceTree<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
-<div class="comment"><div id="valine"></div><script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                new Valine({
-                    el: '#valine',
-                    appId: 'Rf1OExncyuF63xO6zVHaqdrm-gzGzoHsz',
-                    appKey: 'uIrFaPMGG1RgVwNJdrX1TTxa',placeholder: 'Hi ^_^',verify: true,avatar: 'mp',pageSize: 10,lang: 'zh-cn',visitor: true,recordIP: true,});
-            });
-        </script>
-        <noscript>
-            Please enable JavaScript to view the <a href="https://valine.js.org/">comments powered by Valine.</a>
-        </noscript></div>
-    </article></div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
             </main><footer class="footer">
-    <div class="copyright"><div class="copyright-line">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer"><i class="far fa-heart fa-fw"></i> LoveIt</a>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.4"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
+    </footer></div>
 
-        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-    </div>
-</footer>
-</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
-            <i class="fas fa-chevron-up fa-fw"></i>
-        </a><script>
-        document.addEventListener('DOMContentLoaded', function () {
-            lightGallery(document.getElementById('content'), {
-                selector: '.lightgallery',
-                speed: 400,
-                hideBarsDelay: 2000,
-                thumbnail: true,
-                exThumbImage: 'data-thumbnail',
-                thumbWidth: 80,
-                thumbContHeight: 80,
-            });
-        });
-    </script><link rel="stylesheet" href="/lib/valine/valine.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/valine/Valine.min.js"></script><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"Rf1OExncyuF63xO6zVHaqdrm-gzGzoHsz","appKey":"uIrFaPMGG1RgVwNJdrX1TTxa","avatar":"mp","el":"#valine","enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"Hi ^_^","recordIP":true,"visitor":true}},"headerMode":{"desktop":"fixed","mobile":"auto"},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","noResultsFound":"没有找到结果","type":"algolia"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

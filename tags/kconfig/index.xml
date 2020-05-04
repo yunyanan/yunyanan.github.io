@@ -1,28 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Kconfig on YunYanan</title>
-    <link>https://yunyanan.github.io/tags/kconfig/</link>
-    <description>Recent content in Kconfig on YunYanan</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 15 Mar 2020 10:29:35 +0800</lastBuildDate>
-    
-	<atom:link href="https://yunyanan.github.io/tags/kconfig/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>内核编译的背后</title>
-      <link>https://yunyanan.github.io/exploring_kbuild/</link>
-      <pubDate>Sun, 15 Mar 2020 10:29:35 +0800</pubDate>
-      
-      <guid>https://yunyanan.github.io/exploring_kbuild/</guid>
-      <description>&lt;div style=&#34;text-align: center&#34;&gt;
-&lt;img src=&#34;https://yunyanan.github.io/images/posts/exploring_kbuild/kbuild.png&#34;/&gt;
-&lt;/div&gt;
-&lt;p&gt;Hey, 会编译内核了之后还想知道内核编译背后的 &lt;code&gt;Kbuild&lt;/code&gt; 吗 😏&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Kconfig - 标签 - YunYanan</title>
+        <link>https://yunyanan.github.io/tags/kconfig/</link>
+        <description>Kconfig - 标签 - YunYanan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 15 Mar 2020 10:29:35 &#43;0800</lastBuildDate><atom:link href="https://yunyanan.github.io/tags/kconfig/" rel="self" type="application/rss+xml" /><item>
+    <title>内核编译的背后</title>
+    <link>https://yunyanan.github.io/exploring_kbuild/</link>
+    <pubDate>Sun, 15 Mar 2020 10:29:35 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yunyanan.github.io/exploring_kbuild/</guid>
+    <description><![CDATA[<div style="text-align: center">
+
+</div>
+<p>Hey, 会编译内核了之后还想知道内核编译背后的 <code>Kbuild</code> 吗 😏</p>]]></description>
+</item></channel>
 </rss>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>DeviceTree - YunYanan</title>
+        <meta name="Description" content="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。"><meta property="og:title" content="DeviceTree" />
+<meta property="og:description" content="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunyanan.github.io/devicetree/" />
+<meta property="article:published_time" content="2020-05-02T20:00:53+08:00" />
+<meta property="article:modified_time" content="2020-05-04T17:36:51+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="DeviceTree"/>
+<meta name="twitter:description" content="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。"/>
+<meta name="application-name" content="YunYanan">
+<meta name="apple-mobile-web-app-title" content="YunYanan"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yunyanan.github.io/devicetree/" /><link rel="prev" href="https://yunyanan.github.io/exploring_kbuild/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "DeviceTree",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yunyanan.github.io\/devicetree\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/yunyanan.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "DeviceTree, Linux","wordcount":  2420 ,
+        "url": "https:\/\/yunyanan.github.io\/devicetree\/","datePublished": "2020-05-02T20:00:53+08:00","dateModified": "2020-05-04T17:36:51+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/yunyanan.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "YunYanan"
+            },"description": "这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。"
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="YunYanan"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i> </span>YunYanan</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/categories/documentation/"> 文档 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="YunYanan"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i> </span>YunYanan</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/categories/documentation/" title="">文档</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">DeviceTree</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://yunyanan.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/linux/">
+                                <i class="far fa-folder fa-fw"></i>Linux
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-05-02>2020-05-02</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 2420 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 5 分钟&nbsp;<span id="/devicetree/" class="leancloud_visitors" data-flag-title="DeviceTree">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading/normal.min.svg"
+        data-src="/images/posts/DeviceTree/featured.jpg"
+        data-srcset="/images/posts/DeviceTree/featured.jpg, /images/posts/DeviceTree/featured.jpg 1.5x, /images/posts/DeviceTree/featured.jpg 2x"
+        data-sizes="auto"
+        alt="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。"
+        title="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。" /></div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#设备树简介">设备树简介</a></li>
+    <li><a href="#设备树语法">设备树语法</a>
+      <ul>
+        <li><a href="#devicetree-node-格式">Devicetree node 格式</a></li>
+        <li><a href="#property-格式">Property 格式</a></li>
+        <li><a href="#一些特殊默认的属性">一些特殊默认的属性</a>
+          <ul>
+            <li><a href="#address-cells"><strong>#address-cells</strong></a></li>
+            <li><a href="#size-cells"><strong>#size-cells</strong></a></li>
+            <li><a href="#compatible"><strong>compatible</strong></a></li>
+            <li><a href="#memory"><strong>memory</strong></a></li>
+            <li><a href="#chosen"><strong>chosen</strong></a></li>
+            <li><a href="#cpus"><strong>cpus</strong></a></li>
+          </ul>
+        </li>
+        <li><a href="#节点的引用">节点的引用</a>
+          <ul>
+            <li><a href="#phandle">phandle</a></li>
+            <li><a href="#label">label</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#设备树的编译与反编译">设备树的编译与反编译</a></li>
+    <li><a href="#在根文件系统中查看设备树">在根文件系统中查看设备树</a>
+      <ul>
+        <li><a href="#sysfirmwarefdt">/sys/firmware/fdt</a></li>
+        <li><a href="#sysfirmwaredevicetree">/sys/firmware/devicetree</a></li>
+      </ul>
+    </li>
+    <li><a href="#内核对设备树的处理">内核对设备树的处理</a>
+      <ul>
+        <li><a href="#platform-identification">platform identification</a></li>
+        <li><a href="#runtime-configuration">runtime configuration</a></li>
+        <li><a href="#device-population">device population</a></li>
+      </ul>
+    </li>
+    <li><a href="#为什么-pc-上没有设备树">为什么 PC 上没有设备树</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="设备树简介">设备树简介</h2>
+<p>设备树概念的引入最早可以追溯到 <strong>Kernel v2.6.22</strong>, 它是用来描述硬件的一种数据结构和语言。 在设备树引入之前， 硬件相关的资源信息都是在驱动中直接写死的， 这种方法的特点就是会有很多的冗余代码， 移植性较差。 当硬件有变动时，需要重新描述新设备的硬件资源， 然后重新编译内核或者驱动。 而引入了设备树之后这些不足之处有了很好的改善， 现在如果要移植驱动的话就只需要修改设备树文件，提供一个新平台的 <strong>dtb</strong> 文件给内核即可。</p>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>信息<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><strong>名词解释</strong>：<br>
+<strong>dts  &ndash; Device Tree Source files</strong>　　　　　　// 设备树源文件<br>
+<strong>dtsi &ndash; Device Tree Source Include files</strong>　　// 可以被 <strong>dts</strong> 文件包含的设备树源文件， 主要包含一些通用的设备描述<br>
+<strong>dtb  &ndash; Device Tree Blob</strong>　　　　　　　　　// 设备树二进制文件， 由 dts 编译后得到<br>
+<strong>blob &ndash; Binary Large Object</strong><br>
+<strong>dtc  &ndash; Device Tree Compiler</strong>　　　　　　　// 设备树编译器</div>
+        </div>
+    </div>
+<h2 id="设备树语法">设备树语法</h2>
+<h3 id="devicetree-node-格式">Devicetree node 格式</h3>
+<p><strong>Devicetree</strong> 是由一系列的节点和属性组成， 一个节点也可以包含字节点：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[label:] node-name[@unit-address] {
+	[properties definitions]
+	[child nodes]
+};
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>[label:]</code>: 标签。 方便别的节点引用， 可以省略。</li>
+<li><code>node-name[@unit-address]</code>: 节点名。 同一级别的节点名字不可以相同， 可以通过增
+加设备的地址 <code>[@unit-address]</code> 来区分 <code>node-name</code> 相同的节点。</li>
+</ul>
+<h3 id="property-格式">Property 格式</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">[label:] property-name = value;	// 格式1： 有取值
+[label:] property-name;			// 格式2： 无取值
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-pencil-alt fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">使用分号结尾， 和 C 语言语法类似。</div>
+        </div>
+    </div>
+<p>Property 的取值有 3 种类型：</p>
+<ol>
+<li><strong>Arrays of cell</strong>: 一个或多个 32 位数据， 64 位数据使用 2 个 32 位数据来表示。 格式： <code>&lt;...&gt;</code>。</li>
+<li><strong>String</strong>: 字符串。 格式： <code>&quot;...&quot;</code>。</li>
+<li><strong>Bytestring</strong>: 1 个或多个字节。 格式： <code>[...]</code>。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">interrupts = &lt;17 0xc&gt;;						// Arrays of cells, 2 个 32 位数。
+clock-frequency = &lt;0x00000001 0x00000000&gt;;	// 2 个 32 位数表示一个64位数。
+
+compatible = &#34;simple-bus&#34;;					// String, 有结束符的字符串。
+
+local-mac-address = [00 00 12 34 56 78];	// Bytestring， 每个字节使用 2 个 16 进制数表示。
+local-mac-address = [000012345678];			// 字节和字节之间的空格可以省略。
+
+compatible = &#34;ns16550&#34;, &#34;ns8250&#34;;			// 也可以是各种类型的组合， 用逗号隔开。
+example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
+</code></pre></td></tr></table>
+</div>
+</div><div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>信息<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">在 <strong>DTS</strong> 文件中被定义的各个属性的值的意义是完全取决于驱动程序的， 所以尽管可能
+会有些看上去很奇怪的赋值方式或者格式， 但是只要符合 <strong>DTS</strong> 文件的语法就没有问题。</div>
+        </div>
+    </div>
+<h3 id="一些特殊默认的属性">一些特殊默认的属性</h3>
+<h4 id="address-cells"><strong>#address-cells</strong></h4>
+<p>在它的子节点的 <strong>reg</strong> 属性中， 使用多少个 <strong>u32</strong> 整数来描述地址。</p>
+<h4 id="size-cells"><strong>#size-cells</strong></h4>
+<p>在它的子节点的 <strong>reg</strong> 属性中， 使用多少个 <strong>u32</strong> 整数来描述大小。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">   #address-cells = &lt;0x1&gt;;
+   #size-cells = &lt;0x1&gt;;
+   ...
+   ocram: sram@900000 {
+	   ...
+	   reg = &lt;0x00900000 0x20000&gt;;	// address: 0x00900000 size: 0x20000
+	   ...
+   };
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="compatible"><strong>compatible</strong></h4>
+<p><strong>compatible</strong> 属性的值是一系列字符串， 它用 <strong>&ldquo;manufacturer,model&rdquo;</strong> 的格式指定
+出了具体的设备。 并且具有从左向右由高到低的兼容性优先级（越靠左边兼容性越好）。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">compatible = &#34;samsung, smdk2440&#34;;	// 厂商： samsung 型号： smdk2440
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="memory"><strong>memory</strong></h4>
+<p>用来描述硬件内存布局。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">memory@80000000 {
+	device_type = &#34;memory&#34;;
+	reg = &lt;0x80000000 0x20000000&gt;;	// 起始地址： 0x80000000 大小： 0x20000000
+};
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="chosen"><strong>chosen</strong></h4>
+<p><strong>bootargs</strong> 属性： 内核启动时的 <strong>command line</strong> 参数。<br>
+<strong>stdout-path&amp;stdin-path</strong> 属性：指定标准输入输出， 可选。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">chosen {
+	bootargs = &#34;noinitrd root=/dev/mtdblock4 rw init=/linuxrc console=ttySAC0,115200&#34;;	// 内核启动时传入的参数
+	stdout-path = &amp;uart1;	// 使用 uart1 做标准输出
+};
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="cpus"><strong>cpus</strong></h4>
+<p>描述了 <strong>cpu</strong> 相关的信息。下面一般会有一个或多个子节点。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">cpus {
+	#address-cells = &lt;1&gt;;	// 在子节点中使用 1 个 32 位数描述地址
+	#size-cells = &lt;0&gt;;		// 在子节点中使用几个 32 位数描述大小， 固定为 0
+
+	cpu0: cpu@0 {	// cpu0
+	compatible = &#34;arm,cortex-a7&#34;;	// 厂商： arm 型号： cortex-a7
+	device_type = &#34;cpu&#34;;
+	reg = &lt;0&gt;;						// 表明自己是哪一个 cpu
+	...
+	};
+};
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="节点的引用">节点的引用</h3>
+<h4 id="phandle">phandle</h4>
+<p>节点中的 <strong>phandle</strong> 属性， 使用一个唯一的 <strong>id</strong> 来标识一个节点， 在
+<strong>property</strong> 可以使用这个 <strong>id</strong> 来引用节点</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">pic@10000000 {
+	phandle = &lt;1&gt;;
+	interrupt-controller;
+};
+
+another-device-node {
+	interrupt-parent = &lt;1&gt;;		// 使用 phandle 的值来引用 **pic@10000000** 节点。
+};
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="label">label</h4>
+<p>定义节点的时候增加标签属性， 使用标签来引用节点。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">PIC: pic@10000000 {
+	phandle = &lt;1&gt;;
+	interrupt-controller;
+};
+
+another-device-node {
+	interrupt-parent = &lt;&amp;PIC&gt;;		// 使用 **PIC** 这个i标签来引用 **pic@10000000** 节点。
+};
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="设备树的编译与反编译">设备树的编译与反编译</h2>
+<p>设备树的编译器叫做 <strong>DTC</strong>, 它会把设备树源文件 <strong>DTS, DTSI</strong> 编译成 <strong>DTB</strong>，也
+可以把 <strong>DTB</strong> 文件反编译成 <strong>DTS</strong> 文件。 当我们在查看设备树文件的时候， 常常会
+由于节点信息分散在多个 <strong>DTS</strong> 和 <strong>DTSI</strong> 文件中造成我们查看不方便， 而使用
+<strong>DTC</strong> 反编译出来的 <strong>DTS</strong> 文件则是集中了所有的节点信息, 在查看设备树的时候这
+会非常有用。 <strong>DTC</strong> 命令的语法是这样的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">dtc <span class="o">[</span>-I input-format<span class="o">]</span> <span class="o">[</span>-O output-format<span class="o">]</span> <span class="o">[</span>-o output-filename<span class="o">]</span> <span class="o">[</span>-V output_version<span class="o">]</span> input_filename
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="在根文件系统中查看设备树">在根文件系统中查看设备树</h2>
+<h3 id="sysfirmwarefdt">/sys/firmware/fdt</h3>
+<p>原始 <strong>dtb</strong> 文件， 可以使用 <strong>DTC</strong> 反编译它， 也可以用 <code>hexdump</code> 查看：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">hexdump -C /sys/firmware/fdt
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="sysfirmwaredevicetree">/sys/firmware/devicetree</h3>
+<p>以目录的结构呈现 <strong>DTB</strong> 文件， 根节点对应 <strong>base</strong> 目录， 每一个节点对应一个目
+录， 每一个属性对应一个文件。</p>
+<h2 id="内核对设备树的处理">内核对设备树的处理</h2>
+<div class="details admonition quote open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-quote-right fa-fw"></i>引用<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><p>Linux uses DT data for three major purposes:</p>
+<ol>
+<li>platform identification,</li>
+<li>runtime configuration, and</li>
+<li>device population.</li>
+</ol>
+</div>
+        </div>
+    </div>
+<p>内核对设备树的处理也可以从这三个角度出发。</p>
+<h3 id="platform-identification">platform identification</h3>
+<p>关于平台信息其实在上面的介绍中也算是讲到了， 就是 <strong>compatible</strong> 属性。 根节点下
+的 <strong>compatible</strong> 属性即指定了当前系统名称。 如果是多个字符串，那么从左到右就代
+表了从最兼容到次之。</p>
+<h3 id="runtime-configuration">runtime configuration</h3>
+<p>内核对运行时配置信息的处理也比较简单， 简单来说就是从 <strong>DTB</strong> 文件中把所需要的信
+息提取出来赋值给内核中的变量即可。 主要是处理了:</p>
+<ol>
+<li><strong>chosen</strong> 节点中的 <strong>bootargs</strong> 属性的值， 赋值给了全局变量
+<strong>boot_command_line</strong>。</li>
+<li>根节点下的 <strong>#address-cells</strong> 和 <strong>#size-cells</strong> 属性的值， 赋值给了全局变量：
+<strong>dt_root_addr_cells</strong> 和 <strong>dt_root_size_cells</strong>。</li>
+<li>提取出 <strong>memory</strong> 节点中的 <strong>arg</strong> 属性的值 <strong>base</strong> 和 <strong>size</strong>, 最终调用
+<strong>memblock_add(base, size)</strong>。</li>
+</ol>
+<h3 id="device-population">device population</h3>
+<p>设备树文件中的每个节点都会被转换成一个 <strong>device_node</strong> 结构体， <strong>device_node</strong>
+结构体中的 <strong>property</strong> 结构体用来描述该节点的属性， 每一个属性对应一个
+<strong>property</strong> 结构体。 这些 <strong>device_node</strong> 构成了一棵树， 根节点为 <strong>root_node</strong>。
+而这其中一部分的 <strong>device_node</strong> 又会转换成 <strong>platform_device</strong> 结构。 转换的条
+件为：</p>
+<ul>
+<li>根节点下含有 <strong>compatile</strong> 属性的子节点。</li>
+<li>如果一个节点的 <strong>compatile</strong> 属性含有这些特殊的值 <strong>(&ldquo;simpli-bus&rdquo;, &ldquo;simple-mfd&rdquo;,
+&ldquo;isa&rdquo;, &ldquo;arm, amba-bus&rdquo;)</strong> 之一， 那么它的子节点（需含 <strong>compatile</strong> 属性）也可
+以转换为 <strong>platform_device</strong>。 i2c， spi 等总线节点下的子节点， 应该交给对应的
+总线驱动程序来处理， 它们不应该被转换为 <strong>platform_device</strong>。</li>
+</ul>
+<p>最后， <strong>platform_device</strong> 转换完成后就可以和 <strong>platform_driver</strong> 匹配了， 之后
+就是驱动程序的处理了。</p>
+<h2 id="为什么-pc-上没有设备树">为什么 PC 上没有设备树</h2>
+<div class="details admonition info open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-info-circle fa-fw"></i>信息<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content">下面这段内容来自
+<strong><a href="https://unix.stackexchange.com/a/399621/410471" target="_blank" rel="noopener noreffer">StackExchange</a></strong>，
+我挑选了里面一部分内容并翻译了出来。</div>
+        </div>
+    </div>
+<p>外设和主处理器之间是通过总线建立连接的。 有一些总线协议支持枚举， 即主处理器可以
+在总线上询问 “有哪些设备连接到了这个总线上？” 这些设备会以一种标准的格式回复一些
+关于它们的类型，制造商，型号和配置的信息。 有了这些信息， 操作系统就可以报告可用
+设备的列表， 并决定为每个可用设备使用哪个设备驱动程序。 所有现代 PC 总线都支持枚
+举， 但是许多的嵌入式系统使用的是不支持枚举的简单总线， 所以这种情况下就必须告诉
+操作系统有哪些设备以及如何访问他们。 设备树就是描述这样信息的一个标准格式。</p>
+<hr>
+<div style="text-align: center">
+<p>--END--</p>
+<p>Happy Hacking!</p>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-05-04 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/360c18d7fb8f490bfb7dcba5875a2d9fb1b8989b" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 360c18d7fb8f490bfb7dcba5875a2d9fb1b8989b: commit post">
+                                <i class="fas fa-hashtag fa-fw"></i>360c18d</a></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/devicetree/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://yunyanan.github.io/devicetree/" data-title="DeviceTree" data-hashtags="DeviceTree,Linux"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://yunyanan.github.io/devicetree/" data-hashtag="DeviceTree"><i class="fab fa-facebook-square fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/devicetree/">DeviceTree</a>,&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/exploring_kbuild/" class="prev" rel="prev" title="内核编译的背后"><i class="fas fa-angle-left fa-fw"></i>内核编译的背后</a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.69.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.4"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"Rf1OExncyuF63xO6zVHaqdrm-gzGzoHsz","appKey":"uIrFaPMGG1RgVwNJdrX1TTxa","avatar":"mp","el":"#valine","enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"Hi ^_^","recordIP":true,"visitor":true}},"headerMode":{"desktop":"fixed","mobile":"auto"},"search":{"algoliaAppID":"PASDMWALPK","algoliaIndex":"index.zh-cn","algoliaSearchKey":"b42948e51daaa93df92381c8e2ac0f93","noResultsFound":"没有找到结果","type":"algolia"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/algoliasearch/algoliasearch-lite.umd.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

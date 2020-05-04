@@ -1,28 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Emacs on YunYanan</title>
-    <link>https://yunyanan.github.io/tags/emacs/</link>
-    <description>Recent content in Emacs on YunYanan</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 05 Feb 2020 09:17:52 +0800</lastBuildDate>
-    
-	<atom:link href="https://yunyanan.github.io/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>聊聊 Emacs</title>
-      <link>https://yunyanan.github.io/talk_about_emacs/</link>
-      <pubDate>Wed, 05 Feb 2020 09:17:52 +0800</pubDate>
-      
-      <guid>https://yunyanan.github.io/talk_about_emacs/</guid>
-      <description>&lt;div style=&#34;text-align: center&#34;&gt;
-&lt;img src=&#34;https://yunyanan.github.io/images/posts/talk_about_emacs/emacs_logo.png&#34;/&gt;
-&lt;/div&gt;
-&lt;p&gt;来聊聊 Emacs 吧 😬&lt;/p&gt;</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Emacs - 标签 - YunYanan</title>
+        <link>https://yunyanan.github.io/tags/emacs/</link>
+        <description>Emacs - 标签 - YunYanan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 05 Feb 2020 09:17:52 &#43;0800</lastBuildDate><atom:link href="https://yunyanan.github.io/tags/emacs/" rel="self" type="application/rss+xml" /><item>
+    <title>聊聊 Emacs</title>
+    <link>https://yunyanan.github.io/talk_about_emacs/</link>
+    <pubDate>Wed, 05 Feb 2020 09:17:52 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yunyanan.github.io/talk_about_emacs/</guid>
+    <description><![CDATA[<div style="text-align: center">
+
+</div>
+<p>来聊聊 Emacs 吧 😬</p>]]></description>
+</item></channel>
 </rss>
