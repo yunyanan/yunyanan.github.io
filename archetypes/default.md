@@ -3,26 +3,18 @@ title: "{{ replace .TranslationBaseName "-" " " | title }}"
 date: {{ .Date }}
 lastmod: {{ .Date }}
 draft: true
-author: ""
-authorLink: ""
+author: "YunYanan"
+authorLink: "https://yunyanan.github.io"
 description: ""
-license: ""
 
 tags: ['']
 categories: ['']
+
 hiddenFromHomePage: false
+hiddenFromSearch: false
 
 featuredImage: ""
 featuredImagePreview: ""
-
-toc: false
-autoCollapseToc: true
-math: false
-lightgallery: true
-linkToMarkdown: true
-share:
-  enable: true
-comment: true
 ---
 
 <!--more-->
