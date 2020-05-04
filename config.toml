@@ -31,7 +31,7 @@ enableEmoji = true
     # 语言名称
     languageName = "简体中文"
     # 是否包括中日韩文字
-    hasCJKLanguage = true
+    hasCJKLanguage = false
     # 默认每页列表显示的文章数目
     paginate = 12
     # [UA-XXXXXXXX-X] 谷歌分析代号
@@ -136,9 +136,9 @@ enableEmoji = true
           # 主页显示头像的 URL
           avatarURL = "/images/avatar.png"
           # 主页显示的网站副标题
-          subtitle = "Stay Hungry, Stay Foolish."
+          subtitle = "Stay Hungry  Stay Foolish"
           # 是否为副标题显示打字机动画
-          typeit = true
+          typeit = false
           # 是否显示社交账号
           social = true
           # 免责声明 (支持 HTML 格式)
@@ -253,7 +253,8 @@ enableEmoji = true
       name = "YunYanan"
       # you can add extra information before the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
-      pre = "<i class='far fa-kiss-wink-heart fa-fw'></i> "
+      # pre = "<i class='far fa-kiss-wink-heart fa-fw'></i> "
+	  pre = "<i class='far fa-paper-plane fa-fw'></i> "
       # you can add extra information after the name (HTML format is supported), such as icons
       # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
       post = ""
