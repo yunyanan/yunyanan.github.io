@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>空间复杂度 - 标签 - YunYanan</title>
+        <link>https://yunyanan.github.io/tags/%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/</link>
+        <description>空间复杂度 - 标签 - YunYanan</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 20 Jun 2020 17:46:54 &#43;0800</lastBuildDate><atom:link href="https://yunyanan.github.io/tags/%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/" rel="self" type="application/rss+xml" /><item>
+    <title>算法复杂度分析</title>
+    <link>https://yunyanan.github.io/analysis_complexity/</link>
+    <pubDate>Sat, 20 Jun 2020 17:46:54 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://yunyanan.github.io/analysis_complexity/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/posts/analysis_complexity/featured.jpg" referrerpolicy="no-referrer">
+            </div><p><strong>&ldquo;算法 + 数据结构 = 程序&rdquo;</strong> 这个公式想必所有的开发者都有所耳闻， 毕竟提出这个公式的
+<strong>Niklaus Wirth</strong> 凭借这个公式获得了 1984 年的图灵奖， 也由此可见算法和数据结构的重
+要性。</p>]]></description>
+</item></channel>
+</rss>

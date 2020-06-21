@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>算法复杂度分析 - YunYanan</title>
+        <meta name="Description" content="个人博客"><meta property="og:title" content="算法复杂度分析" />
+<meta property="og:description" content="&ldquo;算法 &#43; 数据结构 = 程序&rdquo; 这个公式想必所有的开发者都有所耳闻， 毕竟提出这个公式的
+Niklaus Wirth 凭借这个公式获得了 1984 年的图灵奖， 也由此可见算法和数据结构的重
+要性。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://yunyanan.github.io/analysis_complexity/" />
+<meta property="article:published_time" content="2020-06-20T17:46:54+08:00" />
+<meta property="article:modified_time" content="2020-06-21T23:09:10+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="算法复杂度分析"/>
+<meta name="twitter:description" content="&ldquo;算法 &#43; 数据结构 = 程序&rdquo; 这个公式想必所有的开发者都有所耳闻， 毕竟提出这个公式的
+Niklaus Wirth 凭借这个公式获得了 1984 年的图灵奖， 也由此可见算法和数据结构的重
+要性。"/>
+<meta name="application-name" content="YunYanan">
+<meta name="apple-mobile-web-app-title" content="YunYanan"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://yunyanan.github.io/analysis_complexity/" /><link rel="prev" href="https://yunyanan.github.io/devicetree/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "算法复杂度分析",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/yunyanan.github.io\/analysis_complexity\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/yunyanan.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "算法, 时间复杂度, 空间复杂度","wordcount":  557 ,
+        "url": "https:\/\/yunyanan.github.io\/analysis_complexity\/","datePublished": "2020-06-20T17:46:54+08:00","dateModified": "2020-06-21T23:09:10+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/yunyanan.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "YunYanan"
+            },"description": ""
+    }
+    </script></head>
+    <body><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="YunYanan"><span class="header-title-pre"><i class='far fa-paper-plane fa-fw'></i> </span>YunYanan</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="YunYanan"><span class="header-title-pre"><i class='far fa-paper-plane fa-fw'></i> </span>YunYanan</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">算法复杂度分析</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://yunyanan.github.io" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>YunYanan</a></span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E7%AE%97%E6%B3%95/">
+                                <i class="far fa-folder fa-fw"></i>算法
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-06-20>2020-06-20</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 557 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 3 分钟&nbsp;<span id="/analysis_complexity/" class="leancloud_visitors" data-flag-title="算法复杂度分析">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading/normal.min.svg"
+        data-src="/images/posts/analysis_complexity/featured.jpg"
+        data-srcset="/images/posts/analysis_complexity/featured.jpg, /images/posts/analysis_complexity/featured.jpg 1.5x, /images/posts/analysis_complexity/featured.jpg 2x"
+        data-sizes="auto"
+        alt="/images/posts/analysis_complexity/featured.jpg"
+        title="/images/posts/analysis_complexity/featured.jpg" /></div><div class="details toc" id="toc-static">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#时间复杂度">时间复杂度</a>
+      <ul>
+        <li><a href="#常见时间复杂度实例">常见时间复杂度实例</a>
+          <ul>
+            <li><a href="#o1">O(1)</a></li>
+            <li><a href="#olog-n">O(log n)</a></li>
+            <li><a href="#on">O(n)</a></li>
+            <li><a href="#on2">O(n^2)</a></li>
+            <li><a href="#on3">O(n^3)</a></li>
+            <li><a href="#o2n">O(2^n)</a></li>
+            <li><a href="#on-1">O(n!)</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#空间复杂度">空间复杂度</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p><strong>&ldquo;算法 + 数据结构 = 程序&rdquo;</strong> 这个公式想必所有的开发者都有所耳闻， 毕竟提出这个公式的
+<strong>Niklaus Wirth</strong> 凭借这个公式获得了 1984 年的图灵奖， 也由此可见算法和数据结构的重
+要性。</p>
+<h2 id="引言">引言</h2>
+<p>其实我在刚开始写程序的一段时间里， 并没有体会到数据结构和算法的重要性。 现在来看
+原因可能是在当时工作内容中更多的是实现各种各样的应用逻辑， 而且有很大一部分代码
+都是有之前项目的程序可以作为模板参考。 做的越多也就越来越熟练，需要思考的只是各
+个项目之间的逻辑差异， 并不需要额外的考量。</p>
+<p>后来我自己开始独立写系统功能模块了，需要自己来设计这个模块的架构， 需要考虑这
+个模块内部的各种细节。 然后你会以为我从这里开始就意识到数据结构和算法的重要性了
+吗？ 其实也并没有， 没有复杂的数据结构和算法，我依然可以实现这个模块。 然而随着
+程序写的越来越多的时候，开始觉得自己好像是遇到了瓶颈，那种感觉很诡异。大概就是觉
+得自己有点不会写程序了， 但又并不是真的写不出来， 总觉得差点意思。</p>
+<p>直到有一天我开始学习之前没有掌握的数据结构， 去面对之前一直望而却步的算法。 几天
+后，在工作的时候我发现前两天刚看到的东西可以用起来了。 此刻我才恍然大悟， 原来不
+是在工作中用不到数据结构和算法， 而是当你不了解它们的时候，碰到一个问题你自然也
+想不到要用它们。</p>
+<p>在这篇文章中我们就先来说说算法。 而在选择一个算法的时候，我们往往需要了解这个算
+法的两个性能指标 &ndash; 时间复杂度和空间复杂度。 那要怎么分析一个算法的复杂度呢？</p>
+<h2 id="时间复杂度">时间复杂度</h2>
+<p>我们通常使用 <strong>&ldquo;Big O notation&rdquo;</strong> 的方式来表示时间复杂度， 常见的时间复杂度有以下几
+种：</p>
+<pre><code>1. O(1): 常数时间复杂度
+2. O(log n): 对数时间复杂度
+3. O(n): 线性时间复杂度
+4. O(n^2): 平方时间复杂度
+5. O(n^3): 立方时间复杂度
+6. O(2^n): 指数时间复杂度
+7. O(n!): 阶乘时间复杂度
+</code></pre>
+<p>它们在图中表现出来大概是这个样子的：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading/small.min.svg"
+        data-src="/images/posts/analysis_complexity/Comparison_computational_complexity.svg"
+        data-srcset="/images/posts/analysis_complexity/Comparison_computational_complexity.svg, /images/posts/analysis_complexity/Comparison_computational_complexity.svg 1.5x, /images/posts/analysis_complexity/Comparison_computational_complexity.svg 2x"
+        data-sizes="auto"
+        alt="Comparison Complexity"
+        title="Comparison Complexity" /></p>
+<div style="text-align: center">
+由<a href="//commons.wikimedia.org/wiki/User:Cmglee"
+title="User:Cmglee">Cmglee</a> - <span class="int-own-work" lang="zh-cn">自己的
+作品</span>，<a href="https://creativecommons.org/licenses/by-sa/4.0"
+title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>，<a
+href="https://commons.wikimedia.org/w/index.php?curid=50321072">链接</a>
+</div>
+<p>从图上不难看出， 随着 <strong>n</strong> 不断加大， 各个时间复杂度 <strong>T(n)</strong> 的差异也不断加大。 那对
+程序的影响也自然是不言而喻的。</p>
+<p>当我们在分析算法的时间复杂度的时候有两点需要注意的是:</p>
+<pre><code>1. 忽略常数系数对复杂度的影响。 例如时间复杂度 **T(n) = 5*n^2**, 这时候常数系数
+   **5** 便可以忽略， 最终 **T(n) = n^2**。 因为比起系数对 **T(n)** 的影响要
+   原低于函数的阶数对 **T(n)** 的影响。
+2. 只保留最高时间复杂度。 例如时间复杂度 **T(n) = n^3 + n^2**, 那么 **n^2** 便可以忽
+   略。 最终 **T(n) = n^3**。
+</code></pre>
+<h3 id="常见时间复杂度实例">常见时间复杂度实例</h3>
+<h4 id="o1">O(1)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">tmp</span><span class="p">;</span>
+
+	<span class="n">tmp</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">a</span>  <span class="o">=</span> <span class="o">*</span><span class="n">b</span><span class="p">;</span>
+	<span class="o">*</span><span class="n">b</span>  <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面这个函数的执行是不受传入参数影响的， 函数中的代码只会被执行一次遍退出， 所以
+时间复杂度 <strong>T(n) = O(1)</strong>。</p>
+<h4 id="olog-n">O(log n)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="kt">int</span> <span class="nf">binary_search</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">array</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">l</span><span class="p">,</span> <span class="n">r</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">mid</span><span class="p">;</span>
+
+	<span class="n">l</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="n">r</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">while</span> <span class="p">(</span><span class="n">l</span> <span class="o">&lt;=</span> <span class="n">r</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">mid</span> <span class="o">=</span> <span class="n">l</span> <span class="o">+</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">l</span> <span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+		<span class="p">}</span>
+		<span class="k">if</span> <span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+			<span class="n">r</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+			<span class="n">l</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>在上面这个二分查找的代码中， 每次查找的区间以 2 的倍数减少， 所以时间复杂度即为
+<strong>O(log n)</strong>。</p>
+<h4 id="on">O(n)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">ret</span><span class="p">;</span>
+
+	<span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">ret</span> <span class="o">+=</span> <span class="n">i</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面这个函数中有个 <strong>for</strong> 循环， 而循环次数受到传入参数 <strong>n</strong> 的影响， 循环体中
+的代码会执行 <strong>n</strong> 次， 所以时间复杂度 <strong>T(n) = O(n)</strong>。</p>
+<h4 id="on2">O(n^2)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="kt">void</span> <span class="nf">selection_sort</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">array</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">t</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">size</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">if</span> <span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+				<span class="n">t</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+				<span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+				<span class="n">array</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
+				<span class="n">count</span> <span class="o">++</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这个函数便是选择排序的实现， 它使用了两层 <strong>for</strong> 循环， 循环次数受到了传入的
+<strong>size</strong> 的影响， 它是一个典型的 <strong>O(n^2)</strong> 的时间复杂度算法。</p>
+<h4 id="on3">O(n^3)</h4>
+<p>上面的排序算法使用了两层 <strong>for</strong> 循环便有了 <strong>O(n^2)</strong> 的时间复杂度， 那不难想到，
+使用三层的 <strong>for</strong> 循环便是最基本的立方阶时间复杂度算法了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="kt">int</span> <span class="nf">sum</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+
+	<span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+			<span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+				<span class="n">ret</span><span class="o">++</span><span class="p">;</span>
+			<span class="p">}</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">ret</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="o2n">O(2^n)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="kt">int</span> <span class="nf">fibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">n</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">if</span> <span class="p">((</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
+		<span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fibonacci</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面这个求斐波那契数列第 n 项的函数， 采用了暴力递归的解法。 它的时间复杂度即为
+<strong>O(2^n)</strong>。</p>
+<h4 id="on-1">O(n!)</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="kt">void</span> <span class="nf">fac_runtime</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+	<span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+		<span class="n">fac_runtime</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面这段代码便是阶乘阶时间复杂度的算法。 阶乘阶已经算是最糟糕的时间复杂度了，在
+写代码的时候应该经可能的去避免出现这样的代码。</p>
+<h2 id="空间复杂度">空间复杂度</h2>
+<p>空间复杂度的分析其实要比时间复杂度的分析简单很多。 主要可以从两个方面判断：</p>
+<pre><code>1. 新开数组长度
+2. 递归深度
+</code></pre>
+<p>比如使用了一个 <strong>n</strong> 个元素的数组， 那空间复杂度即为 <strong>O(n)</strong>, 而如果是一个二维
+数组， 元素个数为 <strong>n^2</strong>, 那空间复杂度也就是 <strong>O(n^2)</strong>。</p>
+<p>如果是使用了递归， 那么递归的深度就是空间复杂度的最大值了。 当然， 如果又开了数
+组，又使用了递归， 那么两者的最大值即为该算法的空间复杂度了。</p>
+<h2 id="总结">总结</h2>
+<p>时间复杂度为线性对数阶的时候其实就已经可以算是比较差了， 那就更别说平方阶， 指数
+阶， 阶乘阶这些了。 时间复杂度在线性阶的时候可以算是一般，基本可以接受的程度，但
+是如果能优化，那自然优化优化更好。 理想情况下是常数阶， 但很多时候可能达不到这个
+阶层。 如果实在不行，不要忘了还有一个方法就是可以使用空间来换时间， 但是这个方法
+也受限于硬件资源。 关键还是要具体问题具体分析了 😆</p>
+<hr>
+<div style="text-align: center">
+<p>--END--</p>
+<p>Happy Hacking!</p>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-06-21 更新&nbsp;<a class="git-hash" href="https://github.com/dillonzq/LoveIt/commit/9182715073cb33d4502c572f1af54f2cde5b0368" target="_blank" title="commit by yunyanan(yunyanan1@gmail.com) 9182715073cb33d4502c572f1af54f2cde5b0368: commit post">
+                                <i class="fas fa-hashtag fa-fw"></i>9182715</a></span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/analysis_complexity/index.md" target="_blank">阅读原始文档</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://yunyanan.github.io/analysis_complexity/" data-title="算法复杂度分析" data-hashtags="算法,时间复杂度,空间复杂度"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://yunyanan.github.io/analysis_complexity/" data-hashtag="算法"><i class="fab fa-facebook-square fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="/tags/%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">时间复杂度</a>,&nbsp;<a href="/tags/%E7%A9%BA%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6/">空间复杂度</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/devicetree/" class="prev" rel="prev" title="DeviceTree"><i class="fas fa-angle-left fa-fw"></i>DeviceTree</a></div>
+</div>
+<div id="comments"><div id="valine" class="comment"></div><noscript>
+                Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
+            </noscript></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.4"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/valine/valine.min.css"><script type="text/javascript">
+    window.config = {"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{"valine":{"appId":"Rf1OExncyuF63xO6zVHaqdrm-gzGzoHsz","appKey":"uIrFaPMGG1RgVwNJdrX1TTxa","avatar":"mp","el":"#valine","enableQQ":false,"highlight":true,"lang":"zh-cn","pageSize":10,"placeholder":"Hi ^_^","recordIP":true,"visitor":true}},"headerMode":{"desktop":"fixed","mobile":"auto"}};
+</script><script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=Element.prototype.closest%2CrequestAnimationFrame%2CCustomEvent%2CPromise%2CObject.entries%2CObject.assign%2CObject.values%2Cfetch%2CElement.prototype.after%2CArray.prototype.fill%2CIntersectionObserver%2CArray.from%2CArray.prototype.find%2CMath.sign"></script><script type="text/javascript" src="/lib/valine/Valine.min.js"></script><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/object-fit-images/ofi.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
