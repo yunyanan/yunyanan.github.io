@@ -9,9 +9,10 @@
         <meta name="Description" content="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。"><meta property="og:title" content="DeviceTree" />
 <meta property="og:description" content="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://yunyanan.github.io/devicetree/" />
+<meta property="og:url" content="https://yunyanan.github.io/devicetree/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-05-02T20:00:53+08:00" />
 <meta property="article:modified_time" content="2020-05-04T17:36:51+08:00" />
+
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="DeviceTree"/>
 <meta name="twitter:description" content="这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。"/>
@@ -171,17 +172,17 @@
 <p><strong>Devicetree</strong> 是由一系列的节点和属性组成， 一个节点也可以包含字节点：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[label:] node-name[@unit-address] {
-	[properties definitions]
-	[child nodes]
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[label:] node-name[@unit-address] {
+</span></span><span class="line"><span class="cl">	[properties definitions]
+</span></span><span class="line"><span class="cl">	[child nodes]
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li><code>[label:]</code>: 标签。 方便别的节点引用， 可以省略。</li>
@@ -191,13 +192,13 @@
 <h3 id="property-格式">Property 格式</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">[label:] property-name = value;	// 格式1： 有取值
-[label:] property-name;			// 格式2： 无取值
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[label:] property-name = value;	// 格式1： 有取值
+</span></span><span class="line"><span class="cl">[label:] property-name;			// 格式2： 无取值
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition note open">
         <div class="details-summary admonition-title">
@@ -216,7 +217,7 @@
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -228,17 +229,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">interrupts = &lt;17 0xc&gt;;						// Arrays of cells, 2 个 32 位数。
-clock-frequency = &lt;0x00000001 0x00000000&gt;;	// 2 个 32 位数表示一个64位数。
-
-compatible = &#34;simple-bus&#34;;					// String, 有结束符的字符串。
-
-local-mac-address = [00 00 12 34 56 78];	// Bytestring， 每个字节使用 2 个 16 进制数表示。
-local-mac-address = [000012345678];			// 字节和字节之间的空格可以省略。
-
-compatible = &#34;ns16550&#34;, &#34;ns8250&#34;;			// 也可以是各种类型的组合， 用逗号隔开。
-example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">interrupts = &lt;17 0xc&gt;;						// Arrays of cells, 2 个 32 位数。
+</span></span><span class="line"><span class="cl">clock-frequency = &lt;0x00000001 0x00000000&gt;;	// 2 个 32 位数表示一个64位数。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">compatible = &#34;simple-bus&#34;;					// String, 有结束符的字符串。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">local-mac-address = [00 00 12 34 56 78];	// Bytestring， 每个字节使用 2 个 16 进制数表示。
+</span></span><span class="line"><span class="cl">local-mac-address = [000012345678];			// 字节和字节之间的空格可以省略。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">compatible = &#34;ns16550&#34;, &#34;ns8250&#34;;			// 也可以是各种类型的组合， 用逗号隔开。
+</span></span><span class="line"><span class="cl">example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="details admonition info open">
         <div class="details-summary admonition-title">
@@ -257,7 +258,7 @@ example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -267,15 +268,15 @@ example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">   #address-cells = &lt;0x1&gt;;
-   #size-cells = &lt;0x1&gt;;
-   ...
-   ocram: sram@900000 {
-	   ...
-	   reg = &lt;0x00900000 0x20000&gt;;	// address: 0x00900000 size: 0x20000
-	   ...
-   };
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">   #address-cells = &lt;0x1&gt;;
+</span></span><span class="line"><span class="cl">   #size-cells = &lt;0x1&gt;;
+</span></span><span class="line"><span class="cl">   ...
+</span></span><span class="line"><span class="cl">   ocram: sram@900000 {
+</span></span><span class="line"><span class="cl">	   ...
+</span></span><span class="line"><span class="cl">	   reg = &lt;0x00900000 0x20000&gt;;	// address: 0x00900000 size: 0x20000
+</span></span><span class="line"><span class="cl">	   ...
+</span></span><span class="line"><span class="cl">   };
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="compatible"><strong>compatible</strong></h4>
 <p><strong>compatible</strong> 属性的值是一系列字符串， 它用 <strong>&ldquo;manufacturer,model&rdquo;</strong> 的格式指定
@@ -283,28 +284,28 @@ example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">compatible = &#34;samsung, smdk2440&#34;;	// 厂商： samsung 型号： smdk2440
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">compatible = &#34;samsung, smdk2440&#34;;	// 厂商： samsung 型号： smdk2440
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="memory"><strong>memory</strong></h4>
 <p>用来描述硬件内存布局。</p>
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">memory@80000000 {
-	device_type = &#34;memory&#34;;
-	reg = &lt;0x80000000 0x20000000&gt;;	// 起始地址： 0x80000000 大小： 0x20000000
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">memory@80000000 {
+</span></span><span class="line"><span class="cl">	device_type = &#34;memory&#34;;
+</span></span><span class="line"><span class="cl">	reg = &lt;0x80000000 0x20000000&gt;;	// 起始地址： 0x80000000 大小： 0x20000000
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="chosen"><strong>chosen</strong></h4>
 <p><strong>bootargs</strong> 属性： 内核启动时的 <strong>command line</strong> 参数。<br>
@@ -312,24 +313,24 @@ example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">chosen {
-	bootargs = &#34;noinitrd root=/dev/mtdblock4 rw init=/linuxrc console=ttySAC0,115200&#34;;	// 内核启动时传入的参数
-	stdout-path = &amp;uart1;	// 使用 uart1 做标准输出
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">chosen {
+</span></span><span class="line"><span class="cl">	bootargs = &#34;noinitrd root=/dev/mtdblock4 rw init=/linuxrc console=ttySAC0,115200&#34;;	// 内核启动时传入的参数
+</span></span><span class="line"><span class="cl">	stdout-path = &amp;uart1;	// 使用 uart1 做标准输出
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="cpus"><strong>cpus</strong></h4>
 <p>描述了 <strong>cpu</strong> 相关的信息。下面一般会有一个或多个子节点。</p>
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -342,18 +343,18 @@ example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">cpus {
-	#address-cells = &lt;1&gt;;	// 在子节点中使用 1 个 32 位数描述地址
-	#size-cells = &lt;0&gt;;		// 在子节点中使用几个 32 位数描述大小， 固定为 0
-
-	cpu0: cpu@0 {	// cpu0
-	compatible = &#34;arm,cortex-a7&#34;;	// 厂商： arm 型号： cortex-a7
-	device_type = &#34;cpu&#34;;
-	reg = &lt;0&gt;;						// 表明自己是哪一个 cpu
-	...
-	};
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cpus {
+</span></span><span class="line"><span class="cl">	#address-cells = &lt;1&gt;;	// 在子节点中使用 1 个 32 位数描述地址
+</span></span><span class="line"><span class="cl">	#size-cells = &lt;0&gt;;		// 在子节点中使用几个 32 位数描述大小， 固定为 0
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	cpu0: cpu@0 {	// cpu0
+</span></span><span class="line"><span class="cl">	compatible = &#34;arm,cortex-a7&#34;;	// 厂商： arm 型号： cortex-a7
+</span></span><span class="line"><span class="cl">	device_type = &#34;cpu&#34;;
+</span></span><span class="line"><span class="cl">	reg = &lt;0&gt;;						// 表明自己是哪一个 cpu
+</span></span><span class="line"><span class="cl">	...
+</span></span><span class="line"><span class="cl">	};
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="节点的引用">节点的引用</h3>
 <h4 id="phandle">phandle</h4>
@@ -362,7 +363,7 @@ example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -372,22 +373,22 @@ example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">pic@10000000 {
-	phandle = &lt;1&gt;;
-	interrupt-controller;
-};
-
-another-device-node {
-	interrupt-parent = &lt;1&gt;;		// 使用 phandle 的值来引用 **pic@10000000** 节点。
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">pic@10000000 {
+</span></span><span class="line"><span class="cl">	phandle = &lt;1&gt;;
+</span></span><span class="line"><span class="cl">	interrupt-controller;
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">another-device-node {
+</span></span><span class="line"><span class="cl">	interrupt-parent = &lt;1&gt;;		// 使用 phandle 的值来引用 **pic@10000000** 节点。
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="label">label</h4>
 <p>定义节点的时候增加标签属性， 使用标签来引用节点。</p>
 <p>示例：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -397,15 +398,15 @@ another-device-node {
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">PIC: pic@10000000 {
-	phandle = &lt;1&gt;;
-	interrupt-controller;
-};
-
-another-device-node {
-	interrupt-parent = &lt;&amp;PIC&gt;;		// 使用 **PIC** 这个i标签来引用 **pic@10000000** 节点。
-};
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">PIC: pic@10000000 {
+</span></span><span class="line"><span class="cl">	phandle = &lt;1&gt;;
+</span></span><span class="line"><span class="cl">	interrupt-controller;
+</span></span><span class="line"><span class="cl">};
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">another-device-node {
+</span></span><span class="line"><span class="cl">	interrupt-parent = &lt;&amp;PIC&gt;;		// 使用 **PIC** 这个i标签来引用 **pic@10000000** 节点。
+</span></span><span class="line"><span class="cl">};
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="设备树的编译与反编译">设备树的编译与反编译</h2>
 <p>设备树的编译器叫做 <strong>DTC</strong>, 它会把设备树源文件 <strong>DTS, DTSI</strong> 编译成 <strong>DTB</strong>，也
@@ -415,22 +416,22 @@ another-device-node {
 会非常有用。 <strong>DTC</strong> 命令的语法是这样的：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">dtc <span class="o">[</span>-I input-format<span class="o">]</span> <span class="o">[</span>-O output-format<span class="o">]</span> <span class="o">[</span>-o output-filename<span class="o">]</span> <span class="o">[</span>-V output_version<span class="o">]</span> input_filename
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">dtc <span class="o">[</span>-I input-format<span class="o">]</span> <span class="o">[</span>-O output-format<span class="o">]</span> <span class="o">[</span>-o output-filename<span class="o">]</span> <span class="o">[</span>-V output_version<span class="o">]</span> input_filename
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="在根文件系统中查看设备树">在根文件系统中查看设备树</h2>
 <h3 id="sysfirmwarefdt">/sys/firmware/fdt</h3>
 <p>原始 <strong>dtb</strong> 文件， 可以使用 <strong>DTC</strong> 反编译它， 也可以用 <code>hexdump</code> 查看：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">hexdump -C /sys/firmware/fdt
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">hexdump -C /sys/firmware/fdt
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="sysfirmwaredevicetree">/sys/firmware/devicetree</h3>
 <p>以目录的结构呈现 <strong>DTB</strong> 文件， 根节点对应 <strong>base</strong> 目录， 每一个节点对应一个目
@@ -535,8 +536,8 @@ another-device-node {
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.
             </noscript></div></article></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.72.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.4"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.93.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.4"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">YunYanan</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
