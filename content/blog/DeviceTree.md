@@ -23,14 +23,12 @@ featuredImage: "/images/posts/DeviceTree/featured.jpg"
 
 设备树概念的引入最早可以追溯到 **Kernel v2.6.22**, 它是用来描述硬件的一种数据结构和语言。 在设备树引入之前， 硬件相关的资源信息都是在驱动中直接写死的， 这种方法的特点就是会有很多的冗余代码， 移植性较差。 当硬件有变动时，需要重新描述新设备的硬件资源， 然后重新编译内核或者驱动。 而引入了设备树之后这些不足之处有了很好的改善， 现在如果要移植驱动的话就只需要修改设备树文件，提供一个新平台的 **dtb** 文件给内核即可。
 
-{{< admonition info >}}
 **名词解释**：\
 **dts  -- Device Tree Source files**　　　　　　// 设备树源文件\
 **dtsi -- Device Tree Source Include files**　　// 可以被 **dts** 文件包含的设备树源文件， 主要包含一些通用的设备描述\
 **dtb  -- Device Tree Blob**　　　　　　　　　// 设备树二进制文件， 由 dts 编译后得到\
 **blob -- Binary Large Object**\
 **dtc  -- Device Tree Compiler**　　　　　　　// 设备树编译器
-{{< /admonition >}}
 
 ## 设备树语法
 
@@ -52,9 +50,7 @@ featuredImage: "/images/posts/DeviceTree/featured.jpg"
 [label:] property-name;			// 格式2： 无取值
 ```
 
-{{< admonition >}}
 使用分号结尾， 和 C 语言语法类似。
-{{< /admonition >}}
 
 Property 的取值有 3 种类型：
 1. **Arrays of cell**: 一个或多个 32 位数据， 64 位数据使用 2 个 32 位数据来表示。 格式： `<...>`。
@@ -74,10 +70,8 @@ local-mac-address = [000012345678];			// 字节和字节之间的空格可以省
 compatible = "ns16550", "ns8250";			// 也可以是各种类型的组合， 用逗号隔开。
 example = <0xf00f0000 19>, "a strange property format";
 ```
-{{< admonition info >}}
 在 **DTS** 文件中被定义的各个属性的值的意义是完全取决于驱动程序的， 所以尽管可能
 会有些看上去很奇怪的赋值方式或者格式， 但是只要符合 **DTS** 文件的语法就没有问题。
-{{< /admonition >}}
 
 ### 一些特殊默认的属性
 #### **#address-cells**
@@ -206,12 +200,10 @@ hexdump -C /sys/firmware/fdt
 
 ## 内核对设备树的处理
 
-{{< admonition quote >}}
 Linux uses DT data for three major purposes:
 1) platform identification,
 2) runtime configuration, and
 3) device population.
-{{< /admonition >}}
 
 内核对设备树的处理也可以从这三个角度出发。
 
@@ -250,11 +242,9 @@ Linux uses DT data for three major purposes:
 
 ## 为什么 PC 上没有设备树
 
-{{< admonition info >}}
 下面这段内容来自
 **[StackExchange](https://unix.stackexchange.com/a/399621/410471)**，
 我挑选了里面一部分内容并翻译了出来。
-{{< /admonition >}}
 
 外设和主处理器之间是通过总线建立连接的。 有一些总线协议支持枚举， 即主处理器可以
 在总线上询问 “有哪些设备连接到了这个总线上？” 这些设备会以一种标准的格式回复一些
