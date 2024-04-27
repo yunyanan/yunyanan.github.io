@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Categories on Yun YaNan</title>
-    <link>https://yunyanan.github.io/categories/</link>
+    <link>https://yunyanan.github.io/blog/categories/</link>
     <description>Recent content in Categories on Yun YaNan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
@@ -10,20 +10,20 @@
     <webMaster>yunyanan1@gmail.com (Yun YaNan)</webMaster>
     <copyright>Copyright © 2020, Yun YaNan</copyright>
     <lastBuildDate>Sat, 02 May 2020 20:00:53 +0800</lastBuildDate>
-    <atom:link href="https://yunyanan.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yunyanan.github.io/blog/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Linux</title>
-      <link>https://yunyanan.github.io/categories/linux/</link>
+      <link>https://yunyanan.github.io/blog/categories/linux/</link>
       <pubDate>Sat, 02 May 2020 20:00:53 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
-      <guid>https://yunyanan.github.io/categories/linux/</guid>
+      <guid>https://yunyanan.github.io/blog/categories/linux/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>
     <item>
       <title>随想</title>
-      <link>https://yunyanan.github.io/categories/%E9%9A%8F%E6%83%B3/</link>
+      <link>https://yunyanan.github.io/blog/categories/%E9%9A%8F%E6%83%B3/</link>
       <pubDate>Wed, 05 Feb 2020 09:17:52 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
-      <guid>https://yunyanan.github.io/categories/%E9%9A%8F%E6%83%B3/</guid>
+      <guid>https://yunyanan.github.io/blog/categories/%E9%9A%8F%E6%83%B3/</guid>
       <description></description>
       <content:encoded><![CDATA[]]></content:encoded>
     </item>

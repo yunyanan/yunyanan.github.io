@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Kernel on Yun YaNan</title>
-    <link>https://yunyanan.github.io/tags/kernel/</link>
+    <link>https://yunyanan.github.io/blog/tags/kernel/</link>
     <description>Recent content in Kernel on Yun YaNan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
@@ -10,12 +10,12 @@
     <webMaster>yunyanan1@gmail.com (Yun YaNan)</webMaster>
     <copyright>Copyright © 2020, Yun YaNan</copyright>
     <lastBuildDate>Sat, 29 Feb 2020 17:40:32 +0800</lastBuildDate>
-    <atom:link href="https://yunyanan.github.io/tags/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yunyanan.github.io/blog/tags/kernel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>编译 Linux 内核</title>
-      <link>https://yunyanan.github.io/blog/linux_kernel_compile/</link>
+      <link>https://yunyanan.github.io/blog/blog/linux_kernel_compile/</link>
       <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
-      <guid>https://yunyanan.github.io/blog/linux_kernel_compile/</guid>
+      <guid>https://yunyanan.github.io/blog/blog/linux_kernel_compile/</guid>
       <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;来看看怎么编译 &lt;code&gt;GNU Linux&lt;/code&gt; 内核吧 :thinking:&lt;/p&gt;</description>
       <content:encoded><![CDATA[<!-- raw HTML omitted -->
 <p>来看看怎么编译 <code>GNU Linux</code> 内核吧 :thinking:</p>
