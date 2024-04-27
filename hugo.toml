@@ -1,5 +1,5 @@
 # Basic config
-baseURL = "https://yunyanan.github.io/"
+baseURL = "https://yunyanan.github.io/blog/"
 theme = "hugo-bearcub"
 copyright = "Copyright © 2020, Yun YaNan"
 defaultContentLanguage = "cn"
@@ -28,7 +28,7 @@ enableRobotsTXT = true
     LanguageCode = "zh-CN"
     contentDir = "content"
     [languages.cn.params]
-      madeWith = ""
+      madeWith = "Happy Hacking!"
 
 
 [params]
