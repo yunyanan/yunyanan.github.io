@@ -12,7 +12,7 @@ fi
 if [[ $(git status -s) ]]
 then
     echo -e "\033[32m [Commit new posts first...] \033[0m"
-    rm content/posts/*~
+    rm content/blog/*~
     git add --all && git commit -m "commit post"
     git push origin source
 fi
