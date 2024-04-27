@@ -1,36 +1,342 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Linux - 分类 - YunYanan</title>
-        <link>https://yunyanan.github.io/categories/linux/</link>
-        <description>Linux - 分类 - YunYanan</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 02 May 2020 20:00:53 &#43;0800</lastBuildDate><atom:link href="https://yunyanan.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
-    <title>DeviceTree</title>
-    <link>https://yunyanan.github.io/devicetree/</link>
-    <pubDate>Sat, 02 May 2020 20:00:53 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yunyanan.github.io/devicetree/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="/images/posts/DeviceTree/featured.jpg" referrerpolicy="no-referrer">
-            </div>这篇文章主要介绍了设备树的语法，一些默认属性等相关内容。]]></description>
-</item><item>
-    <title>内核编译的背后</title>
-    <link>https://yunyanan.github.io/exploring_kbuild/</link>
-    <pubDate>Sun, 15 Mar 2020 10:29:35 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yunyanan.github.io/exploring_kbuild/</guid>
-    <description><![CDATA[<div style="text-align: center">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on Yun YaNan</title>
+    <link>https://yunyanan.github.io/categories/linux/</link>
+    <description>Recent content in Linux on Yun YaNan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>yunyanan1@gmail.com (Yun YaNan)</managingEditor>
+    <webMaster>yunyanan1@gmail.com (Yun YaNan)</webMaster>
+    <copyright>Copyright © 2020, Yun YaNan</copyright>
+    <lastBuildDate>Sat, 02 May 2020 20:00:53 +0800</lastBuildDate>
+    <atom:link href="https://yunyanan.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DeviceTree</title>
+      <link>https://yunyanan.github.io/blog/devicetree/</link>
+      <pubDate>Sat, 02 May 2020 20:00:53 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/blog/devicetree/</guid>
+      <description></description>
+      <content:encoded><![CDATA[<h2 id="设备树简介">设备树简介</h2>
+<p>设备树概念的引入最早可以追溯到 <strong>Kernel v2.6.22</strong>, 它是用来描述硬件的一种数据结构和语言。 在设备树引入之前， 硬件相关的资源信息都是在驱动中直接写死的， 这种方法的特点就是会有很多的冗余代码， 移植性较差。 当硬件有变动时，需要重新描述新设备的硬件资源， 然后重新编译内核或者驱动。 而引入了设备树之后这些不足之处有了很好的改善， 现在如果要移植驱动的话就只需要修改设备树文件，提供一个新平台的 <strong>dtb</strong> 文件给内核即可。</p>
+<p><strong>名词解释</strong>：<br>
+<strong>dts  &ndash; Device Tree Source files</strong>　　　　　　// 设备树源文件<br>
+<strong>dtsi &ndash; Device Tree Source Include files</strong>　　// 可以被 <strong>dts</strong> 文件包含的设备树源文件， 主要包含一些通用的设备描述<br>
+<strong>dtb  &ndash; Device Tree Blob</strong>　　　　　　　　　// 设备树二进制文件， 由 dts 编译后得到<br>
+<strong>blob &ndash; Binary Large Object</strong><br>
+<strong>dtc  &ndash; Device Tree Compiler</strong>　　　　　　　// 设备树编译器</p>
+<h2 id="设备树语法">设备树语法</h2>
+<h3 id="devicetree-node-格式">Devicetree node 格式</h3>
+<p><strong>Devicetree</strong> 是由一系列的节点和属性组成， 一个节点也可以包含字节点：</p>
 
-</div>
-<p>Hey, 会编译内核了之后还想知道内核编译背后的 <code>Kbuild</code> 吗 😏</p>]]></description>
-</item><item>
-    <title>编译 Linux 内核</title>
-    <link>https://yunyanan.github.io/linux_kernel_compile/</link>
-    <pubDate>Sat, 29 Feb 2020 17:40:32 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yunyanan.github.io/linux_kernel_compile/</guid>
-    <description><![CDATA[<div style="text-align: center">
 
-</div>
-<p>来看看怎么编译 <code>GNU Linux</code> 内核吧 🤔</p>]]></description>
-</item></channel>
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">[label:] node-name[@unit-address] {
+	[properties definitions]
+	[child nodes]
+};</code></pre><ul>
+<li><code>[label:]</code>: 标签。 方便别的节点引用， 可以省略。</li>
+<li><code>node-name[@unit-address]</code>: 节点名。 同一级别的节点名字不可以相同， 可以通过增
+加设备的地址 <code>[@unit-address]</code> 来区分 <code>node-name</code> 相同的节点。</li>
+</ul>
+<h3 id="property-格式">Property 格式</h3>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">[label:] property-name = value;	// 格式1： 有取值
+[label:] property-name;			// 格式2： 无取值</code></pre><p>使用分号结尾， 和 C 语言语法类似。</p>
+<p>Property 的取值有 3 种类型：</p>
+<ol>
+<li><strong>Arrays of cell</strong>: 一个或多个 32 位数据， 64 位数据使用 2 个 32 位数据来表示。 格式： <code>&lt;...&gt;</code>。</li>
+<li><strong>String</strong>: 字符串。 格式： <code>&quot;...&quot;</code>。</li>
+<li><strong>Bytestring</strong>: 1 个或多个字节。 格式： <code>[...]</code>。</li>
+</ol>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">interrupts = &lt;17 0xc&gt;;						// Arrays of cells, 2 个 32 位数。
+clock-frequency = &lt;0x00000001 0x00000000&gt;;	// 2 个 32 位数表示一个64位数。
+
+compatible = &#34;simple-bus&#34;;					// String, 有结束符的字符串。
+
+local-mac-address = [00 00 12 34 56 78];	// Bytestring， 每个字节使用 2 个 16 进制数表示。
+local-mac-address = [000012345678];			// 字节和字节之间的空格可以省略。
+
+compatible = &#34;ns16550&#34;, &#34;ns8250&#34;;			// 也可以是各种类型的组合， 用逗号隔开。
+example = &lt;0xf00f0000 19&gt;, &#34;a strange property format&#34;;</code></pre><p>在 <strong>DTS</strong> 文件中被定义的各个属性的值的意义是完全取决于驱动程序的， 所以尽管可能
+会有些看上去很奇怪的赋值方式或者格式， 但是只要符合 <strong>DTS</strong> 文件的语法就没有问题。</p>
+<h3 id="一些特殊默认的属性">一些特殊默认的属性</h3>
+<h4 id="address-cells"><strong>#address-cells</strong></h4>
+<p>在它的子节点的 <strong>reg</strong> 属性中， 使用多少个 <strong>u32</strong> 整数来描述地址。</p>
+<h4 id="size-cells"><strong>#size-cells</strong></h4>
+<p>在它的子节点的 <strong>reg</strong> 属性中， 使用多少个 <strong>u32</strong> 整数来描述大小。</p>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">   #address-cells = &lt;0x1&gt;;
+   #size-cells = &lt;0x1&gt;;
+   ...
+   ocram: sram@900000 {
+	   ...
+	   reg = &lt;0x00900000 0x20000&gt;;	// address: 0x00900000 size: 0x20000
+	   ...
+   };</code></pre><h4 id="compatible"><strong>compatible</strong></h4>
+<p><strong>compatible</strong> 属性的值是一系列字符串， 它用 <strong>&ldquo;manufacturer,model&rdquo;</strong> 的格式指定
+出了具体的设备。 并且具有从左向右由高到低的兼容性优先级（越靠左边兼容性越好）。</p>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">compatible = &#34;samsung, smdk2440&#34;;	// 厂商： samsung 型号： smdk2440</code></pre><h4 id="memory"><strong>memory</strong></h4>
+<p>用来描述硬件内存布局。</p>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">memory@80000000 {
+	device_type = &#34;memory&#34;;
+	reg = &lt;0x80000000 0x20000000&gt;;	// 起始地址： 0x80000000 大小： 0x20000000
+};</code></pre><h4 id="chosen"><strong>chosen</strong></h4>
+<p><strong>bootargs</strong> 属性： 内核启动时的 <strong>command line</strong> 参数。<br>
+<strong>stdout-path&amp;stdin-path</strong> 属性：指定标准输入输出， 可选。</p>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">chosen {
+	bootargs = &#34;noinitrd root=/dev/mtdblock4 rw init=/linuxrc console=ttySAC0,115200&#34;;	// 内核启动时传入的参数
+	stdout-path = &amp;uart1;	// 使用 uart1 做标准输出
+};</code></pre><h4 id="cpus"><strong>cpus</strong></h4>
+<p>描述了 <strong>cpu</strong> 相关的信息。下面一般会有一个或多个子节点。</p>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">cpus {
+	#address-cells = &lt;1&gt;;	// 在子节点中使用 1 个 32 位数描述地址
+	#size-cells = &lt;0&gt;;		// 在子节点中使用几个 32 位数描述大小， 固定为 0
+
+	cpu0: cpu@0 {	// cpu0
+	compatible = &#34;arm,cortex-a7&#34;;	// 厂商： arm 型号： cortex-a7
+	device_type = &#34;cpu&#34;;
+	reg = &lt;0&gt;;						// 表明自己是哪一个 cpu
+	...
+	};
+};</code></pre><h3 id="节点的引用">节点的引用</h3>
+<h4 id="phandle">phandle</h4>
+<p>节点中的 <strong>phandle</strong> 属性， 使用一个唯一的 <strong>id</strong> 来标识一个节点， 在
+<strong>property</strong> 可以使用这个 <strong>id</strong> 来引用节点</p>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">pic@10000000 {
+	phandle = &lt;1&gt;;
+	interrupt-controller;
+};
+
+another-device-node {
+	interrupt-parent = &lt;1&gt;;		// 使用 phandle 的值来引用 **pic@10000000** 节点。
+};</code></pre><h4 id="label">label</h4>
+<p>定义节点的时候增加标签属性， 使用标签来引用节点。</p>
+<p>示例：</p>
+
+
+
+
+
+<pre tabindex="0"><code class="language-DTS" data-lang="DTS">PIC: pic@10000000 {
+	phandle = &lt;1&gt;;
+	interrupt-controller;
+};
+
+another-device-node {
+	interrupt-parent = &lt;&amp;PIC&gt;;		// 使用 **PIC** 这个i标签来引用 **pic@10000000** 节点。
+};</code></pre><h2 id="设备树的编译与反编译">设备树的编译与反编译</h2>
+<p>设备树的编译器叫做 <strong>DTC</strong>, 它会把设备树源文件 <strong>DTS, DTSI</strong> 编译成 <strong>DTB</strong>，也
+可以把 <strong>DTB</strong> 文件反编译成 <strong>DTS</strong> 文件。 当我们在查看设备树文件的时候， 常常会
+由于节点信息分散在多个 <strong>DTS</strong> 和 <strong>DTSI</strong> 文件中造成我们查看不方便， 而使用
+<strong>DTC</strong> 反编译出来的 <strong>DTS</strong> 文件则是集中了所有的节点信息, 在查看设备树的时候这
+会非常有用。 <strong>DTC</strong> 命令的语法是这样的：</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">dtc <span class="o">[</span>-I input-format<span class="o">]</span> <span class="o">[</span>-O output-format<span class="o">]</span> <span class="o">[</span>-o output-filename<span class="o">]</span> <span class="o">[</span>-V output_version<span class="o">]</span> input_filename</span></span></code></pre></div><h2 id="在根文件系统中查看设备树">在根文件系统中查看设备树</h2>
+<h3 id="sysfirmwarefdt">/sys/firmware/fdt</h3>
+<p>原始 <strong>dtb</strong> 文件， 可以使用 <strong>DTC</strong> 反编译它， 也可以用 <code>hexdump</code> 查看：</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">hexdump -C /sys/firmware/fdt</span></span></code></pre></div><h3 id="sysfirmwaredevicetree">/sys/firmware/devicetree</h3>
+<p>以目录的结构呈现 <strong>DTB</strong> 文件， 根节点对应 <strong>base</strong> 目录， 每一个节点对应一个目
+录， 每一个属性对应一个文件。</p>
+<h2 id="内核对设备树的处理">内核对设备树的处理</h2>
+<p>Linux uses DT data for three major purposes:</p>
+<ol>
+<li>platform identification,</li>
+<li>runtime configuration, and</li>
+<li>device population.</li>
+</ol>
+<p>内核对设备树的处理也可以从这三个角度出发。</p>
+<h3 id="platform-identification">platform identification</h3>
+<p>关于平台信息其实在上面的介绍中也算是讲到了， 就是 <strong>compatible</strong> 属性。 根节点下
+的 <strong>compatible</strong> 属性即指定了当前系统名称。 如果是多个字符串，那么从左到右就代
+表了从最兼容到次之。</p>
+<h3 id="runtime-configuration">runtime configuration</h3>
+<p>内核对运行时配置信息的处理也比较简单， 简单来说就是从 <strong>DTB</strong> 文件中把所需要的信
+息提取出来赋值给内核中的变量即可。 主要是处理了:</p>
+<ol>
+<li><strong>chosen</strong> 节点中的 <strong>bootargs</strong> 属性的值， 赋值给了全局变量
+<strong>boot_command_line</strong>。</li>
+<li>根节点下的 <strong>#address-cells</strong> 和 <strong>#size-cells</strong> 属性的值， 赋值给了全局变量：
+<strong>dt_root_addr_cells</strong> 和 <strong>dt_root_size_cells</strong>。</li>
+<li>提取出 <strong>memory</strong> 节点中的 <strong>arg</strong> 属性的值 <strong>base</strong> 和 <strong>size</strong>, 最终调用
+<strong>memblock_add(base, size)</strong>。</li>
+</ol>
+<h3 id="device-population">device population</h3>
+<p>设备树文件中的每个节点都会被转换成一个 <strong>device_node</strong> 结构体， <strong>device_node</strong>
+结构体中的 <strong>property</strong> 结构体用来描述该节点的属性， 每一个属性对应一个
+<strong>property</strong> 结构体。 这些 <strong>device_node</strong> 构成了一棵树， 根节点为 <strong>root_node</strong>。
+而这其中一部分的 <strong>device_node</strong> 又会转换成 <strong>platform_device</strong> 结构。 转换的条
+件为：</p>
+<ul>
+<li>根节点下含有 <strong>compatile</strong> 属性的子节点。</li>
+<li>如果一个节点的 <strong>compatile</strong> 属性含有这些特殊的值 <strong>(&ldquo;simpli-bus&rdquo;, &ldquo;simple-mfd&rdquo;,
+&ldquo;isa&rdquo;, &ldquo;arm, amba-bus&rdquo;)</strong> 之一， 那么它的子节点（需含 <strong>compatile</strong> 属性）也可
+以转换为 <strong>platform_device</strong>。 i2c， spi 等总线节点下的子节点， 应该交给对应的
+总线驱动程序来处理， 它们不应该被转换为 <strong>platform_device</strong>。</li>
+</ul>
+<p>最后， <strong>platform_device</strong> 转换完成后就可以和 <strong>platform_driver</strong> 匹配了， 之后
+就是驱动程序的处理了。</p>
+<h2 id="为什么-pc-上没有设备树">为什么 PC 上没有设备树</h2>
+<p>下面这段内容来自
+<strong><a href="https://unix.stackexchange.com/a/399621/410471">StackExchange</a></strong>，
+我挑选了里面一部分内容并翻译了出来。</p>
+<p>外设和主处理器之间是通过总线建立连接的。 有一些总线协议支持枚举， 即主处理器可以
+在总线上询问 “有哪些设备连接到了这个总线上？” 这些设备会以一种标准的格式回复一些
+关于它们的类型，制造商，型号和配置的信息。 有了这些信息， 操作系统就可以报告可用
+设备的列表， 并决定为每个可用设备使用哪个设备驱动程序。 所有现代 PC 总线都支持枚
+举， 但是许多的嵌入式系统使用的是不支持枚举的简单总线， 所以这种情况下就必须告诉
+操作系统有哪些设备以及如何访问他们。 设备树就是描述这样信息的一个标准格式。</p>
+<hr>
+<!-- raw HTML omitted -->]]></content:encoded>
+    </item>
+    <item>
+      <title>编译 Linux 内核</title>
+      <link>https://yunyanan.github.io/blog/linux_kernel_compile/</link>
+      <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/blog/linux_kernel_compile/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;来看看怎么编译 &lt;code&gt;GNU Linux&lt;/code&gt; 内核吧 :thinking:&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<!-- raw HTML omitted -->
+<p>来看看怎么编译 <code>GNU Linux</code> 内核吧 :thinking:</p>
+<h2 id="前言">前言</h2>
+<hr>
+<p>说起来接触 Linux 这么长时间以来我编译过工作中供应商提供的 SDK，
+<a href="https://github.com/raspberrypi/linux">Raspberry Pi</a>, 还有为了修改 Ubuntu 的一个
+驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内
+核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是
+编译动作多多少少被修改过， 编译的时候存在些许差别。所以这次我直接下载了 GItHub上
+<a href="https://github.com/torvalds/linux">Linux</a> 仓库的 master 分支来编译。这次就先记
+录一下编译 Linux 内核的方法和过程，后面在来写一个 Kbuild 系统的介绍。</p>
+<h2 id="编译">编译</h2>
+<hr>
+<p>先简单说一下下载吧， 我是直接从 GitHub 上 Linux 的仓库直接下载的， 当然也可以去内核
+的<a href="https://www.kernel.org">官方网站</a>上下载, 这上面不仅有最新稳定版本的内核，一些
+历史版本的内核也可以从这里下载到。 不仅如此， Linux 的内核仓库中其实还包含了大量
+的文档， 可以选择自己编译出内核文档，也可以使用
+<a href="https://www.kernel.org/doc/html/latest/index.html">在线文档</a>。</p>
+<p>NOTE: 在线的文档可能更方便一点， 自己编译的话要在自己电脑上安装一些工具啥的。</p>
+<p>现在进入正题:</p>
+<h4 id="配置内核">配置内核</h4>
+<p>Linux 内核的配置方法有很多， 下面这三种应该是目前使用比较广泛的三种方式：</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make menuconfig		<span class="c1"># Update current config utilising a menu based program</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">make xconfig		<span class="c1"># Update current config utilising a Qt based front-end</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">make gconfig		<span class="c1"># Update current config utilising a GTK+ based front-end</span></span></span></code></pre></div><p>这三个命令在配置时只需要用一个就可以了， 命令后面的注释说明了这三个命令的使用条件。
+这里先介绍一下 <code>make help</code> 命令。 这条命令可以查看到内核编译时所有 Make 可用的目标
+及介绍， 上面的注释便出自这里。 我之前配置时也只用过第一种方法，这次编译我的电脑也支持
+后面两个命令的条件，所以在这里我也展示一下这三种配置方式的界面。</p>
+<ul>
+<li>首先是 <code>make menuconfig</code> 的配置界面：</li>
+</ul>
+<p><img alt="make menuconfig" src="/images/posts/linux_kernel_compile/menuconfig.png"></p>
+<ul>
+<li>然后是 <code>make xconfig</code> 的配置界面：</li>
+</ul>
+<p><img alt="make xconfig" src="/images/posts/linux_kernel_compile/xconfig.png"></p>
+<ul>
+<li>最后是 <code>make gconfig</code> 的配置界面：</li>
+</ul>
+<p><img alt="make gconfig" src="/images/posts/linux_kernel_compile/gconfig.png"></p>
+<p>使用哪种方式可以说取决于个人喜好了或者自己电脑所具备的条件了，毕竟他们最终的目的
+都是生成名为 <code>.config</code> 的内核配置文件。 在配置具体功能时最多有三种选择：</p>
+<ul>
+<li>Y &ndash; 将该功能编译进内核</li>
+<li>N &ndash; 不要将该功能编译进内核</li>
+<li>M &ndash; 将该功能编译成模块</li>
+</ul>
+<p>基本每个功能配置都会有对应的帮助说明， 非常的人性化。 需要注意的是这个步骤其实并
+不是每次都必须的， 比如之前已经配置过了，或者从其他地方拷贝来了可用的配置文件，
+这一步是完全可以跳过的。配置完成后就可以开始编译了。</p>
+<h4 id="编译内核">编译内核</h4>
+<p>开始编译时直接使用 <code>make</code> 命令即可。 当然如果想加快编译的速度， 可以追加 <code>-j</code> 参
+数。</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make -j 4			<span class="c1"># 同时运行 4 个作业，这里取值推荐为 2 倍的 CPU Core 数</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">make -j <span class="k">$(</span>nproc<span class="k">)</span>		<span class="c1"># 可以通过 nproc 命令得到可用处理单元的数量</span></span></span></code></pre></div><h4 id="编译模块">编译模块</h4>
+<p>上面配置内核时说到有三种选择，配置时候选择 <code>M</code> 编译为模块的功能特性在这里可以用
+下面的命令编译出来：</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make modules</span></span></code></pre></div><p>至此，需要编译的代码都已经编译完成。</p>
+<h2 id="结语">结语</h2>
+<hr>
+<p>Linux 内核的 Makefile 还有很多目标，例如这些：</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make modules_install		<span class="c1"># 安装内核模块</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">make htmldocs			<span class="c1"># 生成 html 格式的内核文档</span></span></span></code></pre></div><p>在这里就不一一介绍了，以后用到再说。我想说的是正是有这么多的编译目标的存在才让现
+在 Linux 内核的编译如此的简单且人性化。 而在 Linux 的内核中更是处处充满了令人眼
+前一亮的细节，这应该也是 Linux 内核魅力的来源之一吧。以后慢慢去发现它们吧。 ：）</p>
+<p><strong>Happy Hacking!</strong></p>]]></content:encoded>
+    </item>
+  </channel>
 </rss>

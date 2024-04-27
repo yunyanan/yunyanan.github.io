@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Tags on Yun YaNan</title>
+    <link>https://yunyanan.github.io/tags/</link>
+    <description>Recent content in Tags on Yun YaNan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>yunyanan1@gmail.com (Yun YaNan)</managingEditor>
+    <webMaster>yunyanan1@gmail.com (Yun YaNan)</webMaster>
+    <copyright>Copyright © 2020, Yun YaNan</copyright>
+    <lastBuildDate>Sat, 02 May 2020 20:00:53 +0800</lastBuildDate>
+    <atom:link href="https://yunyanan.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>DeviceTree</title>
+      <link>https://yunyanan.github.io/tags/devicetree/</link>
+      <pubDate>Sat, 02 May 2020 20:00:53 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/tags/devicetree/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://yunyanan.github.io/tags/linux/</link>
+      <pubDate>Sat, 02 May 2020 20:00:53 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/tags/linux/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Kbuild</title>
+      <link>https://yunyanan.github.io/tags/kbuild/</link>
+      <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/tags/kbuild/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Kernel</title>
+      <link>https://yunyanan.github.io/tags/kernel/</link>
+      <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/tags/kernel/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Emacs</title>
+      <link>https://yunyanan.github.io/tags/emacs/</link>
+      <pubDate>Wed, 05 Feb 2020 09:17:52 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/tags/emacs/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Markdown</title>
+      <link>https://yunyanan.github.io/tags/markdown/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/tags/markdown/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Syntax</title>
+      <link>https://yunyanan.github.io/tags/syntax/</link>
+      <pubDate>Fri, 03 Jan 2020 00:00:00 +0000</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/tags/syntax/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+  </channel>
+</rss>

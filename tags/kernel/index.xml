@@ -1,27 +1,108 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
-    <channel>
-        <title>Kernel - 标签 - YunYanan</title>
-        <link>https://yunyanan.github.io/tags/kernel/</link>
-        <description>Kernel - 标签 - YunYanan</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 15 Mar 2020 10:29:35 &#43;0800</lastBuildDate><atom:link href="https://yunyanan.github.io/tags/kernel/" rel="self" type="application/rss+xml" /><item>
-    <title>内核编译的背后</title>
-    <link>https://yunyanan.github.io/exploring_kbuild/</link>
-    <pubDate>Sun, 15 Mar 2020 10:29:35 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yunyanan.github.io/exploring_kbuild/</guid>
-    <description><![CDATA[<div style="text-align: center">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Kernel on Yun YaNan</title>
+    <link>https://yunyanan.github.io/tags/kernel/</link>
+    <description>Recent content in Kernel on Yun YaNan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <managingEditor>yunyanan1@gmail.com (Yun YaNan)</managingEditor>
+    <webMaster>yunyanan1@gmail.com (Yun YaNan)</webMaster>
+    <copyright>Copyright © 2020, Yun YaNan</copyright>
+    <lastBuildDate>Sat, 29 Feb 2020 17:40:32 +0800</lastBuildDate>
+    <atom:link href="https://yunyanan.github.io/tags/kernel/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>编译 Linux 内核</title>
+      <link>https://yunyanan.github.io/blog/linux_kernel_compile/</link>
+      <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
+      <guid>https://yunyanan.github.io/blog/linux_kernel_compile/</guid>
+      <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;来看看怎么编译 &lt;code&gt;GNU Linux&lt;/code&gt; 内核吧 :thinking:&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<!-- raw HTML omitted -->
+<p>来看看怎么编译 <code>GNU Linux</code> 内核吧 :thinking:</p>
+<h2 id="前言">前言</h2>
+<hr>
+<p>说起来接触 Linux 这么长时间以来我编译过工作中供应商提供的 SDK，
+<a href="https://github.com/raspberrypi/linux">Raspberry Pi</a>, 还有为了修改 Ubuntu 的一个
+驱动编译过和当时 Ubuntu 同样版本的内核， 就是没有单独编译过最新最纯粹的 Linux 内
+核。 虽然说都是 Linux 内核的编译，但是前面说的那些要么是内核版本比较老，要么就是
+编译动作多多少少被修改过， 编译的时候存在些许差别。所以这次我直接下载了 GItHub上
+<a href="https://github.com/torvalds/linux">Linux</a> 仓库的 master 分支来编译。这次就先记
+录一下编译 Linux 内核的方法和过程，后面在来写一个 Kbuild 系统的介绍。</p>
+<h2 id="编译">编译</h2>
+<hr>
+<p>先简单说一下下载吧， 我是直接从 GitHub 上 Linux 的仓库直接下载的， 当然也可以去内核
+的<a href="https://www.kernel.org">官方网站</a>上下载, 这上面不仅有最新稳定版本的内核，一些
+历史版本的内核也可以从这里下载到。 不仅如此， Linux 的内核仓库中其实还包含了大量
+的文档， 可以选择自己编译出内核文档，也可以使用
+<a href="https://www.kernel.org/doc/html/latest/index.html">在线文档</a>。</p>
+<p>NOTE: 在线的文档可能更方便一点， 自己编译的话要在自己电脑上安装一些工具啥的。</p>
+<p>现在进入正题:</p>
+<h4 id="配置内核">配置内核</h4>
+<p>Linux 内核的配置方法有很多， 下面这三种应该是目前使用比较广泛的三种方式：</p>
 
-</div>
-<p>Hey, 会编译内核了之后还想知道内核编译背后的 <code>Kbuild</code> 吗 😏</p>]]></description>
-</item><item>
-    <title>编译 Linux 内核</title>
-    <link>https://yunyanan.github.io/linux_kernel_compile/</link>
-    <pubDate>Sat, 29 Feb 2020 17:40:32 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://yunyanan.github.io/linux_kernel_compile/</guid>
-    <description><![CDATA[<div style="text-align: center">
 
-</div>
-<p>来看看怎么编译 <code>GNU Linux</code> 内核吧 🤔</p>]]></description>
-</item></channel>
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make menuconfig		<span class="c1"># Update current config utilising a menu based program</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">make xconfig		<span class="c1"># Update current config utilising a Qt based front-end</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">make gconfig		<span class="c1"># Update current config utilising a GTK+ based front-end</span></span></span></code></pre></div><p>这三个命令在配置时只需要用一个就可以了， 命令后面的注释说明了这三个命令的使用条件。
+这里先介绍一下 <code>make help</code> 命令。 这条命令可以查看到内核编译时所有 Make 可用的目标
+及介绍， 上面的注释便出自这里。 我之前配置时也只用过第一种方法，这次编译我的电脑也支持
+后面两个命令的条件，所以在这里我也展示一下这三种配置方式的界面。</p>
+<ul>
+<li>首先是 <code>make menuconfig</code> 的配置界面：</li>
+</ul>
+<p><img alt="make menuconfig" src="/images/posts/linux_kernel_compile/menuconfig.png"></p>
+<ul>
+<li>然后是 <code>make xconfig</code> 的配置界面：</li>
+</ul>
+<p><img alt="make xconfig" src="/images/posts/linux_kernel_compile/xconfig.png"></p>
+<ul>
+<li>最后是 <code>make gconfig</code> 的配置界面：</li>
+</ul>
+<p><img alt="make gconfig" src="/images/posts/linux_kernel_compile/gconfig.png"></p>
+<p>使用哪种方式可以说取决于个人喜好了或者自己电脑所具备的条件了，毕竟他们最终的目的
+都是生成名为 <code>.config</code> 的内核配置文件。 在配置具体功能时最多有三种选择：</p>
+<ul>
+<li>Y &ndash; 将该功能编译进内核</li>
+<li>N &ndash; 不要将该功能编译进内核</li>
+<li>M &ndash; 将该功能编译成模块</li>
+</ul>
+<p>基本每个功能配置都会有对应的帮助说明， 非常的人性化。 需要注意的是这个步骤其实并
+不是每次都必须的， 比如之前已经配置过了，或者从其他地方拷贝来了可用的配置文件，
+这一步是完全可以跳过的。配置完成后就可以开始编译了。</p>
+<h4 id="编译内核">编译内核</h4>
+<p>开始编译时直接使用 <code>make</code> 命令即可。 当然如果想加快编译的速度， 可以追加 <code>-j</code> 参
+数。</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make -j 4			<span class="c1"># 同时运行 4 个作业，这里取值推荐为 2 倍的 CPU Core 数</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">make -j <span class="k">$(</span>nproc<span class="k">)</span>		<span class="c1"># 可以通过 nproc 命令得到可用处理单元的数量</span></span></span></code></pre></div><h4 id="编译模块">编译模块</h4>
+<p>上面配置内核时说到有三种选择，配置时候选择 <code>M</code> 编译为模块的功能特性在这里可以用
+下面的命令编译出来：</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make modules</span></span></code></pre></div><p>至此，需要编译的代码都已经编译完成。</p>
+<h2 id="结语">结语</h2>
+<hr>
+<p>Linux 内核的 Makefile 还有很多目标，例如这些：</p>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="ln">1</span><span class="cl">make modules_install		<span class="c1"># 安装内核模块</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">make htmldocs			<span class="c1"># 生成 html 格式的内核文档</span></span></span></code></pre></div><p>在这里就不一一介绍了，以后用到再说。我想说的是正是有这么多的编译目标的存在才让现
+在 Linux 内核的编译如此的简单且人性化。 而在 Linux 的内核中更是处处充满了令人眼
+前一亮的细节，这应该也是 Linux 内核魅力的来源之一吧。以后慢慢去发现它们吧。 ：）</p>
+<p><strong>Happy Hacking!</strong></p>]]></content:encoded>
+    </item>
+  </channel>
 </rss>
