@@ -1,5 +1,5 @@
 # Basic config
-baseURL = "https://yunyanan.github.io/blog/"
+baseURL = "https://yunyanan.github.io/"
 theme = "hugo-bearcub"
 copyright = "Copyright © 2020, Yun YaNan"
 defaultContentLanguage = "cn"
