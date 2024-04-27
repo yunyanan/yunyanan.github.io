@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Linux on Yun YaNan</title>
-    <link>https://yunyanan.github.io/blog/categories/linux/</link>
+    <link>https://yunyanan.github.io/categories/linux/</link>
     <description>Recent content in Linux on Yun YaNan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
@@ -10,12 +10,12 @@
     <webMaster>yunyanan1@gmail.com (Yun YaNan)</webMaster>
     <copyright>Copyright © 2020, Yun YaNan</copyright>
     <lastBuildDate>Sat, 02 May 2020 20:00:53 +0800</lastBuildDate>
-    <atom:link href="https://yunyanan.github.io/blog/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://yunyanan.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DeviceTree</title>
-      <link>https://yunyanan.github.io/blog/blog/devicetree/</link>
+      <link>https://yunyanan.github.io/blog/devicetree/</link>
       <pubDate>Sat, 02 May 2020 20:00:53 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
-      <guid>https://yunyanan.github.io/blog/blog/devicetree/</guid>
+      <guid>https://yunyanan.github.io/blog/devicetree/</guid>
       <description></description>
       <content:encoded><![CDATA[<h2 id="设备树简介">设备树简介</h2>
 <p>设备树概念的引入最早可以追溯到 <strong>Kernel v2.6.22</strong>, 它是用来描述硬件的一种数据结构和语言。 在设备树引入之前， 硬件相关的资源信息都是在驱动中直接写死的， 这种方法的特点就是会有很多的冗余代码， 移植性较差。 当硬件有变动时，需要重新描述新设备的硬件资源， 然后重新编译内核或者驱动。 而引入了设备树之后这些不足之处有了很好的改善， 现在如果要移植驱动的话就只需要修改设备树文件，提供一个新平台的 <strong>dtb</strong> 文件给内核即可。</p>
@@ -247,9 +247,9 @@ another-device-node {
     </item>
     <item>
       <title>编译 Linux 内核</title>
-      <link>https://yunyanan.github.io/blog/blog/linux_kernel_compile/</link>
+      <link>https://yunyanan.github.io/blog/linux_kernel_compile/</link>
       <pubDate>Sat, 29 Feb 2020 17:40:32 +0800</pubDate><author>yunyanan1@gmail.com (Yun YaNan)</author>
-      <guid>https://yunyanan.github.io/blog/blog/linux_kernel_compile/</guid>
+      <guid>https://yunyanan.github.io/blog/linux_kernel_compile/</guid>
       <description>&lt;!-- raw HTML omitted --&gt;&#xA;&lt;p&gt;来看看怎么编译 &lt;code&gt;GNU Linux&lt;/code&gt; 内核吧 :thinking:&lt;/p&gt;</description>
       <content:encoded><![CDATA[<!-- raw HTML omitted -->
 <p>来看看怎么编译 <code>GNU Linux</code> 内核吧 :thinking:</p>
